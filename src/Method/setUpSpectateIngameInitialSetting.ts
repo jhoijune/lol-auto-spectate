@@ -16,5 +16,7 @@ export default (playerIndex: number) => {
   // target timer on
   robot.keyToggle('n', 'down');
   robot.keyToggle('n', 'up');
-  fixSpectateView(playerIndex);
+  if (playerIndex !== -1) {
+    fixSpectateView(playerIndex);
+  }
 };

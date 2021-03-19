@@ -3,10 +3,13 @@ import mapNickToName from './mapNickToName';
 import sleep from './sleep';
 import request from './request';
 import printDate from './printDate';
-import closeLOLClient from './closeLOLClient';
 import spectateGame from './spectateGame';
-import setUpSpectateInitialSetting from './setUpSpectateInitialSetting';
+import setUpSpectateIngameInitialSetting from './setUpSpectateIngameInitialSetting';
 import fixSpectateView from './fixSpectateView';
+import convertPUUIDtoID from './convertPUUIDtoID';
+import createPictureInfo from './createPictureInfo';
+import createProIDs from './createProIDs';
+import findMatch from './findMatch';
 
 export default {
   collectProPicture,
@@ -14,10 +17,13 @@ export default {
   sleep,
   request,
   printDate,
-  closeLOLClient,
   spectateGame,
-  setUpSpectateInitialSetting,
+  setUpSpectateIngameInitialSetting,
   fixSpectateView,
+  convertPUUIDtoID,
+  createPictureInfo,
+  createProIDs,
+  findMatch,
 };
 export {
   collectProPicture,
@@ -25,8 +31,11 @@ export {
   sleep,
   request,
   printDate,
-  closeLOLClient,
   spectateGame,
-  setUpSpectateInitialSetting,
+  setUpSpectateIngameInitialSetting,
   fixSpectateView,
+  convertPUUIDtoID,
+  createPictureInfo,
+  createProIDs,
+  findMatch,
 };

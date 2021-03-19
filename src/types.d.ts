@@ -6,18 +6,9 @@ declare global {
   }
 }
 
-declare module '*.json' {
-  const value: string;
-  export default value;
-}
-
 declare module 'axios' {
   export interface AxiosRequestConfig {
-    method: string;
-    url: string;
-    data?: {
-      'X-Riot-Token'?: string;
-    };
+    'X-Riot-Token'?: string;
   }
 }
 
@@ -77,4 +68,105 @@ export type CurrentGameInfo = {
   bannedChampions: BannedChampion[];
   gameStartTime: number;
   gameLength: number;
+};
+
+type ItemInfo = {
+  canUse: boolean;
+  consumable: boolean;
+  count: number;
+  displayName: string;
+  itemID: string;
+  price: string;
+  rawDescription: string;
+  rawDisplayName: string;
+  slot: number;
+};
+
+export type PlayerList = {
+  championName: string;
+  isBot: boolean;
+  isDead: boolean;
+  items: ItemInfo[];
+  level: number;
+  position: string;
+  rawChampionName: string;
+  rawSkinName: string;
+  respawnTimer: number;
+  runes: {
+    keystone: {
+      displayName: string;
+      id: number;
+      rawDescription: string;
+      rawDisplayName: string;
+    };
+    primaryRuneTree: {
+      displayName: string;
+      id: number;
+      rawDescription: string;
+      rawDisplayName: string;
+    };
+    secondaryRuneTree: {
+      displayName: string;
+      id: number;
+      rawDescription: string;
+      rawDisplayName: string;
+    };
+  };
+  scores: {
+    assists: number;
+    creepScore: number;
+    deaths: number;
+    kills: number;
+    wardScore: number;
+  };
+  skinID: number;
+  skinName: string;
+  summonerName: string;
+  summonerSpells: {
+    summonerSpellOne: {
+      displayName: string;
+      rawDescription: string;
+      rawDisplayName: string;
+    };
+    summonerSpellTwo: {
+      displayName: string;
+      rawDescription: string;
+      rawDisplayName: string;
+    };
+  };
+  team: string;
+}[];
+
+type Event = {
+  EventID: number;
+  EventName: string;
+  EventTime: number;
+  Assisters: string[];
+  KillerName: string;
+  VictimName: string;
+};
+
+export type EventData = {
+  Events: Event[];
+};
+
+type LeagueItemDTO = {
+  summonerId: string;
+  summonerName: string;
+  leaguePoints: number;
+  rank: string;
+  wins: number;
+  losses: number;
+  veteran: boolean;
+  inactive: boolean;
+  freshBlood: boolean;
+  hotStreak: boolean;
+};
+
+export type LeagueListDTO = {
+  tier: string;
+  leagueId: string;
+  queue: string;
+  name: string;
+  entries: LeagueItemDTO[];
 };

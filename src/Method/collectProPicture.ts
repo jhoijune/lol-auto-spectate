@@ -5,24 +5,21 @@ import path from 'path';
 import mapNickToName from './mapNickToName';
 
 export default async () => {
-  const assetsPath = path.join(__dirname, '..', '..', 'assets');
+  const picturesPath = path.join(__dirname, '..', '..', 'assets', 'pictures');
   try {
     // folder init
     await fs.access(
-      assetsPath,
+      picturesPath,
       constants.F_OK || constants.R_OK || constants.W_OK
     );
   } catch (error) {
     if (error.code === 'ENOENT') {
-      console.log('Create assets directory');
-      await fs.mkdir(assetsPath);
+      console.log('Create pictures directory');
+      await fs.mkdir(picturesPath);
     }
   }
   try {
-    let nickMapping = await mapNickToName();
-    while (!nickMapping) {
-      nickMapping = await mapNickToName();
-    }
+    const nickMapping = await mapNickToName();
     const proName = new Set<string>();
     for (const [, nick] of nickMapping) {
       const [teamOrName, name] = nick.split(' ');
@@ -32,7 +29,7 @@ export default async () => {
         proName.add(name);
       }
     }
-    const files = await fs.readdir(assetsPath);
+    const files = await fs.readdir(picturesPath);
     const fileMap = new Map<string, string>();
     for (const file of files) {
       const [name, fileName] = file.split(' ');
@@ -63,7 +60,7 @@ export default async () => {
           if (fileMap.get(name) !== fileName) {
             const fileName = `${name} ${fileMap.get(name)!}`;
             console.log(`Delete picture ${fileName}`);
-            fs.rm(path.join(assetsPath, fileName));
+            fs.rm(path.join(picturesPath, fileName));
           } else {
             isWrite = false;
           }
@@ -71,7 +68,7 @@ export default async () => {
         if (isWrite) {
           const viewSource = await page.goto(imageHref);
           fs.writeFile(
-            path.join(assetsPath, `${name} ${fileName}`),
+            path.join(picturesPath, `${name} ${fileName}`),
             await viewSource.buffer()
           );
           console.log(`Create picture ${fileName}`);

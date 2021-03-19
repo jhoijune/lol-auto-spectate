@@ -1,14 +1,14 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
 import printDate from './printDate';
 
 export default async function <T>(
   method: 'get' | 'post',
   url: string,
-  data?: object
+  config?: AxiosRequestConfig
 ) {
   console.log(`Starting ${method.toUpperCase()} ${url} ${printDate()}`);
-  const response: AxiosResponse<T> = await axios({ method, url, data });
+  const response: AxiosResponse<T> = await axios({ method, url, data: config });
   console.log(
     `${method.toUpperCase()} request finished for: ${url} ${printDate()}`
   );
