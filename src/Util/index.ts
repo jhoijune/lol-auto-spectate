@@ -5,6 +5,8 @@ import request from './request';
 import printDate from './printDate';
 import closeLOLClient from './closeLOLClient';
 import spectateGame from './spectateGame';
+import setUpSpectateInitialSetting from './setUpSpectateInitialSetting';
+import fixSpectateView from './fixSpectateView';
 
 export default {
   collectProPicture,
@@ -14,6 +16,8 @@ export default {
   printDate,
   closeLOLClient,
   spectateGame,
+  setUpSpectateInitialSetting,
+  fixSpectateView,
 };
 export {
   collectProPicture,
@@ -23,4 +27,6 @@ export {
   printDate,
   closeLOLClient,
   spectateGame,
+  setUpSpectateInitialSetting,
+  fixSpectateView,
 };
