@@ -10,6 +10,8 @@ import convertPUUIDtoID from './convertPUUIDtoID';
 import createPictureInfo from './createPictureInfo';
 import createProIDs from './createProIDs';
 import findMatch from './findMatch';
+import checkStreaming from './checkStreaming';
+import modifyChannelInfo from './modifyChannelInfo';
 
 export default {
   collectProPicture,
@@ -24,6 +26,8 @@ export default {
   createPictureInfo,
   createProIDs,
   findMatch,
+  checkStreaming,
+  modifyChannelInfo,
 };
 export {
   collectProPicture,
@@ -38,4 +42,6 @@ export {
   createPictureInfo,
   createProIDs,
   findMatch,
+  checkStreaming,
+  modifyChannelInfo,
 };

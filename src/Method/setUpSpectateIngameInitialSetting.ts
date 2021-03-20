@@ -1,5 +1,7 @@
 import robot from 'robotjs';
+
 import fixSpectateView from './fixSpectateView';
+import Constants from '../Constants';
 
 export default (playerIndex: number) => {
   robot.setMouseDelay(100);
@@ -16,7 +18,7 @@ export default (playerIndex: number) => {
   // target timer on
   robot.keyToggle('n', 'down');
   robot.keyToggle('n', 'up');
-  if (playerIndex !== -1) {
+  if (playerIndex !== Constants.NONE) {
     fixSpectateView(playerIndex);
   }
 };

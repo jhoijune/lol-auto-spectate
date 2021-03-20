@@ -1,16 +1,10 @@
 import sleep from './sleep';
 import { CurrentGameInfo } from '../types';
 import request from './request';
-
-const SPECTATE_URL =
-  'https://kr.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/';
-
-const { RIOT_API_KEY } = process.env;
-
-const SUMMONERS_RIFT_ID = 11;
-const SOLO_RANK_ID = 420;
+import Constants from '../Constants';
 
 export default async (rankLimit: number, idPriority: string[][]) => {
+  const { RIOT_API_KEY } = process.env;
   for (let rank = 0; rank < rankLimit; rank++) {
     const ids = idPriority[rank];
     for (const id of ids) {
@@ -22,12 +16,19 @@ export default async (rankLimit: number, idPriority: string[][]) => {
             mapId,
             gameQueueConfigId,
           },
-        } = await request<CurrentGameInfo>('get', `${SPECTATE_URL}${id}`, {
-          'X-Riot-Token': RIOT_API_KEY,
-        });
+        } = await request<CurrentGameInfo>(
+          'get',
+          `${Constants.SPECTATE_URL}${id}`,
+          {
+            headers: {
+              'X-Riot-Token': RIOT_API_KEY,
+            },
+          }
+        );
         if (
-          rank < 3 ||
-          (mapId === SUMMONERS_RIFT_ID && gameQueueConfigId === SOLO_RANK_ID)
+          rank < idPriority.length - 1 ||
+          (mapId === Constants.SUMMONERS_RIFT_ID &&
+            gameQueueConfigId === Constants.SOLO_RANK_ID)
         ) {
           console.log('Match was found');
           return {

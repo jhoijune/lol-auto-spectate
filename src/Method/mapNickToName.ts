@@ -13,7 +13,9 @@ export default async () => {
         'get',
         'https://op.gg/spectate/list'
       ));
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
   }
   const $ = cheerio.load(html);
   const teams = $('ul.RegisterSummonerList>li');

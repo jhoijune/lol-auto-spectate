@@ -2,6 +2,10 @@ declare global {
   namespace NodeJS {
     interface ProcessEnv {
       RIOT_API_KEY: string;
+      TWITCH_ID: number;
+      TWITCH_CLIENT_ID: string;
+      TWITCH_SECRET: string;
+      TWITCH_TOKEN: string;
     }
   }
 }
@@ -9,6 +13,11 @@ declare global {
 declare module 'axios' {
   export interface AxiosRequestConfig {
     'X-Riot-Token'?: string;
+    'Content-Type'?: string;
+    'Client-Id'?: string;
+    Authorization?: string;
+    'client-id'?: string;
+    authorization?: string;
   }
 }
 
@@ -169,4 +178,25 @@ export type LeagueListDTO = {
   queue: string;
   name: string;
   entries: LeagueItemDTO[];
+};
+
+export type GetStreamsResponse = {
+  data: {
+    id: string;
+    user_id: string;
+    user_login: string;
+    user_name: string;
+    game_id: string;
+    game_name: string;
+    type: string;
+    title: string;
+    viewer_count: number;
+    started_at: string;
+    language: string;
+    thumbnail_url: string;
+    tag_ids: string[];
+  }[];
+  pagination: {
+    cursor: string;
+  };
 };

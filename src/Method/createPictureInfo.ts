@@ -9,7 +9,9 @@ export default async () => {
   while (pictures === null) {
     try {
       pictures = await readdir(picturePath);
-    } catch {}
+    } catch (error) {
+      console.log(error);
+    }
   }
   pictures.forEach((file, index) => {
     const [name] = file.split(' ');
