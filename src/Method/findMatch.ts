@@ -39,8 +39,16 @@ export default async (rankLimit: number, idPriority: string[][]) => {
             peopleCount: participants.length,
           };
         }
-      } catch {
-        await sleep(1200);
+      } catch (error) {
+        const errorCode = error.response.data.status.status_code;
+        if (errorCode === 403) {
+          console.log('Renew RIOT API key');
+          return null;
+        } else if (errorCode === 429) {
+          await sleep(2 * 60 * 1000);
+        } else {
+          await sleep(1200);
+        }
       }
     }
   }

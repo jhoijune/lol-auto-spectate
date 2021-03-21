@@ -13,6 +13,7 @@ import findMatch from './findMatch';
 import checkStreaming from './checkStreaming';
 import modifyChannelInfo from './modifyChannelInfo';
 import stopSpectate from './stopSpectate';
+import getGameTime from './getGameTime';
 
 export default {
   collectProPicture,
@@ -30,6 +31,7 @@ export default {
   checkStreaming,
   modifyChannelInfo,
   stopSpectate,
+  getGameTime,
 };
 export {
   collectProPicture,
@@ -47,4 +49,5 @@ export {
   checkStreaming,
   modifyChannelInfo,
   stopSpectate,
+  getGameTime,
 };

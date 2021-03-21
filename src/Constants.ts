@@ -3,6 +3,8 @@ export default class {
 
   static EVENDATA_URL = 'https://127.0.0.1:2999/liveclientdata/eventdata' as const;
 
+  static GAME_STATS_URL = 'https://127.0.0.1:2999/liveclientdata/gamestats' as const;
+
   static SUMMONER_PUUID_URL = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/' as const;
 
   static SPECTATE_URL = 'https://kr.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/' as const;
@@ -11,7 +13,7 @@ export default class {
 
   static SOLO_RANK_ID = 420 as const;
 
-  static GAME_END_ID = 34 as const;
+  static GAME_END = 'GameEnd' as const;
 
   static NONE = -1 as const;
 

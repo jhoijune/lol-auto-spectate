@@ -8,4 +8,5 @@ export default (gameProcess: ChildProcessWithoutNullStreams) => {
   } else {
     exec('taskkill /f /im "League of Legends.exe"');
   }
+  console.log('Stop spectate');
 };

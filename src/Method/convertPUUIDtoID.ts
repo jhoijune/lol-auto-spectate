@@ -29,7 +29,13 @@ export default async (nickMap: Map<string, string>) => {
         nickMap.set(data.name, name);
         index += 1;
       } catch (error) {
-        console.log(error.status);
+        const errorCode = error.response.data.status.status_code;
+        if (errorCode === 403) {
+          console.log('Renew RIOT API key');
+          return null;
+        } else if (errorCode === 429) {
+          await sleep(2 * 60 * 1000);
+        }
       }
     }
   }

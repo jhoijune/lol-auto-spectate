@@ -2,7 +2,6 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import { config } from 'dotenv';
 import { exec } from 'child_process';
-import kill from 'tree-kill';
 import https from 'https';
 import OBSWebSocket from 'obs-websocket-js';
 
@@ -20,11 +19,12 @@ import {
   checkStreaming,
   fixSpectateView,
   stopSpectate,
+  getGameTime,
 } from './Method';
 import { Heap } from './DataStructure';
 import Constants from './Constants';
 
-import { EventData, PlayerList } from './types';
+import { EventData, GameStats, PlayerList } from './types';
 
 type NAME = keyof typeof Constants.PRIORITIES;
 
@@ -40,10 +40,10 @@ let encryptionKey = '';
 let gameId: number = Constants.NONE;
 let peopleCount: number = Constants.NONE;
 let lastSpectateTime = new Date().valueOf();
-let nickMap: Map<string, string> | null = null;
-let pictures: string[] | null = null;
-let pictureMap: Map<string, number> | null = null;
-let idPriority: string[][] | null = null;
+let nickMap: Map<string, string>;
+let pictures: string[];
+let pictureMap: Map<string, number>;
+let idPriority: string[][];
 
 const httpsAgent = new https.Agent({
   rejectUnauthorized: false,
@@ -62,66 +62,40 @@ export default async (
   const spectateWaitLimit = spectateWaitLimitMinute * 60 * 1000;
   const obs = new OBSWebSocket();
   //await obs.connect({ address: 'localhost:4444' });
-
   // 초기화 작업
-  while (nickMap === null) {
-    try {
-      nickMap = await mapNickToName();
-    } catch (error) {
-      console.log(error);
-    }
+  nickMap = await mapNickToName();
+  ({ pictures, pictureMap } = await createPictureInfo());
+  const tempIDPriority = await convertPUUIDtoID(nickMap);
+  if (tempIDPriority === null) {
+    return;
   }
-  while (pictures === null || pictureMap === null) {
-    try {
-      ({ pictures, pictureMap } = await createPictureInfo());
-    } catch (error) {
-      console.log(error);
-    }
+  idPriority = tempIDPriority;
+  const proIDs = await createProIDs(nickMap);
+  if (proIDs === null) {
+    return;
   }
-  while (idPriority === null) {
-    try {
-      idPriority = await convertPUUIDtoID(nickMap);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  try {
-    const ids = await createProIDs(nickMap);
-    idPriority.push(ids);
-  } catch (error) {}
-  let isProStreaming = false;
-  try {
-    isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
-  } catch (error) {
-    console.log(error);
-  }
+  idPriority.push(proIDs);
+  let isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
   // Tasks
   while (true) {
     // 프로 방송중이면 대기
     while (isProStreaming) {
-      try {
-        isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
-        await sleep(60 * 1000);
-      } catch (error) {
-        console.log(error);
-      }
+      isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
+      await sleep(60 * 1000);
     }
     // 현재 게임중인 프로 확인 과정
     while (spectateRank === Constants.NONE) {
-      try {
-        /* FIXME:
+      /* FIXME:
         const rankLimit = isStreaming
           ? idPriority.length
           : idPriority.length - 1;
           */
-        const rankLimit = idPriority.length;
-        ({ encryptionKey, gameId, spectateRank, peopleCount } = await findMatch(
-          rankLimit,
-          idPriority
-        ));
-      } catch (error) {
-        console.log(error);
+      const rankLimit = idPriority.length;
+      const matchInfo = await findMatch(rankLimit, idPriority);
+      if (matchInfo === null) {
+        return;
       }
+      ({ encryptionKey, gameId, spectateRank, peopleCount } = matchInfo);
       // 방송중인데 오래 팀 프로관전을 못하면 방송 종료
       if (
         isStreaming &&
@@ -181,6 +155,7 @@ export default async (
     //
     if (!isSpectating) {
       spectateRank = Constants.NONE;
+      stopSpectate(gameProcess);
       continue;
     }
     let selectedIndex: number = 2; //FIXME: Constants.NONE
@@ -192,6 +167,9 @@ export default async (
         selectedIndex = playerIndex;
       }
     }
+    console.log(
+      `Tracking Pros: ${proNames.length === 0 ? '' : proNames.join()}`
+    );
     /*
     await modifyChannelInfo(
       `Tracking Pros: ${proNames.length === 0 ? '' : proNames.join()}`
@@ -199,54 +177,43 @@ export default async (
     */
     // obs 화면 만들고 설정
     // obs 게임창 전환
-    // FIXME: 막 시작한 경우 대기시간이 있어서 적용이 안됨
-    // TODO: 시간이 흘렀는지 파악해서 해야됨
-    let eventIndex = 0;
+    let isFixed = false;
     let isUnusualExit = false;
+    let exGameTime: number = Constants.NONE;
     while (isSpectating) {
-      await fixSpectateView(selectedIndex);
-      await sleep(10 * 1000);
       {
-        // 랭크가 낮으면 높은거 있는지 확인
-        const data = await findMatch(spectateRank, idPriority);
-        if (
-          data.spectateRank !== Constants.NONE &&
-          data.spectateRank < spectateRank
-        ) {
-          isSpectating = false;
-          ({ encryptionKey, gameId, spectateRank, peopleCount } = data);
-        }
-      }
-      {
-        // 게임이 종료되었는지 확인
-        try {
-          const {
-            data: { Events: events },
-          } = await request<EventData>('get', Constants.EVENDATA_URL, {
-            httpsAgent,
-          });
-          const size = events.length;
-          console.log(events);
-          while (eventIndex < size && isSpectating) {
-            const event = events[eventIndex];
-            if (event.EventID === Constants.GAME_END_ID) {
-              isSpectating = false;
-              spectateRank = Constants.NONE;
-              if (spectateRank < idPriority.length - 1) {
-                // 팀의 선수라면 마지막 관전 시간 설정
-                lastSpectateTime = new Date().valueOf();
-              }
-            }
-            eventIndex += 1;
+        // 게임이 진행중인지 판단
+        const gameTime = await getGameTime(httpsAgent);
+        if (gameTime !== Constants.NONE) {
+          console.log(gameTime);
+          if (!isFixed && gameTime > 30) {
+            setUpSpectateIngameInitialSetting(selectedIndex);
+            isFixed = true;
           }
-          if (eventIndex === 1) {
-            await setUpSpectateIngameInitialSetting(selectedIndex);
+          if (exGameTime === gameTime && gameTime !== 0) {
+            isSpectating = false;
+            spectateRank = Constants.NONE;
           }
-        } catch {
+          exGameTime = gameTime;
+        } else {
           console.log('Detected abnormal termination');
           spectateRank = Constants.NONE;
           isSpectating = false;
           isUnusualExit = true;
+        }
+      }
+      {
+        // 랭크가 낮으면 높은거 있는지 확인
+        const matchInfo = await findMatch(spectateRank, idPriority);
+        if (matchInfo === null) {
+          return;
+        }
+        if (
+          matchInfo.spectateRank !== Constants.NONE &&
+          matchInfo.spectateRank < spectateRank
+        ) {
+          isSpectating = false;
+          ({ encryptionKey, gameId, spectateRank, peopleCount } = matchInfo);
         }
       }
       {
@@ -266,12 +233,7 @@ export default async (
           //FIXME: await obs.send('StopStreaming');
         }
       }
-      {
-        if (new Date().valueOf() - startTime > 5 * 60 * 1000) {
-          isSpectating = false;
-          spectateRank = Constants.NONE;
-        }
-      }
+      await sleep(10 * 1000);
     }
     // obs 배경화면으로 전환
     if (!isUnusualExit) {
