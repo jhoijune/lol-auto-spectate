@@ -1,7 +1,8 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { config } from 'dotenv';
-import { spawn } from 'child_process';
+import { exec } from 'child_process';
+import kill from 'tree-kill';
 import https from 'https';
 import OBSWebSocket from 'obs-websocket-js';
 
@@ -18,6 +19,7 @@ import {
   modifyChannelInfo,
   checkStreaming,
   fixSpectateView,
+  stopSpectate,
 } from './Method';
 import { Heap } from './DataStructure';
 import Constants from './Constants';
@@ -107,9 +109,12 @@ export default async (
     // 현재 게임중인 프로 확인 과정
     while (spectateRank === Constants.NONE) {
       try {
+        /* FIXME:
         const rankLimit = isStreaming
           ? idPriority.length
           : idPriority.length - 1;
+          */
+        const rankLimit = idPriority.length;
         ({ encryptionKey, gameId, spectateRank, peopleCount } = await findMatch(
           rankLimit,
           idPriority
@@ -149,7 +154,6 @@ export default async (
         if (data.length !== peopleCount) {
           continue;
         }
-        console.log(data.length);
         let redStart: number = Constants.NONE;
         for (let index = 0; index < data.length; index++) {
           const { summonerName, team } = data[index];
@@ -179,7 +183,7 @@ export default async (
       spectateRank = Constants.NONE;
       continue;
     }
-    let selectedIndex: number = Constants.NONE;
+    let selectedIndex: number = 2; //FIXME: Constants.NONE
     const proNames: string[] = [];
     while (!pq.isEmpty()) {
       const [, { name, playerIndex }] = pq.remove();
@@ -222,6 +226,7 @@ export default async (
             httpsAgent,
           });
           const size = events.length;
+          console.log(events);
           while (eventIndex < size && isSpectating) {
             const event = events[eventIndex];
             if (event.EventID === Constants.GAME_END_ID) {
@@ -234,7 +239,7 @@ export default async (
             }
             eventIndex += 1;
           }
-          if (eventIndex > 0) {
+          if (eventIndex === 1) {
             await setUpSpectateIngameInitialSetting(selectedIndex);
           }
         } catch {
@@ -261,10 +266,16 @@ export default async (
           //FIXME: await obs.send('StopStreaming');
         }
       }
+      {
+        if (new Date().valueOf() - startTime > 5 * 60 * 1000) {
+          isSpectating = false;
+          spectateRank = Constants.NONE;
+        }
+      }
     }
     // obs 배경화면으로 전환
     if (!isUnusualExit) {
-      process.kill(-gameProcess.pid);
+      stopSpectate(gameProcess);
     }
   }
 };

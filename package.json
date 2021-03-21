@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "A program to automatically spectate and broadcast league of legends pro's solo rank",
   "main": "src/index.ts",
-  "scripts": {},
+  "scripts": {
+    "start": "node dist"
+  },
   "author": "jhoijune",
   "license": "ISC",
   "dependencies": {
@@ -13,6 +15,7 @@
     "obs-websocket-js": "^4.0.2",
     "puppeteer": "^8.0.0",
     "robotjs": "^0.6.0",
+    "tree-kill": "^1.2.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },

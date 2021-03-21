@@ -12,6 +12,7 @@ import createProIDs from './createProIDs';
 import findMatch from './findMatch';
 import checkStreaming from './checkStreaming';
 import modifyChannelInfo from './modifyChannelInfo';
+import stopSpectate from './stopSpectate';
 
 export default {
   collectProPicture,
@@ -28,6 +29,7 @@ export default {
   findMatch,
   checkStreaming,
   modifyChannelInfo,
+  stopSpectate,
 };
 export {
   collectProPicture,
@@ -44,4 +46,5 @@ export {
   findMatch,
   checkStreaming,
   modifyChannelInfo,
+  stopSpectate,
 };

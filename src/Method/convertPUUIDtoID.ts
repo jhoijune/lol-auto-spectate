@@ -29,7 +29,7 @@ export default async (nickMap: Map<string, string>) => {
         nickMap.set(data.name, name);
         index += 1;
       } catch (error) {
-        console.log(error);
+        console.log(error.status);
       }
     }
   }
