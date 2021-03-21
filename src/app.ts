@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { config } from 'dotenv';
+import { spawn } from 'child_process';
 import https from 'https';
 import OBSWebSocket from 'obs-websocket-js';
 
@@ -16,11 +17,14 @@ import {
   findMatch,
   modifyChannelInfo,
   checkStreaming,
+  fixSpectateView,
 } from './Method';
 import { Heap } from './DataStructure';
 import Constants from './Constants';
 
 import { EventData, PlayerList } from './types';
+
+type NAME = keyof typeof Constants.PRIORITIES;
 
 config();
 
@@ -32,6 +36,7 @@ let isSpectating = false;
 let spectateRank: number = Constants.NONE; // -1: none 0: faker 1: 1군 2: 2군 3: 프로 챌린저
 let encryptionKey = '';
 let gameId: number = Constants.NONE;
+let peopleCount: number = Constants.NONE;
 let lastSpectateTime = new Date().valueOf();
 let nickMap: Map<string, string> | null = null;
 let pictures: string[] | null = null;
@@ -40,10 +45,10 @@ let idPriority: string[][] | null = null;
 
 const httpsAgent = new https.Agent({
   rejectUnauthorized: false,
-  cert: readFileSync(join(__dirname, 'assets', 'riotgames.pem')),
+  cert: readFileSync(join(__dirname, '..', 'assets', 'riotgames.pem')),
 });
 
-const pq = new Heap<{ name: string; playerIndex: number }>();
+const pq = new Heap<{ name: string; playerIndex: number }>(true);
 
 export default async (
   gameWaitLimitMinute: number,
@@ -53,9 +58,8 @@ export default async (
   const gameWaitLimit = gameWaitLimitMinute * 60 * 1000;
   const gameTimeLimit = gameTimeLimitMinute * 60 * 1000;
   const spectateWaitLimit = spectateWaitLimitMinute * 60 * 1000;
-
   const obs = new OBSWebSocket();
-  await obs.connect({ address: 'localhost:4444' });
+  //await obs.connect({ address: 'localhost:4444' });
 
   // 초기화 작업
   while (nickMap === null) {
@@ -79,23 +83,40 @@ export default async (
       console.log(error);
     }
   }
-  const ids = await createProIDs(nickMap);
-  idPriority.push(ids);
-  let isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
+  try {
+    const ids = await createProIDs(nickMap);
+    idPriority.push(ids);
+  } catch (error) {}
+  let isProStreaming = false;
+  try {
+    isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
+  } catch (error) {
+    console.log(error);
+  }
   // Tasks
   while (true) {
     // 프로 방송중이면 대기
     while (isProStreaming) {
-      isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
-      await sleep(60 * 1000);
+      try {
+        isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
+        await sleep(60 * 1000);
+      } catch (error) {
+        console.log(error);
+      }
     }
     // 현재 게임중인 프로 확인 과정
     while (spectateRank === Constants.NONE) {
-      const rankLimit = isStreaming ? idPriority.length : idPriority.length - 1;
-      ({ encryptionKey, gameId, spectateRank } = await findMatch(
-        rankLimit,
-        idPriority
-      ));
+      try {
+        const rankLimit = isStreaming
+          ? idPriority.length
+          : idPriority.length - 1;
+        ({ encryptionKey, gameId, spectateRank, peopleCount } = await findMatch(
+          rankLimit,
+          idPriority
+        ));
+      } catch (error) {
+        console.log(error);
+      }
       // 방송중인데 오래 팀 프로관전을 못하면 방송 종료
       if (
         isStreaming &&
@@ -116,8 +137,8 @@ export default async (
     //
     const infos = []; //  여기에 pro name과 pro 사진 매칭정보를 저장
     while (!isSpectating && new Date().valueOf() - startTime < gameWaitLimit) {
-      gameTimeLimit;
       try {
+        await sleep(1000);
         const { data } = await request<PlayerList>(
           'get',
           Constants.PLAYERLIST_URL,
@@ -125,6 +146,10 @@ export default async (
             httpsAgent,
           }
         );
+        if (data.length !== peopleCount) {
+          continue;
+        }
+        console.log(data.length);
         let redStart: number = Constants.NONE;
         for (let index = 0; index < data.length; index++) {
           const { summonerName, team } = data[index];
@@ -139,17 +164,15 @@ export default async (
               // pictures[picIndex] obs에 맞는 코드
             }
             if (name in Constants.PRIORITIES) {
-              pq.add(Constants.PRIORITIES[name], {
+              pq.add(Constants.PRIORITIES[name as NAME], {
                 name,
-                playerIndex: team === 'ORDER' ? index : 5 + (redStart - index),
+                playerIndex: team === 'ORDER' ? index : 5 + (index - redStart),
               });
             }
           }
         }
         isSpectating = true;
-      } catch {
-        await sleep(1000);
-      }
+      } catch {}
     }
     //
     if (!isSpectating) {
@@ -165,15 +188,19 @@ export default async (
         selectedIndex = playerIndex;
       }
     }
+    /*
     await modifyChannelInfo(
       `Tracking Pros: ${proNames.length === 0 ? '' : proNames.join()}`
     );
+    */
     // obs 화면 만들고 설정
     // obs 게임창 전환
-    await sleep(4 * 1000);
-    setUpSpectateIngameInitialSetting(selectedIndex);
+    // FIXME: 막 시작한 경우 대기시간이 있어서 적용이 안됨
+    // TODO: 시간이 흘렀는지 파악해서 해야됨
     let eventIndex = 0;
+    let isUnusualExit = false;
     while (isSpectating) {
+      await fixSpectateView(selectedIndex);
       await sleep(10 * 1000);
       {
         // 랭크가 낮으면 높은거 있는지 확인
@@ -183,7 +210,7 @@ export default async (
           data.spectateRank < spectateRank
         ) {
           isSpectating = false;
-          ({ encryptionKey, gameId, spectateRank } = data);
+          ({ encryptionKey, gameId, spectateRank, peopleCount } = data);
         }
       }
       {
@@ -207,8 +234,14 @@ export default async (
             }
             eventIndex += 1;
           }
-        } catch (error) {
-          console.log(error);
+          if (eventIndex > 0) {
+            await setUpSpectateIngameInitialSetting(selectedIndex);
+          }
+        } catch {
+          console.log('Detected abnormal termination');
+          spectateRank = Constants.NONE;
+          isSpectating = false;
+          isUnusualExit = true;
         }
       }
       {
@@ -230,6 +263,8 @@ export default async (
       }
     }
     // obs 배경화면으로 전환
-    process.kill(-gameProcess.pid);
+    if (!isUnusualExit) {
+      process.kill(-gameProcess.pid);
+    }
   }
 };

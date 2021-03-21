@@ -15,6 +15,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
             gameId,
             mapId,
             gameQueueConfigId,
+            participants,
           },
         } = await request<CurrentGameInfo>(
           'get',
@@ -35,6 +36,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
             encryptionKey,
             gameId,
             spectateRank: rank,
+            peopleCount: participants.length,
           };
         }
       } catch {
@@ -44,7 +46,8 @@ export default async (rankLimit: number, idPriority: string[][]) => {
   }
   return {
     encryptionKey: '',
-    gameId: 0,
+    gameId: -1,
     spectateRank: -1,
+    peopleCount: -1,
   };
 };

@@ -1,22 +1,24 @@
 import request from './request';
-import PUUID from '../../assets/static/PUUID.json';
-import PUUID_PRIORITY from '../../assets/static/PUUID_PRIORITY.json';
+
 import { SummonerDTO } from '../types';
 import Constants from '../Constants';
+import sleep from './sleep';
+
+type PRO_NAMES = keyof typeof Constants.PUUID;
 
 export default async (nickMap: Map<string, string>) => {
   const { RIOT_API_KEY } = process.env;
-  const puuids = PUUID as { [key: string]: string[] };
   const puuidToId = new Map<string, string>();
-  for (const name in puuids) {
-    if (!(name in puuids)) {
+  for (const name in Constants.PUUID) {
+    if (!(name in Constants.PUUID)) {
       continue;
     }
-    const whosePuuids = puuids[name];
+
+    const whosePuuids = Constants.PUUID[name as PRO_NAMES];
     let index = 0;
     while (index < whosePuuids.length) {
       try {
-        const puuid = puuids[name][index];
+        const puuid = whosePuuids[index];
         const tempUrl = `${Constants.SUMMONER_PUUID_URL}${puuid}`;
         const { data } = await request<SummonerDTO>('get', tempUrl, {
           headers: {
@@ -32,8 +34,7 @@ export default async (nickMap: Map<string, string>) => {
     }
   }
   const idPriority: string[][] = [];
-  const puuidPriority = PUUID_PRIORITY as string[][];
-  for (const puuids of puuidPriority) {
+  for (const puuids of Constants.PUUID_PRIORITY) {
     const container: string[] = [];
     for (const puuid of puuids) {
       container.push(puuidToId.get(puuid)!);

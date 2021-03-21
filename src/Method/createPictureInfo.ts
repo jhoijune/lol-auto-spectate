@@ -1,7 +1,7 @@
 import { readdir } from 'fs/promises';
 import { join } from 'path';
 
-const picturePath = join('..', 'assets');
+const picturePath = join(__dirname, '..', '..', 'assets', 'pictures');
 
 export default async () => {
   let pictures: string[] | null = null;

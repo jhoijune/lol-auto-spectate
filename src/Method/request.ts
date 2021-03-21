@@ -7,6 +7,7 @@ export default async function <T>(
   url: string,
   config?: AxiosRequestConfig
 ) {
+  // FIXME: try catch
   console.log(`Starting ${method.toUpperCase()} ${url} ${printDate()}`);
   const response: AxiosResponse<T> = await axios({
     method,

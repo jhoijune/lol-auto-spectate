@@ -1,11 +1,12 @@
 import cheerio from 'cheerio';
 
 import request from './request';
-import teamAcronymRaw from '../../assets/static/TEAM_ACRONYM.json';
+import Constants from '../Constants';
+
+type TEAM_NAME = keyof typeof Constants.TEAM_ACRONYM;
 
 export default async () => {
   const map = new Map<string, string>();
-  const teamAcronym = teamAcronymRaw as { [key: string]: string };
   let html: string | null = null;
   while (html === null) {
     try {
@@ -22,20 +23,17 @@ export default async () => {
   teams.each((index, elem) => {
     const lists = $(elem).find('li');
     lists.each((index, elem) => {
-      const { teamName, summonerName, summonerExtra } = $(elem).data() as {
-        [key: string]: string | number;
-      };
+      const summonerName = $(elem).find('.SummonerName').text().trim();
+      const summonerExtra = $(elem).find('.SummonerExtra').text().trim();
+      const teamName = $(elem).find('.SummonerTeam').text().trim();
       let modifiedTeamName: string;
-      if (teamName in teamAcronym) {
-        modifiedTeamName = teamAcronym[teamName];
+      if (teamName in Constants.TEAM_ACRONYM) {
+        modifiedTeamName = Constants.TEAM_ACRONYM[teamName as TEAM_NAME];
       } else {
         modifiedTeamName = teamName.toString().toUpperCase();
       }
-      const name = summonerExtra.toString();
-      const concat = `${modifiedTeamName} ${name[0].toUpperCase()}${name.slice(
-        1
-      )}`.trim();
-      map.set(summonerName.toString(), concat);
+      const concat = `${modifiedTeamName} ${summonerExtra}`.trim();
+      map.set(summonerName, concat);
     });
   });
   return map;

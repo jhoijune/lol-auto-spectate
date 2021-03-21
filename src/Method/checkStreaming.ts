@@ -19,9 +19,9 @@ export default async (...ids: string[]) => {
         },
       }
     );
-    console.log(data);
     return data.length !== 0;
   } catch (error) {
     console.log(error);
+    return false;
   }
 };

@@ -2,6 +2,7 @@ import request from './request';
 
 export default async (title: string) => {
   // https://dev.twitch.tv/docs/api/reference#modify-channel-information
+  // FIXME: 여기도 에러남
   const { TWITCH_ID, TWITCH_TOKEN, TWITCH_CLIENT_ID } = process.env;
   try {
     await request(
