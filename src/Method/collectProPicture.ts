@@ -6,23 +6,36 @@ import mapNickToName from './mapNickToName';
 
 export default async () => {
   const picturesPath = path.join(__dirname, '..', '..', 'assets', 'pictures');
+  let isDirectoryExist = false;
   try {
     // folder init
     await fs.access(
       picturesPath,
       constants.F_OK || constants.R_OK || constants.W_OK
     );
+    isDirectoryExist = true;
   } catch (error) {
+    console.error(JSON.stringify(error));
     if (error.code === 'ENOENT') {
+      isDirectoryExist = false;
+    }
+  }
+  if (!isDirectoryExist) {
+    try {
       console.log('Create pictures directory');
       await fs.mkdir(picturesPath);
+    } catch (error) {
+      console.error(JSON.stringify(error));
     }
   }
   try {
-    const nickMapping = await mapNickToName();
+    const nickMap = await mapNickToName();
+    if (nickMap === null) {
+      return;
+    }
     const proName = new Set<string>();
-    for (const [, nick] of nickMapping) {
-      const [teamOrName, name] = nick.split(' ');
+    for (const [, teamName] of nickMap) {
+      const [teamOrName, name] = teamName.split(' ');
       if (name === undefined) {
         proName.add(teamOrName);
       } else {
@@ -78,6 +91,6 @@ export default async () => {
     await browser.close();
     console.log('Finished pro picture collect');
   } catch (error) {
-    console.log(error);
+    console.error(JSON.stringify(error));
   }
 };

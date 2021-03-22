@@ -1,14 +1,13 @@
 import { readFileSync } from 'fs';
 import { join } from 'path';
 import { config } from 'dotenv';
-import { exec } from 'child_process';
 import https from 'https';
 import OBSWebSocket from 'obs-websocket-js';
+import axios from 'axios';
 
 import {
   mapNickToName,
   createPictureInfo,
-  request,
   sleep,
   convertPUUIDtoID,
   spectateGame,
@@ -20,11 +19,14 @@ import {
   fixSpectateView,
   stopSpectate,
   getGameTime,
+  printDate,
 } from './Method';
 import { Heap } from './DataStructure';
 import Constants from './Constants';
 
 import { EventData, GameStats, PlayerList } from './types';
+
+//import './Method/logError';
 
 type NAME = keyof typeof Constants.PRIORITIES;
 
@@ -63,7 +65,11 @@ export default async (
   const obs = new OBSWebSocket();
   //await obs.connect({ address: 'localhost:4444' });
   // 초기화 작업
-  nickMap = await mapNickToName();
+  const tempNickMap = await mapNickToName();
+  if (tempNickMap === null) {
+    return;
+  }
+  nickMap = tempNickMap;
   ({ pictures, pictureMap } = await createPictureInfo());
   const tempIDPriority = await convertPUUIDtoID(nickMap);
   if (tempIDPriority === null) {
@@ -80,17 +86,12 @@ export default async (
   while (true) {
     // 프로 방송중이면 대기
     while (isProStreaming) {
-      isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
+      isProStreaming = await checkStreaming('faker');
       await sleep(60 * 1000);
     }
     // 현재 게임중인 프로 확인 과정
     while (spectateRank === Constants.NONE) {
-      /* FIXME:
-        const rankLimit = isStreaming
-          ? idPriority.length
-          : idPriority.length - 1;
-          */
-      const rankLimit = idPriority.length;
+      const rankLimit = isStreaming ? idPriority.length : idPriority.length - 1;
       const matchInfo = await findMatch(rankLimit, idPriority);
       if (matchInfo === null) {
         return;
@@ -118,13 +119,11 @@ export default async (
     while (!isSpectating && new Date().valueOf() - startTime < gameWaitLimit) {
       try {
         await sleep(1000);
-        const { data } = await request<PlayerList>(
-          'get',
-          Constants.PLAYERLIST_URL,
-          {
-            httpsAgent,
-          }
-        );
+        console.log(`Starting GET ${Constants.PLAYERLIST_URL} ${printDate()}`);
+        const { data } = await axios.get<PlayerList>(Constants.PLAYERLIST_URL, {
+          httpsAgent,
+        });
+        console.log('fuck');
         if (data.length !== peopleCount) {
           continue;
         }
@@ -150,15 +149,19 @@ export default async (
           }
         }
         isSpectating = true;
-      } catch {}
+      } catch {
+      } finally {
+        console.log(
+          `GET request finished for: ${Constants.PLAYERLIST_URL} ${printDate()}`
+        );
+      }
     }
-    //
     if (!isSpectating) {
       spectateRank = Constants.NONE;
       stopSpectate(gameProcess);
       continue;
     }
-    let selectedIndex: number = 2; //FIXME: Constants.NONE
+    let selectedIndex: number = Constants.NONE;
     const proNames: string[] = [];
     while (!pq.isEmpty()) {
       const [, { name, playerIndex }] = pq.remove();
@@ -184,9 +187,9 @@ export default async (
       {
         // 게임이 진행중인지 판단
         const gameTime = await getGameTime(httpsAgent);
+        fixSpectateView(selectedIndex);
         if (gameTime !== Constants.NONE) {
-          console.log(gameTime);
-          if (!isFixed && gameTime > 30) {
+          if (!isFixed && gameTime > 10) {
             setUpSpectateIngameInitialSetting(selectedIndex);
             isFixed = true;
           }
@@ -225,7 +228,7 @@ export default async (
       }
       {
         // twitch api를 통해 현재 방송중인지 확인
-        isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
+        isProStreaming = await checkStreaming('faker');
         if (isProStreaming) {
           isSpectating = false;
           isStreaming = false;

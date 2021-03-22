@@ -1,4 +1,6 @@
 export default class {
+  static PRO_LIST_URL = 'https://op.gg/spectate/list' as const;
+
   static PLAYERLIST_URL = 'https://127.0.0.1:2999/liveclientdata/playerlist' as const;
 
   static EVENDATA_URL = 'https://127.0.0.1:2999/liveclientdata/eventdata' as const;
@@ -8,6 +10,10 @@ export default class {
   static SUMMONER_PUUID_URL = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/' as const;
 
   static SPECTATE_URL = 'https://kr.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/' as const;
+
+  static STREAMS_URL = 'https://api.twitch.tv/helix/streams' as const;
+
+  static BROADCASTER_URL = 'https://api.twitch.tv/helix/channels?broadcaster_id' as const;
 
   static SUMMONERS_RIFT_ID = 11 as const;
 

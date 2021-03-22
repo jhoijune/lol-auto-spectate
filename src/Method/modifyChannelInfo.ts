@@ -1,15 +1,18 @@
-import request from './request';
+import axios from 'axios';
+import Constants from '../Constants';
+import printDate from './printDate';
 
 export default async (title: string) => {
   // https://dev.twitch.tv/docs/api/reference#modify-channel-information
   // FIXME: 여기도 에러남
   const { TWITCH_ID, TWITCH_TOKEN, TWITCH_CLIENT_ID } = process.env;
+  const url = `${Constants.BROADCASTER_URL}=${TWITCH_ID}`;
   try {
-    await request(
-      'patch',
-      `https://api.twitch.tv/helix/channels?broadcaster_id=${TWITCH_ID}`,
+    console.log(`Starting PATCH ${url} ${printDate()}`);
+    await axios.patch(
+      url,
+      { title },
       {
-        data: { title },
         headers: {
           Authorization: `Bearer ${TWITCH_TOKEN}`,
           'Content-Type': 'application/json',
@@ -18,6 +21,8 @@ export default async (title: string) => {
       }
     );
   } catch (error) {
-    console.log(error);
+    console.error(JSON.stringify(error));
+  } finally {
+    console.log(`PATCH request finished for: ${url} ${printDate()}`);
   }
 };

@@ -208,3 +208,7 @@ export type GameStats = {
   mapNumber: number;
   mapTerrain: string;
 };
+
+declare module 'node-key-sender' {
+  export function sendKey(key: string): void;
+}
