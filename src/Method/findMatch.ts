@@ -1,7 +1,8 @@
 import sleep from './sleep';
 import { CurrentGameInfo } from '../types';
-import request from './request';
 import Constants from '../Constants';
+import axios from 'axios';
+import printDate from './printDate';
 
 export default async (rankLimit: number, idPriority: string[][]) => {
   const { RIOT_API_KEY } = process.env;
@@ -9,6 +10,9 @@ export default async (rankLimit: number, idPriority: string[][]) => {
     const ids = idPriority[rank];
     for (const id of ids) {
       try {
+        console.log(
+          `Starting GET ${Constants.SPECTATE_URL}${id} ${printDate()}`
+        );
         const {
           data: {
             observers: { encryptionKey },
@@ -17,15 +21,11 @@ export default async (rankLimit: number, idPriority: string[][]) => {
             gameQueueConfigId,
             participants,
           },
-        } = await request<CurrentGameInfo>(
-          'get',
-          `${Constants.SPECTATE_URL}${id}`,
-          {
-            headers: {
-              'X-Riot-Token': RIOT_API_KEY,
-            },
-          }
-        );
+        } = await axios.get<CurrentGameInfo>(`${Constants.SPECTATE_URL}${id}`, {
+          headers: {
+            'X-Riot-Token': RIOT_API_KEY,
+          },
+        });
         if (
           rank < idPriority.length - 1 ||
           (mapId === Constants.SUMMONERS_RIFT_ID &&
@@ -41,6 +41,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
         }
       } catch (error) {
         const errorCode = error.response.data.status.status_code;
+        // 404 match was not found
         if (errorCode === 403) {
           console.log('Renew RIOT API key');
           return null;
@@ -49,6 +50,12 @@ export default async (rankLimit: number, idPriority: string[][]) => {
         } else {
           await sleep(1200);
         }
+      } finally {
+        console.log(
+          `GET request finished for: ${
+            Constants.SPECTATE_URL
+          }${id} ${printDate()}`
+        );
       }
     }
   }

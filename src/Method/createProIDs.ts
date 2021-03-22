@@ -1,7 +1,8 @@
-import request from './request';
 import { LeagueItemDTO, LeagueListDTO } from '../types';
 import Constants from '../Constants';
 import sleep from './sleep';
+import axios from 'axios';
+import printDate from './printDate';
 
 export default async (nickMap: Map<string, string>) => {
   const { RIOT_API_KEY } = process.env;
@@ -10,9 +11,11 @@ export default async (nickMap: Map<string, string>) => {
     let entries: LeagueItemDTO[] | null = null;
     while (entries === null) {
       try {
+        await sleep(1200);
+        console.log(`Starting GET ${url} ${printDate()}`);
         ({
           data: { entries },
-        } = await request<LeagueListDTO>('get', url, {
+        } = await axios.get<LeagueListDTO>(url, {
           headers: {
             'X-Riot-Token': RIOT_API_KEY,
           },
@@ -25,6 +28,8 @@ export default async (nickMap: Map<string, string>) => {
         } else if (errorCode === 429) {
           await sleep(2 * 60 * 1000);
         }
+      } finally {
+        console.log(`GET request finished for: ${url} ${printDate()}`);
       }
     }
     entries.sort(({ leaguePoints: a }, { leaguePoints: b }) => b - a);

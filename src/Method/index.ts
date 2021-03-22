@@ -1,7 +1,6 @@
 import collectProPicture from './collectProPicture';
 import mapNickToName from './mapNickToName';
 import sleep from './sleep';
-import request from './request';
 import printDate from './printDate';
 import spectateGame from './spectateGame';
 import setUpSpectateIngameInitialSetting from './setUpSpectateIngameInitialSetting';
@@ -19,7 +18,6 @@ export default {
   collectProPicture,
   mapNickToName,
   sleep,
-  request,
   printDate,
   spectateGame,
   setUpSpectateIngameInitialSetting,
@@ -37,7 +35,6 @@ export {
   collectProPicture,
   mapNickToName,
   sleep,
-  request,
   printDate,
   spectateGame,
   setUpSpectateIngameInitialSetting,

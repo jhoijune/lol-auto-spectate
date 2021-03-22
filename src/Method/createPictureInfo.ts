@@ -10,7 +10,7 @@ export default async () => {
     try {
       pictures = await readdir(picturePath);
     } catch (error) {
-      console.log(error);
+      console.error(JSON.stringify(error));
     }
   }
   pictures.forEach((file, index) => {

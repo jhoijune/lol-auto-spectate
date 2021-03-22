@@ -1,8 +1,8 @@
-import request from './request';
-
 import { SummonerDTO } from '../types';
 import Constants from '../Constants';
 import sleep from './sleep';
+import axios from 'axios';
+import printDate from './printDate';
 
 type PRO_NAMES = keyof typeof Constants.PUUID;
 
@@ -13,14 +13,15 @@ export default async (nickMap: Map<string, string>) => {
     if (!(name in Constants.PUUID)) {
       continue;
     }
-
     const whosePuuids = Constants.PUUID[name as PRO_NAMES];
     let index = 0;
     while (index < whosePuuids.length) {
+      const puuid = whosePuuids[index];
+      const url = `${Constants.SUMMONER_PUUID_URL}${puuid}`;
       try {
-        const puuid = whosePuuids[index];
-        const tempUrl = `${Constants.SUMMONER_PUUID_URL}${puuid}`;
-        const { data } = await request<SummonerDTO>('get', tempUrl, {
+        await sleep(1200);
+        console.log(`Starting GET ${url} ${printDate()}`);
+        const { data } = await axios.get<SummonerDTO>(url, {
           headers: {
             'X-Riot-Token': RIOT_API_KEY,
           },
@@ -36,6 +37,8 @@ export default async (nickMap: Map<string, string>) => {
         } else if (errorCode === 429) {
           await sleep(2 * 60 * 1000);
         }
+      } finally {
+        console.log(`GET request finished for: ${url} ${printDate()}`);
       }
     }
   }
