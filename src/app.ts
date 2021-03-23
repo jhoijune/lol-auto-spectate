@@ -25,6 +25,7 @@ import { Heap } from './DataStructure';
 import Constants from './Constants';
 
 import { EventData, GameStats, PlayerList } from './types';
+import decideStreaming from './Method/decideStreaming';
 
 //import './Method/logError';
 
@@ -81,12 +82,12 @@ export default async (
     return;
   }
   idPriority.push(proIDs);
-  let isProStreaming = await checkStreaming(...Constants.PRO_STREAMING_IDS);
+  let isProStreaming = await decideStreaming(idPriority);
   // Tasks
   while (true) {
     // 프로 방송중이면 대기
     while (isProStreaming) {
-      isProStreaming = await checkStreaming('faker');
+      isProStreaming = await decideStreaming(idPriority);
       await sleep(60 * 1000);
     }
     // 현재 게임중인 프로 확인 과정
@@ -123,7 +124,6 @@ export default async (
         const { data } = await axios.get<PlayerList>(Constants.PLAYERLIST_URL, {
           httpsAgent,
         });
-        console.log('fuck');
         if (data.length !== peopleCount) {
           continue;
         }
@@ -180,7 +180,6 @@ export default async (
     */
     // obs 화면 만들고 설정
     // obs 게임창 전환
-    let isFixed = false;
     let isUnusualExit = false;
     let exGameTime: number = Constants.NONE;
     while (isSpectating) {
@@ -189,9 +188,8 @@ export default async (
         const gameTime = await getGameTime(httpsAgent);
         fixSpectateView(selectedIndex);
         if (gameTime !== Constants.NONE) {
-          if (!isFixed && gameTime > 10) {
+          if (gameTime > 10) {
             setUpSpectateIngameInitialSetting(selectedIndex);
-            isFixed = true;
           }
           if (exGameTime === gameTime && gameTime !== 0) {
             isSpectating = false;
@@ -228,7 +226,7 @@ export default async (
       }
       {
         // twitch api를 통해 현재 방송중인지 확인
-        isProStreaming = await checkStreaming('faker');
+        isProStreaming = await decideStreaming(idPriority);
         if (isProStreaming) {
           isSpectating = false;
           isStreaming = false;

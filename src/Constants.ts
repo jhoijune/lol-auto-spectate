@@ -15,6 +15,10 @@ export default class {
 
   static BROADCASTER_URL = 'https://api.twitch.tv/helix/channels?broadcaster_id' as const;
 
+  static RIOT_API_WAIT_TIME = 2 * 60 * 10;
+
+  static RIOT_API_LIMIT_TIME = 2 * 60 * 1000;
+
   static SUMMONERS_RIFT_ID = 11 as const;
 
   static SOLO_RANK_ID = 420 as const;
@@ -50,7 +54,6 @@ export default class {
   ] as const;
 
   static PRO_STREAMING_IDS = [
-    'faker',
     't1_teddy',
     't1_cuzz',
     'canna',

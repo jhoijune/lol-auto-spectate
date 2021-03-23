@@ -21,6 +21,12 @@ declare module 'axios' {
   }
 }
 
+declare module 'child_process' {
+  export interface ChildProcessWithoutNullStreams {
+    isUnusualExit?: boolean;
+  }
+}
+
 export type SummonerDTO = {
   id: string;
   accountId: string;

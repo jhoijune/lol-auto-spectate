@@ -40,15 +40,12 @@ export default async (rankLimit: number, idPriority: string[][]) => {
           };
         }
       } catch (error) {
-        const errorCode = error.response.data.status.status_code;
-        // 404 match was not found
+        const errorCode = error.response?.data?.status?.status_code;
         if (errorCode === 403) {
           console.log('Renew RIOT API key');
           return null;
         } else if (errorCode === 429) {
-          await sleep(2 * 60 * 1000);
-        } else {
-          await sleep(1200);
+          await sleep(Constants.RIOT_API_LIMIT_TIME);
         }
       } finally {
         console.log(
@@ -61,8 +58,8 @@ export default async (rankLimit: number, idPriority: string[][]) => {
   }
   return {
     encryptionKey: '',
-    gameId: -1,
-    spectateRank: -1,
-    peopleCount: -1,
+    gameId: Constants.NONE,
+    spectateRank: Constants.NONE,
+    peopleCount: Constants.NONE,
   };
 };

@@ -11,7 +11,7 @@ export default async (nickMap: Map<string, string>) => {
     let entries: LeagueItemDTO[] | null = null;
     while (entries === null) {
       try {
-        await sleep(1200);
+        await sleep(Constants.RIOT_API_WAIT_TIME);
         console.log(`Starting GET ${url} ${printDate()}`);
         ({
           data: { entries },
@@ -21,12 +21,12 @@ export default async (nickMap: Map<string, string>) => {
           },
         }));
       } catch (error) {
-        const errorCode = error.response.data.status.status_code;
+        const errorCode = error.response?.data?.status?.status_code;
         if (errorCode === 403) {
           console.log('Renew RIOT API key');
-          return false;
+          return null;
         } else if (errorCode === 429) {
-          await sleep(2 * 60 * 1000);
+          await sleep(Constants.RIOT_API_LIMIT_TIME);
         }
       } finally {
         console.log(`GET request finished for: ${url} ${printDate()}`);

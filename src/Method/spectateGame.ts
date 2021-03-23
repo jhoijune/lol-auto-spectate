@@ -11,6 +11,9 @@ export default (encryptionKey: string, gameId: number) => {
   const process = spawn(scriptLoc, [encryptionKey, gameId.toString()], {
     detached: true,
   });
+  process.on('exit', () => {
+    process.isUnusualExit = true;
+  });
   console.log('Start spectate!');
   return process;
 };

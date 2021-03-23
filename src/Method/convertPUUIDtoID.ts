@@ -19,7 +19,7 @@ export default async (nickMap: Map<string, string>) => {
       const puuid = whosePuuids[index];
       const url = `${Constants.SUMMONER_PUUID_URL}${puuid}`;
       try {
-        await sleep(1200);
+        await sleep(Constants.RIOT_API_WAIT_TIME);
         console.log(`Starting GET ${url} ${printDate()}`);
         const { data } = await axios.get<SummonerDTO>(url, {
           headers: {
@@ -30,12 +30,12 @@ export default async (nickMap: Map<string, string>) => {
         nickMap.set(data.name, name);
         index += 1;
       } catch (error) {
-        const errorCode = error.response.data.status.status_code;
+        const errorCode = error.response?.data?.status?.status_code;
         if (errorCode === 403) {
           console.log('Renew RIOT API key');
           return null;
         } else if (errorCode === 429) {
-          await sleep(2 * 60 * 1000);
+          await sleep(Constants.RIOT_API_LIMIT_TIME);
         }
       } finally {
         console.log(`GET request finished for: ${url} ${printDate()}`);

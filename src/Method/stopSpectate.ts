@@ -3,10 +3,13 @@ import { ChildProcessWithoutNullStreams } from 'node:child_process';
 import { type } from 'os';
 
 export default (gameProcess: ChildProcessWithoutNullStreams) => {
-  if (type() === 'Darwin') {
+  const osType = type();
+  console.log(process.exitCode); // 자체적으로 꺼버렸을 때 코드
+  if (osType === 'Darwin' && !gameProcess.isUnusualExit) {
     process.kill(-gameProcess.pid);
-  } else {
+    console.log('Stop spectate');
+  } else if (osType === 'Windows_NT') {
     exec('taskkill /f /im "League of Legends.exe"');
+    console.log('Stop spectate');
   }
-  console.log('Stop spectate');
 };

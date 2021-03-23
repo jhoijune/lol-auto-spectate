@@ -289,7 +289,7 @@ OvOzz : Candy
 우하하하우하우하 : Phantom
 68550985del : Yuwan
 GGGori : Gori
-단크 예거 : Dantal
+SylphyRoxyEris : Dantal
 난 모험가 : Aiming
 돌쇠10주년 : HaeSeong
 천생아재필유용 : Jiin
@@ -776,7 +776,7 @@ choujiao : hachamecha
 95282440del : Grendel
 도르마무진 : RNW Moojin
 DK Edge : RNW Edge
-참깨라면코카콜라 : RNW KronG
+치즈케잌크 : RNW KronG
 하리보 다 내꺼야 : RNW Moojin
 우와 대단해 : RNW Mask
 VaIhaIIa : BC Once
