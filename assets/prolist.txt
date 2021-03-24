@@ -96,7 +96,7 @@ SKT T1 WoIf : Wolf
 FA Newt : Newt
 박투신 : TusiN
 반집승부사 : ALL IN
-미 키 : Mickey
+우엄챌 : Mickey
 죽기장인 : PraY
 불난라인부채질 : Watch
 5228315del : Untara
@@ -107,12 +107,13 @@ HLE Key1 : Key
 5686670del : Bless
 제대하고 만나요 : Justice
 5842618del : Bischu
-7867667del : WooFe
+111122223 : WooFe
 원투쓰리파이브 : Chaser
 8313719del : PawN
 굿 팀 : Nuclear
 닭 쳐 : Zet
 시키는거할께요 : Hojin
+Creative Self : Piglet
 엉덩국 갱승제로 : GankZero
 군대괜히미룬사람 : SnowFlower
 lIIIllIllIIIl : WeiYan
@@ -176,7 +177,7 @@ Hidin Reloading : HighDin
 krats aira : SS
 조조키키 : Jihoon
 cogcog : Wyvern
-sksmsckrgkstkfka : Mickey
+미 키 : Mickey
 쿠쟈니 : Kuzan
 Secret : Secret
 테디만나고싶다 : Destiny
@@ -292,7 +293,7 @@ GGGori : Gori
 SylphyRoxyEris : Dantal
 난 모험가 : Aiming
 돌쇠10주년 : HaeSeong
-천생아재필유용 : Jiin
+나는Aimyon이좋아 : Jiin
 75570648del : Husky
 그리워하지마 : YeongJae
 UijU : Trigger
@@ -313,7 +314,7 @@ Falco Lombardi : Deus
 86690861del : 7WO
 Permaban10334177 : M1anhua
 88910569del : Mingjing
-장미꽃찾으러왔어 : Aiming
+여름의 아이 : Aiming
 90421442del : PraY
 Deerbb : Rwei
 95601465del : Kongyue
@@ -344,7 +345,6 @@ T1 Canna : T1 Canna
 95873761del : T1 Zeus
 날 누가 막을건데 : T1 Oner
 lilililllliilili : DIG LirA
-Creative Self : DIG Piglet
 뚱후니 : DIG Huni
 0Xr9AR1cV8sma05T : DIG Huni
 Riris1 : VSG Riris
@@ -371,7 +371,7 @@ Heart : FPX Doinb
 Umi memeda : FPX Doinb
 jdg clid : FPX Doinb
 펀플 탑 : FPX Nuguri
-nanimonai : FPX Tian
+shaco liu : FPX Tian
 WSY de Daddy : FPX Tian
 해맑은수달씨 : FPX Nuguri
 mymx : FPX Tian
@@ -456,7 +456,6 @@ lazzl : EDG Scout
 jin zhi tao wa : EDG Jiejie
 95340215del : EDG JunJia
 95270217del : EDG Meiko
-95180214del : EDG Aodi
 95360216del : EDG Hope
 95691461del : EDG Clearlove
 MONSTER KHAOS : SHG Tussle
@@ -466,10 +465,11 @@ Why me So dlao : SHG Ramune
 이거탑맞거든요 : BBQ MakNooN
 Furyy : SN Fury
 Sweetkr : SN Fury
-Swordart777 : SN SwordArt
 오늘은느낌이좋아 : SN Helper
 구리팡 : SN Helper
+ADD on win : SN ADD
 도데채 외않돼죠 : SN Helper
+진주강씨29대손 : SN ADD
 hua xin chao ren : SN huanfeng
 Iove camille : SN bin
 ge ju tai xiao : SN Maggie
@@ -479,9 +479,7 @@ Sof13 CSGO : SN SofM
 95300230del : SN Bin
 95260224del : SN SofM
 95290224del : SN Angel
-95330229del : SN Weiwei
 95350229del : SN huanfeng
-SvvordArt777 : SN SwordArt
 날뜩한 칼 : DK Khan
 elole : DK Khan
 DWG Ghost : DK Ghost
@@ -553,7 +551,7 @@ jeoniksu : AF Keine
 3월19일12시06분 : JAG Light
 BRO Yaharong : JAG Yaharong
 XXXTENTACION : JAG Yaharong
-senan1 : JAG Senan
+하영하영하영하영 : JAG Senan
 2915598del : CLG Rush
 pvman : CLG Rush
 9081041del : CLG Rush
@@ -561,6 +559,8 @@ pvman : CLG Rush
 IWDominate : CLG Rush
 HLE Max : HLE.A Max
 sheidodabuguo : FPB xiao7
+Swordart777 : TSM SwordArt
+SvvordArt777 : TSM SwordArt
 못먹겟어삼각김밥 : LGD Kramer
 이쁜늑대멋진늑대 : LGD Kramer
 nNikoto : LGD Yuuki
@@ -785,14 +785,6 @@ whfhy : JT Hfhy
 samirayixiuni : JT Lilv
 O I K   3 : JT Rest
 95591453del : JT Nestea
-ADD on win : BLG ADD
-진주강씨29대손 : BLG ADD
-RoetemOvO : BLG Meteor
-jiozz : BLG Jinjiao
-w1ngs0 : BLG xiaoliulian
-XinMo1 : BLG XinMo
-BLG Meteor : BLG Meteor
-aimi ailun : BLG Meteor
 Spring sonata : VIT Mowgli
 T1 Mowgli : VIT Mowgli
 돌이킬 수 있는 : GEN.A Meaning
@@ -852,6 +844,12 @@ mei you dai long : TT Xiaopeng
 reaIIyreaIIyrea1 : TT Xiaowei
 213213213213 : TT GALA
 95260219del : TT Xiaopeng
+RoetemOvO : BLG Meteor
+jiozz : BLG Jinjiao
+w1ngs0 : BLG xiaoliulian
+XinMo1 : BLG XinMo
+BLG Meteor : BLG Meteor
+aimi ailun : BLG Meteor
 Rain Day0 : ES Cryin
 RNG장형석 : ES Xiaobai
 lagluckygame : ES ShiauC
@@ -864,6 +862,8 @@ mean to you : SNS View
 zheduibai : IGY Lucas
 feng ji xu chui : V5 ppgod
 oddoke1 : V5 Mole
+95180214del : V5 Aodi
+95330229del : V5 Weiwei
 Back to the 1999 : JDM A02
 C9 VULCAN : C9 Vulcan
 C9 Zven : C9 Zven

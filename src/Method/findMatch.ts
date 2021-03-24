@@ -10,6 +10,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
     const ids = idPriority[rank];
     for (const id of ids) {
       try {
+        await sleep(Constants.RIOT_API_WAIT_TIME);
         console.log(
           `Starting GET ${Constants.SPECTATE_URL}${id} ${printDate()}`
         );
@@ -27,7 +28,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
           },
         });
         if (
-          rank < idPriority.length - 1 ||
+          rank === 0 ||
           (mapId === Constants.SUMMONERS_RIFT_ID &&
             gameQueueConfigId === Constants.SOLO_RANK_ID)
         ) {

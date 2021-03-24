@@ -1,3 +1,6 @@
+import { Agent } from 'https';
+import { Heap } from './DataStructure';
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -6,6 +9,7 @@ declare global {
       TWITCH_CLIENT_ID: string;
       TWITCH_SECRET: string;
       TWITCH_TOKEN: string;
+      OBS_PASSWORD: string;
     }
   }
 }
@@ -215,6 +219,21 @@ export type GameStats = {
   mapTerrain: string;
 };
 
-declare module 'node-key-sender' {
-  export function sendKey(key: string): void;
-}
+export type Data = {
+  picturePath: string;
+  isSpectating: boolean;
+  isProStreaming: boolean;
+  isStreaming: boolean;
+  spectateRank: number;
+  encryptionKey: string;
+  gameId: number;
+  peopleCount: number;
+  lastSpectateTime: number;
+  httpsAgent: Agent;
+  pq: Heap<{ name: string; playerIndex: number }>;
+  nickMap: Map<string, string>;
+  pictures: string[];
+  pictureMap: Map<string, number>;
+  idPriority: string[][];
+  resolution: 720 | 1080;
+};

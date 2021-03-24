@@ -15,7 +15,7 @@ export default async () => {
     );
     isDirectoryExist = true;
   } catch (error) {
-    console.error(JSON.stringify(error));
+    console.error(error);
     if (error.code === 'ENOENT') {
       isDirectoryExist = false;
     }
@@ -25,7 +25,7 @@ export default async () => {
       console.log('Create pictures directory');
       await fs.mkdir(picturesPath);
     } catch (error) {
-      console.error(JSON.stringify(error));
+      console.error(error);
     }
   }
   try {

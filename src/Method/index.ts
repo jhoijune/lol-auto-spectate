@@ -13,6 +13,12 @@ import checkStreaming from './checkStreaming';
 import modifyChannelInfo from './modifyChannelInfo';
 import stopSpectate from './stopSpectate';
 import getGameTime from './getGameTime';
+import getGameInfo from './getGameInfo';
+import makeOverlay from './makeOverlay';
+import startStreaming from './startStreaming';
+import decideStreaming from './decideStreaming';
+import stopStreaming from './stopStreaming';
+import switchLOLScene from './switchLOLScene';
 
 export default {
   collectProPicture,
@@ -30,6 +36,12 @@ export default {
   modifyChannelInfo,
   stopSpectate,
   getGameTime,
+  getGameInfo,
+  makeOverlay,
+  startStreaming,
+  decideStreaming,
+  stopStreaming,
+  switchLOLScene,
 };
 export {
   collectProPicture,
@@ -47,4 +59,10 @@ export {
   modifyChannelInfo,
   stopSpectate,
   getGameTime,
+  getGameInfo,
+  makeOverlay,
+  startStreaming,
+  decideStreaming,
+  stopStreaming,
+  switchLOLScene,
 };

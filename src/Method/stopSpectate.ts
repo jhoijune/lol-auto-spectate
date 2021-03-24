@@ -4,8 +4,8 @@ import { type } from 'os';
 
 export default (gameProcess: ChildProcessWithoutNullStreams) => {
   const osType = type();
-  console.log(process.exitCode); // 자체적으로 꺼버렸을 때 코드
   if (osType === 'Darwin' && !gameProcess.isUnusualExit) {
+    console.log(process.exitCode); // 자체적으로 꺼버렸을 때 코드
     process.kill(-gameProcess.pid);
     console.log('Stop spectate');
   } else if (osType === 'Windows_NT') {

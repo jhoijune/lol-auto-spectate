@@ -1,0 +1,58 @@
+.blue-team {
+  position: fixed;
+}
+
+.red-team {
+  position: fixed;
+  text-align: right;
+  left: 1755px;
+  width: 165px;
+}
+
+p {
+  all: unset;
+  font-size: 24px;
+  display: inline-block;
+  color: white;
+  background-color: black;
+}
+
+.top {
+  top: 112px;
+}
+
+.jungle {
+  top: 210px;
+}
+
+.mid {
+  top: 305px;
+}
+
+.adc {
+  top: 400px;
+}
+
+.supporter {
+  top: 497px;
+}
+
+.image-container {
+  position: absolute;
+  height: 66px;
+  top: 31.5px;
+}
+
+img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.blue-team .image-container {
+  left: 65px;
+}
+
+.red-team image-container {
+  right: 72px;
+}

@@ -2,10 +2,14 @@ import robot from 'robotjs';
 import { type } from 'os';
 // @ts-ignore
 import ks from 'node-key-sender';
+import Constants from '../Constants';
 
 const mapping = ['1', '2', '3', '4', '5', 'q', 'w', 'e', 'r', 't'] as const;
 
 export default (playerIndex: number) => {
+  if (playerIndex === Constants.NONE) {
+    return;
+  }
   const selectedKey = mapping[playerIndex];
   const { width, height } = robot.getScreenSize();
   robot.moveMouse(width / 2, height / 2);

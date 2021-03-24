@@ -15,6 +15,8 @@ export default class {
 
   static BROADCASTER_URL = 'https://api.twitch.tv/helix/channels?broadcaster_id' as const;
 
+  static OBS_ADDRESS = 'localhost:4444' as const;
+
   static RIOT_API_WAIT_TIME = 2 * 60 * 10;
 
   static RIOT_API_LIMIT_TIME = 2 * 60 * 1000;
@@ -60,6 +62,8 @@ export default class {
     't1_ellim',
     'gumayusi',
     't1_keria',
+    't1zeus_',
+    't1_oner',
     'clozer_t1',
   ] as const;
 
@@ -122,7 +126,6 @@ export default class {
     ],
     Mireu: [
       'j6JGdklJxdOTVAJoXjeCwT6fDBFRRs9F_iW-2zyo5FNQAOLfhTTf_OZ8mNZkaBKRofBkTiSQzjTITA',
-      'GJY-5I39D2PqS9mVqqtcNxJ90kci3Pey0tEV3O1C02zwBtcdxuN5wT7yNFsdzXK1WWzYeB8Mx4khbg',
     ],
     Asper: [
       'AerCri17saiPNIc27kjru_VcKRfztTUtNBbTLDHs-tTblPFd_wKXR_s-iicQTCcW8tq4NvCVJAF1eA',
@@ -257,7 +260,6 @@ export default class {
       '5nAFnM35saWj1Drrijz8cYHCb0Cr2z3pyUSA_Gr1L0gbhJjoFvMXiqoUWMdOjkLQMZjlZCgqZADPpQ',
       'fCfw6jLKT70Lm_i8xyu-lf1ShAuB9TbZe1GFzy5yvisGmthIhcyMVJJaOlVjYC0Po_Mi-sKQ2ZtsYA',
       'j6JGdklJxdOTVAJoXjeCwT6fDBFRRs9F_iW-2zyo5FNQAOLfhTTf_OZ8mNZkaBKRofBkTiSQzjTITA',
-      'GJY-5I39D2PqS9mVqqtcNxJ90kci3Pey0tEV3O1C02zwBtcdxuN5wT7yNFsdzXK1WWzYeB8Mx4khbg',
       'AerCri17saiPNIc27kjru_VcKRfztTUtNBbTLDHs-tTblPFd_wKXR_s-iicQTCcW8tq4NvCVJAF1eA',
       'tS3wb65ZACOvp42fxdX97VxUA_BmNKTW5HEY6shzmAZOqRTyENlucPc9BjaQA3QPZmhaAZVhzvYEGw',
     ],

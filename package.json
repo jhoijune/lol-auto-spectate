@@ -4,7 +4,8 @@
   "description": "A program to automatically spectate and broadcast league of legends pro's solo rank",
   "main": "src/index.ts",
   "scripts": {
-    "start": "node dist"
+    "start": "node dist",
+    "test": "node --unhandled-rejections=strict dist"
   },
   "author": "jhoijune",
   "license": "ISC",
