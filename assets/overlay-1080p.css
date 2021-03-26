@@ -5,42 +5,54 @@
 .red-team {
   position: fixed;
   text-align: right;
-  left: 1755px;
-  width: 165px;
+  left: 1680px;
+  width: 240px;
 }
 
 p {
   all: unset;
+  min-width: 112.5px;
   font-size: 24px;
   display: inline-block;
   color: white;
   background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-top: 3.75px;
+  padding-bottom: 3.75px;
+}
+
+.blue-team p {
+  padding-left: 3px;
+}
+
+.red-team p {
+  padding-right: 3px;
 }
 
 .top {
-  top: 112px;
+  top: 121px;
 }
 
 .jungle {
-  top: 210px;
+  top: 224px;
 }
 
 .mid {
-  top: 305px;
+  top: 327px;
 }
 
 .adc {
-  top: 400px;
+  top: 430px;
 }
 
 .supporter {
-  top: 497px;
+  top: 533px;
 }
 
 .image-container {
   position: absolute;
-  height: 66px;
-  top: 31.5px;
+  height: 67px;
+  top: 36px;
 }
 
 img {
@@ -50,9 +62,9 @@ img {
 }
 
 .blue-team .image-container {
-  left: 65px;
+  left: 76px;
 }
 
-.red-team image-container {
-  right: 72px;
+.red-team .image-container {
+  right: 76px;
 }

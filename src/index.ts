@@ -1,3 +1,3 @@
 import app from './app';
 
-app(3, 90, 60, 720);
+app(1, 90, 30, 720);

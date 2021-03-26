@@ -8,7 +8,10 @@ export default async (rankLimit: number, idPriority: string[][]) => {
   const { RIOT_API_KEY } = process.env;
   for (let rank = 0; rank < rankLimit; rank++) {
     const ids = idPriority[rank];
-    for (const id of ids) {
+    const size = ids.length;
+    let index = 0;
+    while (index < size) {
+      const id = ids[index];
       try {
         await sleep(Constants.RIOT_API_WAIT_TIME);
         console.log(
@@ -21,6 +24,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
             mapId,
             gameQueueConfigId,
             participants,
+            gameLength,
           },
         } = await axios.get<CurrentGameInfo>(`${Constants.SPECTATE_URL}${id}`, {
           headers: {
@@ -32,6 +36,9 @@ export default async (rankLimit: number, idPriority: string[][]) => {
           (mapId === Constants.SUMMONERS_RIFT_ID &&
             gameQueueConfigId === Constants.SOLO_RANK_ID)
         ) {
+          if (gameLength <= 0) {
+            continue;
+          }
           console.log('Match was found');
           return {
             encryptionKey,
@@ -55,6 +62,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
           }${id} ${printDate()}`
         );
       }
+      index += 1;
     }
   }
   return {

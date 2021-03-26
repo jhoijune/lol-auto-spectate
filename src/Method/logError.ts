@@ -11,6 +11,9 @@ process.stderr.write = (
   cbOrEncoding?: BufferEncoding | ((err?: Error) => void),
   cb?: (err?: Error) => void
 ): boolean => {
+  if (!fs.existsSync(logPath)) {
+    fs.mkdirSync(logPath);
+  }
   const presentYmd = printDate().slice(0, 10);
   const fileName = `${presentYmd} error.txt`;
   if (ymd !== presentYmd) {

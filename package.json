@@ -1,11 +1,11 @@
 {
   "name": "lol-auto-spectate",
   "version": "0.0.1",
-  "description": "A program to automatically spectate and broadcast league of legends pro's solo rank",
+  "description": "A program to automatically spectate and broadcast league of legends specific team pro's solo rank",
   "main": "src/index.ts",
   "scripts": {
     "start": "node dist",
-    "test": "node --unhandled-rejections=strict dist"
+    "trace": "node --unhandled-rejections=strict dist"
   },
   "author": "jhoijune",
   "license": "ISC",
@@ -16,15 +16,14 @@
     "node-key-sender": "^1.0.11",
     "obs-websocket-js": "^4.0.2",
     "puppeteer": "^8.0.0",
-    "robotjs": "^0.6.0",
-    "tree-kill": "^1.2.2",
-    "ts-node": "^9.1.1",
-    "typescript": "^4.2.3"
+    "robotjs": "^0.6.0"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
     "@types/cheerio": "^0.22.27",
     "@types/node": "^14.14.35",
-    "@types/puppeteer": "^5.4.3"
+    "@types/puppeteer": "^5.4.3",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
   }
 }

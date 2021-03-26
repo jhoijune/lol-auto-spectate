@@ -15,7 +15,7 @@ export default async () => {
   }
   pictures.forEach((file, index) => {
     const [name] = file.split(' ');
-    pictureMap.set(name, index);
+    pictureMap.set(name.trim(), index);
   });
   return {
     pictures,

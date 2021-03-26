@@ -29,7 +29,7 @@ import Constants from './Constants';
 
 import { Data } from './types';
 
-//import './Method/logError';
+import './Method/logError';
 
 config();
 
@@ -87,13 +87,13 @@ export default async (
   }
   data.idPriority.push(proIDs);
   data.isProStreaming = await decideStreaming(data.idPriority);
-  if (data.isProStreaming && data.isStreaming) {
-    await stopStreaming(obs, data);
-  }
   // Tasks
   while (true) {
     // 프로 방송중이면 대기
     while (data.isProStreaming) {
+      if (data.isStreaming) {
+        await stopStreaming(obs, data);
+      }
       data.isProStreaming = await decideStreaming(data.idPriority);
       await sleep(60 * 1000);
     }
@@ -113,20 +113,23 @@ export default async (
       // 방송중인데 오래 팀 프로관전을 못하면 방송 종료
       if (
         data.isStreaming &&
+        (data.spectateRank === data.idPriority.length - 1 ||
+          data.spectateRank === Constants.NONE) &&
         new Date().valueOf() - data.lastSpectateTime > spectateWaitLimit
       ) {
         await stopStreaming(obs, data);
+        data.spectateRank === Constants.NONE;
       }
     }
     const gameProcess = spectateGame(data.encryptionKey, data.gameId);
     gameProcess.unref();
     const startTime = new Date().valueOf();
-    const overlayInfos: { index: number; name: string; imgSrc?: string }[] = [];
+    let overlayInfos: { index: number; name: string; imgSrc?: string }[];
     while (
       !data.isSpectating &&
       new Date().valueOf() - startTime < gameWaitLimit
     ) {
-      await getGameInfo(data, overlayInfos);
+      overlayInfos = await getGameInfo(data);
     }
     if (!data.isSpectating) {
       data.spectateRank = Constants.NONE;
@@ -142,14 +145,14 @@ export default async (
         selectedIndex = playerIndex;
       }
     }
+    await makeOverlay(overlayInfos!, data);
     if (!data.isStreaming) {
       // 방송켜고 설정
       await startStreaming(obs, data);
     }
-    await makeOverlay(overlayInfos, data);
     await switchLOLScene(obs, data);
     await modifyChannelInfo(
-      `관전 테스트: ${proNames.length === 0 ? '' : proNames.join()}`
+      `관전: ${proNames.length === 0 ? '' : proNames.join(', ')}`
     );
     console.log(
       `Tracking Pros: ${proNames.length === 0 ? '' : proNames.join()}`
@@ -158,6 +161,7 @@ export default async (
     let exGameTime: number = Constants.NONE;
     let isFixed = false;
     while (data.isSpectating) {
+      await sleep(1000);
       {
         // 게임이 진행중인지 판단
         const gameTime = await getGameTime(data.httpsAgent);
@@ -166,8 +170,12 @@ export default async (
             setUpSpectateIngameInitialSetting(selectedIndex);
             isFixed = true;
           }
-          if (exGameTime === gameTime && gameTime !== 0) {
+          if (exGameTime === gameTime && gameTime > 0) {
+            // 게임 종료
             data.isSpectating = false;
+            if (data.spectateRank < data.idPriority.length - 1) {
+              data.lastSpectateTime = new Date().valueOf();
+            }
             data.spectateRank = Constants.NONE;
           }
           exGameTime = gameTime;
@@ -191,17 +199,18 @@ export default async (
           data = { ...data, ...matchInfo, isSpectating: false };
         }
       }
-      {
-        // 게임 시간이 너무 오래지났으면 종료
-        if (new Date().valueOf() - startTime > gameTimeLimit) {
-          data.isSpectating = false;
-          data.spectateRank = Constants.NONE;
-        }
+      // 게임 시간이 너무 오래지났으면 종료
+      if (
+        data.isSpectating &&
+        new Date().valueOf() - startTime > gameTimeLimit
+      ) {
+        data.isSpectating = false;
+        data.spectateRank = Constants.NONE;
       }
       if (data.isSpectating) {
         // twitch api를 통해 현재 방송중인지 확인
         data.isProStreaming = await decideStreaming(data.idPriority);
-        if (data.isProStreaming) {
+        if (data.spectateRank !== 0) {
           data.isSpectating = false;
           data.spectateRank = Constants.NONE;
           await stopStreaming(obs, data);
@@ -215,5 +224,6 @@ export default async (
     await obs.send('SetCurrentScene', {
       'scene-name': 'Waiting',
     });
+    await modifyChannelInfo('관전 대기중');
   }
 };

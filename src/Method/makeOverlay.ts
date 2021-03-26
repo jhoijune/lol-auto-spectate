@@ -62,7 +62,7 @@ export default async (
   </html>`;
   try {
     await fs.writeFile(
-      join(overlayPath, `${data.encryptionKey}-${data.resolution}p.html`),
+      join(overlayPath, `${data.gameId}-${data.resolution}p.html`),
       html
     );
   } catch (error) {

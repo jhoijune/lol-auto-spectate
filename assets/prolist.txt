@@ -546,7 +546,7 @@ Gen G FIy : AF Fly
 qpalzmwoaj : AF Kiin
 병시우 : AF Dread
 jeoniksu : AF Keine
-렌고쿠 레이즈 : JAG Raise
+레이즈3 : JAG Raise
 7aNa : JAG TaNa
 3월19일12시06분 : JAG Light
 BRO Yaharong : JAG Yaharong
@@ -832,7 +832,7 @@ Please DIE KR D1 : KLG Serenity
 AF MapSSi : AF.A MapSSi
 SPG Nino : AF.A Na Kyung
 FA BaeKHo : AF.A BaeKHo
-AF Burry : AF.A Burry
+블루베뤼 스무디 : AF.A Burry
 AF BuLLDoG : AF.A BuLLDoG
 zpxzpx : RWS HwQ
 huntiand1 : TT Natural

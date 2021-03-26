@@ -10,7 +10,7 @@ export default async (obs: OBSWebSocket, data: Data) => {
       '..',
       'assets',
       'overlay',
-      `${data.encryptionKey}-${data.resolution}.html`
+      `${data.gameId}-${data.resolution}p.html`
     );
     await obs.send('SetSourceSettings', {
       sourceName: 'Overlay',
