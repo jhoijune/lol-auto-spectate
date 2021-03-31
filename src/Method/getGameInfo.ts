@@ -39,16 +39,22 @@ export default async (data: Data) => {
           name: teamAndName,
         };
         const [teamOrName, name] = teamAndName.split(' ');
-        if (name === undefined && data.pictureMap.has(teamOrName)) {
-          const picIndex = data.pictureMap.get(teamOrName)!;
+        if (
+          name === undefined &&
+          data.pictureMap.has(teamOrName.toLowerCase())
+        ) {
+          const picIndex = data.pictureMap.get(teamOrName.toLowerCase())!;
           info.imgSrc = data.pictures[picIndex];
-        } else if (name !== undefined && data.pictureMap.has(name)) {
-          const picIndex = data.pictureMap.get(name)!;
+        } else if (
+          name !== undefined &&
+          data.pictureMap.has(name.toLowerCase())
+        ) {
+          const picIndex = data.pictureMap.get(name.toLowerCase())!;
           info.imgSrc = data.pictures[picIndex];
         }
         if (teamAndName in Constants.PRIORITIES) {
           data.pq.add(Constants.PRIORITIES[teamAndName as Name], {
-            name: teamAndName,
+            name,
             playerIndex,
           });
         }

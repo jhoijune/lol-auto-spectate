@@ -1,5 +1,10 @@
-# TODO
+# LOL Auto Spectate
 
-- [ ] twitch api : 레이드,
-- [ ] 전체적인 로직 검증
-- [ ] critical error 발생시 해결
+A program that automatically specates and streams when Faker plays solo rank
+
+## How to use
+
+```bash
+$ npm run init
+$ npm start
+```

@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
 import axios from 'axios';
-import fs from 'fs';
+import { promises as fs, existsSync } from 'fs';
 import { join } from 'path';
 
 import Constants from '../Constants';
@@ -8,7 +8,7 @@ import printDate from './printDate';
 
 type TEAM_NAME = keyof typeof Constants.TEAM_ACRONYM;
 
-export default async () => {
+export default async (correctFileLoc?: string) => {
   const listPath = join(__dirname, '..', '..', 'assets', 'prolist.txt');
   const map = new Map<string, string>();
   let html: string;
@@ -18,10 +18,10 @@ export default async () => {
   } catch (error) {
     console.error(JSON.stringify(error));
     console.log("OP.GG Doesn't work");
-    if (!fs.existsSync(listPath)) {
+    if (!existsSync(listPath)) {
       return null;
     }
-    const texts = fs.readFileSync(listPath).toString();
+    const texts = (await fs.readFile(listPath)).toString();
     const entries = texts.split('\n');
     for (const entry of entries) {
       const [nick, name] = entry.split(':');
@@ -51,15 +51,27 @@ export default async () => {
       map.set(summonerName, concat);
     });
   });
+  if (correctFileLoc) {
+    try {
+      const texts = (await fs.readFile(correctFileLoc)).toString();
+      const entries = texts.split('\n');
+      for (const entry of entries) {
+        const [nick, name] = entry.split(':').map((v) => v.trim());
+        map.set(nick, name);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
   // 파일에 정보 저장
   const texts: string[] = [];
   map.forEach((name, nick) => {
     texts.push(`${nick} : ${name}`);
   });
-  fs.writeFile(listPath, texts.join('\n'), (error) => {
-    if (error) {
-      console.log(error);
-    }
-  });
+  try {
+    fs.writeFile(listPath, texts.join('\n'));
+  } catch (error) {
+    console.log(error);
+  }
   return map;
 };

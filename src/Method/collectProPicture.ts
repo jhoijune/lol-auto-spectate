@@ -28,32 +28,48 @@ export default async () => {
       console.error(error);
     }
   }
+  const nickMap = await mapNickToName();
+  if (nickMap === null) {
+    return;
+  }
+  const proNameSet = new Set<string>();
+  for (const [, teamName] of nickMap) {
+    const [teamOrName, name] = teamName.split(' ');
+    if (name === undefined) {
+      proNameSet.add(teamOrName);
+    } else {
+      proNameSet.add(name);
+    }
+  }
+  const fileMap = new Map<string, string>();
   try {
-    const nickMap = await mapNickToName();
-    if (nickMap === null) {
-      return;
-    }
-    const proName = new Set<string>();
-    for (const [, teamName] of nickMap) {
-      const [teamOrName, name] = teamName.split(' ');
-      if (name === undefined) {
-        proName.add(teamOrName);
-      } else {
-        proName.add(name);
-      }
-    }
     const files = await fs.readdir(picturesPath);
-    const fileMap = new Map<string, string>();
     for (const file of files) {
       const [name, fileName] = file.split(' ');
       fileMap.set(name, fileName);
     }
-    const size = files.length;
-    const URL = 'https://lol.gamepedia.com/';
-    const IMAGE_SELECTOR = '#infoboxPlayer img';
-    const browser = await puppeteer.launch({ headless: true });
-    const page = await browser.newPage();
-    for (const name of proName) {
+  } catch (error) {
+    console.error(error);
+  }
+  const URL = 'https://lol.gamepedia.com/';
+  const IMAGE_SELECTOR = '#infoboxPlayer img';
+  const browser = await puppeteer.launch({ headless: true });
+  let page = await browser.newPage();
+  await page.setDefaultNavigationTimeout(0);
+  const proNames = [...proNameSet];
+  const missingNames: string[] = [];
+  const size = proNames.length;
+  let index = 0;
+  let isClosed = false;
+  while (index < size) {
+    try {
+      if (isClosed) {
+        // TODO: 에러 해결이 안되면 브라우저도 새로 열어야 됨
+        page = await browser.newPage();
+        await page.setDefaultNavigationTimeout(0);
+        isClosed = false;
+      }
+      const name = proNames[index];
       await page.goto(`${URL}${name}`);
       console.log(`GOTO ${URL}${name}`);
       const imageHref = await page.evaluate((sel) => {
@@ -79,18 +95,27 @@ export default async () => {
           }
         }
         if (isWrite) {
-          const viewSource = await page.goto(imageHref);
+          const endIndex = imageHref.indexOf('/revision');
+          const viewSource = await page.goto(imageHref.slice(0, endIndex));
           fs.writeFile(
             path.join(picturesPath, `${name} ${fileName}`),
             await viewSource.buffer()
           );
           console.log(`Create picture ${fileName}`);
         }
+      } else {
+        missingNames.push(name);
       }
+      index += 1;
+    } catch (error) {
+      console.error(error);
+      isClosed = true;
     }
-    await browser.close();
-    console.log('Finished pro picture collect');
-  } catch (error) {
-    console.error(JSON.stringify(error));
   }
+  await browser.close();
+  console.log('Finished pro picture collect');
+  missingNames.sort();
+  console.log('---------Missing name---------');
+  console.log(missingNames.join('\n'));
+  console.log('----------------End----------------');
 };

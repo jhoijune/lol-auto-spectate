@@ -4,18 +4,17 @@ import { join } from 'path';
 const picturePath = join(__dirname, '..', '..', 'assets', 'pictures');
 
 export default async () => {
-  let pictures: string[] | null = null;
+  let pictures: string[] = [];
   const pictureMap = new Map<string, number>();
-  while (pictures === null) {
-    try {
-      pictures = await readdir(picturePath);
-    } catch (error) {
-      console.error(JSON.stringify(error));
-    }
+  try {
+    pictures = await readdir(picturePath);
+  } catch (error) {
+    console.error(JSON.stringify(error));
+    return;
   }
   pictures.forEach((file, index) => {
     const [name] = file.split(' ');
-    pictureMap.set(name.trim(), index);
+    pictureMap.set(name.trim().toLowerCase(), index);
   });
   return {
     pictures,

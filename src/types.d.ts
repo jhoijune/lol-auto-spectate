@@ -31,6 +31,15 @@ declare module 'child_process' {
   }
 }
 
+export type Config = {
+  type: string;
+  gameWaitLimitMinute: number;
+  noOnePlayWaitLimitMinute: number;
+  spectateWaitLimitMinute: number;
+  resolution: 720 | 1080;
+  correctFileLoc?: string;
+};
+
 export type SummonerDTO = {
   id: string;
   accountId: string;
@@ -236,4 +245,6 @@ export type Data = {
   pictureMap: Map<string, number>;
   idPriority: string[][];
   resolution: 720 | 1080;
+  isConfirm: boolean;
+  isLimit: boolean;
 };

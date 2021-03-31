@@ -9,7 +9,7 @@ export default async (idPriority: string[][]) => {
       if (isFakerStreaming) {
         return true;
       }
-      const fakerMathcInfo = await findMatch(1, idPriority);
+      const fakerMathcInfo = await findMatch(Constants.FAKER_RANK, idPriority);
       if (fakerMathcInfo === null) {
         return true;
       }

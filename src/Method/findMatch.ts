@@ -6,7 +6,7 @@ import printDate from './printDate';
 
 export default async (rankLimit: number, idPriority: string[][]) => {
   const { RIOT_API_KEY } = process.env;
-  for (let rank = 0; rank < rankLimit; rank++) {
+  for (let rank = 0; rank <= rankLimit; rank++) {
     const ids = idPriority[rank];
     const size = ids.length;
     let index = 0;
@@ -32,7 +32,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
           },
         });
         if (
-          rank === 0 ||
+          rank === Constants.FAKER_RANK ||
           (mapId === Constants.SUMMONERS_RIFT_ID &&
             gameQueueConfigId === Constants.SOLO_RANK_ID)
         ) {
