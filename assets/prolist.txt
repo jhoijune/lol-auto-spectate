@@ -1,9 +1,9 @@
-조세형마타 : Mata
+조세형마타 : RNG Mata
 znhy : RNG Xiaohu
-sqrZKpPcns3Gv3bK : Mata
-마따마타 : Mata
-MataMataMata : Mata
-Iehendz : Mata
+sqrZKpPcns3Gv3bK : RNG Mata
+마따마타 : RNG Mata
+MataMataMata : RNG Mata
+Iehendz : RNG Mata
 need time xxx : RNG Xiaolongbao
 코코볼마이쩡 : Limit
 Expession : Expession
@@ -85,8 +85,8 @@ real gankster : ReGank
 KaBuM Ryan : Ryan
 왕석형 : Looper
 리리컬 매지컬 : BaeMe
-히순이 : JDG Mystic
-강퀴 팬 : croc
+히순이 : Mystic
+구구근모 : croc
 4444994del : Olleh
 chongyeol : cyeol
 김 와디드 배인 : Wadid
@@ -127,7 +127,7 @@ By 불비 : FireRain
 달인 카직스 : Dalka
 uskinoej : ikssu
 Stitchy : Stitch
-유미발사 : Ray
+15 March : Ray
 12722323del : TusiN
 13220418del : Chaser
 KT Dove : Dove
@@ -182,7 +182,7 @@ cogcog : Wyvern
 Secret : Secret
 재훈Tv : Destiny
 마이티비어 : Mightybear
-Gen G Lonely : Gen.C Lonely
+Gen G Lonely : Lonely
 간다라쿤다 : Lindarang
 유튜브 승우아빠 : Hyuni
 모쏠아싸히키백수 : BBanG
@@ -198,7 +198,7 @@ SeongHw4n : SeongHwan
 명구리버드 : Tempt
 카페라톄 : Wraith
 BtC 홀리스 : Hollis
-고추장육회비빔밥 : Destiny
+재훈왕국 : Destiny
 mangzhong : Cepted
 Destiny : Destiny(KR)
 하늘킹 : Sky
@@ -224,7 +224,7 @@ rrrrrr11111 : Coco
 98 Haru : Haru
 shirushi : Haru
 공수다잘함 : Ben
-45170701del : BLG Aiming
+45170701del : Aiming
 KunikidaHanamaru : Haru
 제드  최   강 : CheonGo
 Oct0ber : Punch
@@ -232,7 +232,7 @@ Oct0ber : Punch
 weilin : Cepted
 Malrang : Malrang
 dkzkap : Once
-48620616del : BLG Aiming
+48620616del : Aiming
 마녀의 괴화집0 : Hoon
 zkiqkakwwxs : Untara
 눈새로장착함 : GuGer
@@ -254,25 +254,25 @@ NEWBEECOCO : Coco
 pJWBaGy6vll7IHFe : Kuro
 Dear Brave : Haru
 cpwhgkrltlfgek : Zet
-갱만가드림 : KT Blank
-IIrrooGG : EDG Gori
+갱만가드림 : Blank
+IIrrooGG : Gori
 회전술주 : Hades
 PawN God : PawN
-굶사 돌려내라 : Natalie
+포식자 : Natalie
 메 피 : Mephi
-대가리박을게연 : Untara
+qkwkekaksm : Untara
 Anggimor1 : Rokenia
 김도칠 : Newt
 SSUNSSUN : ALL IN
 58630611del : PraY
-59030865del : BLG Aiming
+59030865del : Aiming
 59180618del : Hojin
 챌못가는벌레 : MayZ
 해산물zhongdan : Candy
 뭐야 1얘기야 : Hollis
 트위치 TV 해캄 : HakaM
 만년동안사랑해 : Beichen
-HLE yoHam : EDG Gori
+HLE yoHam : Gori
 Hiod : Viod
 Flyquest Flame : Flame
 이양고만낭 : Seonbi
@@ -283,20 +283,20 @@ sup pob : Olleh
 66740768del : BoBo
 고봉박 : Score
 응모험200 : Key
-taytaytayaty : KT Blank
+taytaytayaty : Blank
 승우컵드롤TK : Smeb
 시온아 안녕 : PraY
 OvOzz : Candy
 우하하하우하우하 : Phantom
 68550985del : Yuwan
-GGGori : EDG Gori
+GGGori : Gori
 SylphyRoxyEris : Dantal
-난 모험가 : BLG Aiming
+난 모험가 : Aiming
 돌쇠10주년 : HaeSeong
-나는Aimyon이좋아 : Jiin
+FA MlD : Jiin
 75570648del : Husky
-그리워하지마 : YeongJae
-UijU : V5 Trigger
+젠지 영재 : YeongJae
+UijU : Trigger
 78651087del : JGY
 yurigaoka : Zenit
 0857la : K
@@ -316,7 +316,7 @@ Permaban10334177 : M1anhua
 88910569del : Mingjing
 Aimingg : Aiming
 90421442del : PraY
-Deerbb : Rwei
+90961178del : Rwei
 95601465del : Kongyue
 The Do1u1u : Do1u1u
 코 취 : SeongHyeok
@@ -327,7 +327,7 @@ Hide on bush : T1 Faker
 구마유시 : T1 Gumayusi
 테디팎 : T1 Teddy
 엘 림 : T1 Ellim
-마음껏 짖어라 : T1 Oner
+Onerrr : T1 Oner
 Cuzzzzzzz : T1 Cuzz
 T1 Teddy : T1 Teddy
 T1 Keria : T1 Keria
@@ -354,24 +354,24 @@ GG00NG : VSG Ggoong
 Gen G Ggoong : VSG Ggoong
 이현경사랑해 : VSG Pure
 BLACK VENOM : VSG Riris
-메이지로즌 : Frozen
+메이지로즌 : SUPERMASSIVE ESPORTS Frozen
 사이버보육원 : AXZ Hoglet
 DaYE : AXZ Hoglet
 PAKAZOA : AXZ Hide
 Hoglet : AXZ Hoglet
-Yangnyeom : AXZ Corporal
+LeggingAffirmed : AXZ Corporal
 여름가리캐리 : AXZ Gariaru
 95272442del : AXZ uinyan
 썸썸데이 : 100 Ssumday
-GimGoon : GimGoon
-킹 갓 황 샘 : GimGoon
-급할수록도라에몽 : FPX Nuguri
+GimGoon : FPX GimGoon
+킹 갓 황 샘 : FPX GimGoon
+느낌없구리 : FPX Nuguri
 Heart : FPX Doinb
 괴도 너굴맨 : FPX Nuguri
 Umi memeda : FPX Doinb
 jdg clid : FPX Doinb
 펀플 탑 : FPX Nuguri
-shaco liu : FPX Tian
+jiamian : FPX Tian
 WSY de Daddy : FPX Tian
 해맑은수달씨 : FPX Nuguri
 mymx : FPX Tian
@@ -382,10 +382,11 @@ unkn0wnerrorRrr : DRX cvMax
 DRX 홍창현 : DRX Pyosik
 Kingen : DRX Kingen
 Quad : DRX SOLKA
+qweweqew : DRX Kingen
 SOLKA1 : DRX SOLKA
 KZ Quad : DRX SOLKA
 DRX BAO : DRX BAO
-inevergivesup : DRX Becca
+beccazz : DRX Becca
 Liiv Dooti : LSB DooTi
 너흰이해못해탑을 : LSB Hipo
 도내 S급 망나니 : LSB Hipo
@@ -412,13 +413,13 @@ SB 서밋 : LSB Summit
 단군의청춘부재 : SRB Danchung
 YDG Sangyoon : SRB Sangyoon
 허만흥 : SRB Nova
-비트할코인 : Thal
+Yorick : SRB Thal
 아펠이오스 : SRB Sangyoon
 나는 고기다 : SRB Nova
 응모함200 : SRB Sangyoon
 저는꿀꿀이에요 : SRB Sangyoon
 말라질꺼야 : IG Rookie
-협곡에 갇힌 자 : IG TheShy
+8878386del : IG TheShy
 KcNco : IG TheShy
 The shy : IG TheShy
 45561472del : IG TheShy
@@ -432,12 +433,12 @@ wzywzyzzz : IG Puff
 95150229del : IG TheShy
 95140222del : IG Puff
 95250221del : IG TheShy
-카인12 : Cain
+카인12 : TL Cain
 1521819del : TL CoreJJ
-어녕이 : EG Impact
+어녕이 : TL Impact
 Diuqil : TL CoreJJ
 CoreJangJeon : TL CoreJJ
-구름구매운고추 : EG Impact
+구름구매운고추 : TL Impact
 Gen G 코어장전 : TL CoreJJ
 TF Blaade : TL TF Blade
 daydayupup : EDG Jinoo
@@ -493,9 +494,9 @@ SD견담캡슐파이 : DK Khan
 HUANG TONG DAYE : DK Canyon
 TOPKING : DK Khan
 볼빵빵 다람쥐 : SG OdduGi
-손연우 남편 : Pirean
-SKT T1 Pirean : Pirean
-ulolu : KT Blank
+손연우 남편 : SG Pirean
+SKT T1 Pirean : SG Pirean
+ulolu : SG Blank
 95240753del : SG Yutorimoyashi
 95250753del : SG Enty
 마미쿡버거도둑 : BJK Nagne
@@ -505,24 +506,24 @@ ShrimpVicious : FLA Shrimp
 49820338del : FLA Bvoy
 57910466del : FLA Bvoy
 FDG Jorda : FLA Grey
-T1 Roach : T1C Roach
-404호 너구리 : T1C Hoit
-기요미 라이언 : T1C Hoit
-태기베어 : T1C Asper
-3렙갱안당함 : T1C Mireu
-호잇이 : T1C Hoit
-Roach : T1C Roach
-T1 Fisher : T1C Fisher
-T1 Berserker : T1C Berseker
+T1 Roach : T1.C Roach
+404호 너구리 : T1.C Hoit
+기요미 라이언 : T1.C Hoit
+태기베어 : T1.C Asper
+3렙갱안당함 : T1.C Mireu
+호잇이 : T1.C Hoit
+Roach : T1.C Roach
+T1 Fisher : T1.C Fisher
+T1 Berserker : T1.C Berseker
 비비드 : RJ viviD
 cexk1lng : RJ Art
 DFM viviD : RJ viviD
 solobolo : RJ Cogcog
-iceland iku : RJ hachamecha
-Naehyun : CGA Naehyun
-nakedBlBl : LNG Rather
-이거 사기임 : GBM
-이도류 : Sword
+very angry papa : RJ hachamecha
+Naehyun : GRF Naehyun
+nakedBlBl : GRF Rather
+이거 사기임 : GRF GBM
+이도류 : GRF Sword
 2405432del : WNS GAP
 None Ella : WNS Ella
 12130392del : WNS Lucifer
@@ -546,12 +547,12 @@ Gen G FIy : AF Fly
 qpalzmwoaj : AF Kiin
 병시우 : AF Dread
 jeoniksu : AF Keine
-레이즈3 : Raise
-7aNa : TaNa
-3월19일12시06분 : Light
-BRO Yaharong : BRO Yaharong
-XXXTENTACION : BRO Yaharong
-하영하영하영하영 : DKC Keshi
+레이즈3 : JAG Raise
+7aNa : JAG TaNa
+3월19일12시06분 : JAG Light
+BRO Yaharong : JAG Yaharong
+XXXTENTACION : JAG Yaharong
+하영하영하영하영 : JAG Senan
 2915598del : CLG Rush
 pvman : CLG Rush
 9081041del : CLG Rush
@@ -564,12 +565,12 @@ SvvordArt777 : TSM SwordArt
 못먹겟어삼각김밥 : LGD Kramer
 이쁜늑대멋진늑대 : LGD Kramer
 nNikoto : LGD Yuuki
-kusurii : JDG Xiye
+kusurii : LGD xiye
 pilotl0l : OZ Pilot
 하마Da : OZ MaHa
 말자하 큐베 : OZ Crown
 망해부럿스 : OZ SoaR
-트위치tv 이안 : Ian
+트위치tv 이안 : OZ Ian
 OZ MaHa : OZ MaHa
 Son of Spirit : OZ BroCColi
 삼성갤럭시크라운 : OZ Crown
@@ -577,7 +578,7 @@ Son of Spirit : OZ BroCColi
 SmartPilot : OZ Pilot
 Canblt : OZ Motive
 땅만안짚으면되지 : OZ Crown
-통모짜감자핫도그 : Ian
+통모짜감자핫도그 : OZ Ian
 Wingeddddd : PSG Winged
 드롭탑아메리카노 : PSG Winged
 NaruseSh1roha : PSG Hanabi
@@ -587,13 +588,13 @@ hanabi9 : PSG Hanabi
 River9 : PSG River
 95621469del : PSG Hanabi
 95611458del : PSG Maple
-72110202 : V5 LANGX
+72110202 : RNG Langx
 S1mpIe : RNG Betty
 heihu along : RNG Xiaohu
-gtqeti260 : Uzi
+gtqeti260 : RNG Uzi
 혼자 만 의 시간1 : RNG yuekai
 95360223del : RNG XLB
-95350223del : V5 LANGX
+95350223del : RNG Langx
 95370222del : RNG Betty
 95200224del : RNG Xiaohu
 HLE yoHan : HLE yoHan
@@ -605,7 +606,7 @@ HLE Deft1 : HLE Deft
 HLE Morgan1 : HLE Morgan
 0vLqOPWje51isE6Y : HLE Deft
 뷔이스타 : HLE Vsta
-Chovy zz6 : HLE Chovy
+정쵸뭉 : HLE Chovy
 다죽이기 : HLE Deft
 1일2이3삼4사 : HLE Chovy
 weather i : HLE Vsta
@@ -626,9 +627,9 @@ QARWEAS : WE Zero
 북쪽의 괴물1 : WE Poss
 ping siba : WE Poss
 MuteAll11 : WE Teacherma
-바위게도우미에요 : WE Plex
+111111111112 : WE Plex
 심심풀이 남신 : WE Missing
-xueren : LNG Hoyoung
+xueren : WE Plex
 매일배고프다 : WE yimeng
 dxkcvkfdf : WE Jiumeng
 95240216del : WE Poss
@@ -684,14 +685,6 @@ Gen G Karis : GEN Karis
 황금고블린1 : GEN Ruler
 기찮게하지마 : GEN Bdd
 95660171del : GEN Ruler
-이마트오나홀도둑 : RA iBoy
-Blueberry skies : RA Maestro
-Kksckzx : BLG Zeka
-PSOUT : RA Forge
-89030413del : RA Forge
-qeqweqeq : BLG Zeka
-Starryovo : RA Hang
-95210213del : RA iBoy
 CCrazy : RW Crazy
 배까츄 : RW Holder
 lolRuby : RW Ruby
@@ -712,7 +705,7 @@ See u AG : BRO UmTi
 BRO Hoya : BRO Hoya
 슈계 RP주세요TnT : BRO UmTi
 BRO Lava : BRO Lava
-BRO Delight : BRO Delight
+BRO Delight : BRO Crescent
 Blank : KT Blank
 13930131del : KT Acorn
 멜리크리스마스 : KT Blank
@@ -776,12 +769,12 @@ choujiao : CGA hachamecha
 95282440del : CGA Grendel
 MooJin777 : RNW Moojin
 DK Edge : RNW Edge
-heimao : RNW KronG
+커피빈아메리카노 : RNW KronG
 하리보 다 내꺼야 : RNW Moojin
-우와 대단해 : RNW Mask
+맥스의 형벌 : RNW Mask
 VaIhaIIa : BC Once
 whfhy : JT Hfhy
-0830678748 : RA FoFo
+0830678748 : JT FoFo
 samirayixiuni : JT Lilv
 O I K   3 : JT Rest
 95591453del : JT Nestea
@@ -789,8 +782,8 @@ Spring sonata : VIT Mowgli
 T1 Mowgli : VIT Mowgli
 돌이킬 수 있는 : GEN.A Meaning
 Gen G nyx : GEN.A Nyx
-happy   game : BLGJ Able
-blitzkrieg Bop : BLGJ Able
+happy   game : LEG Able
+blitzkrieg Bop : LEG Able
 blwy3 : WEA Coten
 그대는 어떤가요 : WEA Simple
 hao yun bao bei : WEA Sun
@@ -805,7 +798,7 @@ FA Cookie : EM Cookie
 EM 상어 : EM Shark
 Karasss : EM Karas
 백수 유리 : EM Scarlet
-Gen G Envy : Gen.C Envyy
+Gen G Envy : EM Envy
 나는야 쩡후이 : EM Execute
 노대스미드라이너 : LSB.A TolanD
 Liiv Pump : LSB.A Ice
@@ -814,7 +807,7 @@ xiaomingaa : LSB.A Ten10
 Lulu plz : OMG cold
 하필칭찬받다 : OMG Curse
 95200227del : OMG Curse
-95330228del : LNG icon
+95330228del : OMG icon
 95110225del : OMG Smlz
 likewizer : KBM Wizer
 BRO Roamer : BRO.A Roamer
@@ -854,8 +847,15 @@ Rain Day0 : ES Cryin
 RNG장형석 : ES Xiaobai
 lagluckygame : ES ShiauC
 95130223del : ES Xiaobai
-95120226del : IG Wink
-1l1l1l1l1l1l : TESC AK
+95120226del : ES Wink
+1l1l1l1l1l1l : TES.C AK
+Blueberry skies : RA Maestro
+Kksckzx : RA Zeka
+PSOUT : RA Forge
+89030413del : RA Forge
+qeqweqeq : RA Zeka
+Starryovo : RA Hang
+95210213del : RA iBoy
 mmqm : YM Ke
 53666 : HKA MnM
 mean to you : SNS View
@@ -872,61 +872,3 @@ C9 Zven : C9 Zven
 95990380del : GAM Kiaya
 95790381del : GAM Zeros
 95700382del : GAM Levi
-BRO Chieftatin : BRO Chieftatin
-BRO 치프틴 : BRO Chieftain
-쿠 리 : Kuri
-zwhy : RNG Xiaohu
-Skinny Brown7 : DKC Keshi
-wo shi owo : SN Bin
-8x8 JG : SN SofM
-SNAngeI : SN Angel
-신기한 개 : SN huanfeng
-Hail : SN huanfeng
-wangwangwang1 : TES 369
-haoyunbaobel : TES knight
-cxzkdasjdqwoie : TES JackeyLove
-emo boy : TES yuyanjia
-orvjiowqqwty1 : TES Zhuo
-xiao dun shou : JDG Zoom
-화내 지 마11 : JDG Yagao
-yyga : JDG Xiye
-cherish0120 : JDG Mystic
-mstyyds : JDG LvMao
-rzdryydsrz : V5 LANGX
-의문의중국탑고수 : IG TheShy
-ggttlplp021 : IG TheShy
-fengjianjian : IG XUN
-wanfeng : IG XUN
-ggttlplp019 : IG Rookie
-qweasdqweasdqw : IG Rookie
-살얼음을 : IG Puff
-퓨식아 : IG Puff
-qwertyuiopqwe : IG Wink
-Uarein : IG Wink
-qpoejtypqoejy : IG Baolan
-Habit : FPX Nuguri
-s11mvplwx : FPX Doinb
-2610506813850944 : FPX Doinb
-wudao shaoshuai : FPX Lwx
-tatsumiraid : FPX Crisp
-wono smite : FPX Crisp
-mznzhtfkbjlxkl : RNG Ming
-fashion여자 : EDG Flandre
-Minger : EDG Clearlove
-7bao : EDG Clearlove
-라면4 : EDG Viper
-zxcjhkaiusyqw : EDG Meiko
-likejkgirl : RA FoFo
-Golden colt17 : RA Leyan
-21year0120 : RA iBoy
-나는 준일하다 : BLG Zeka
-여름의 아이 : BLG Aiming
-장미꽃찾으러왔어 : BLG Aiming
-ndbg : LNG Tarzan
-MISOLEDAD : LNG icon
-LifeisGood666 : TT SamD
-Youtube 프로즌ON : Frozen
-으후루꾸루후으 : Thal
-어리고싶다 : KT Doran
-happy game : BLGJ Able
-ggggjjjjj : Uzi

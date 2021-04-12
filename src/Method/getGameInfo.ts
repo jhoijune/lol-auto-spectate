@@ -15,6 +15,7 @@ export default async (data: Data) => {
       Constants.PLAYERLIST_URL,
       {
         httpsAgent: data.httpsAgent,
+        timeout: 5000,
       }
     );
     if (gameInfo.length !== data.peopleCount) {
@@ -62,7 +63,10 @@ export default async (data: Data) => {
       }
     }
     data.isSpectating = true;
-  } catch {
+  } catch (error) {
+    if (error.code === 'ECONNABORTED') {
+      return null;
+    }
   } finally {
     console.log(
       `GET request finished for: ${Constants.PLAYERLIST_URL} ${printDate()}`

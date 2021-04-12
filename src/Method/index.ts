@@ -2,12 +2,12 @@ import collectProPicture from './collectProPicture';
 import mapNickToName from './mapNickToName';
 import sleep from './sleep';
 import printDate from './printDate';
-import spectateGame from './spectateGame';
+import startSpectate from './startSpectate';
 import setUpSpectateIngameInitialSetting from './setUpSpectateIngameInitialSetting';
 import fixSpectateView from './fixSpectateView';
 import convertPUUIDtoID from './convertPUUIDtoID';
-import createPictureInfo from './createPictureInfo';
-import createProIDs from './createProIDs';
+import makePictureInfo from './makePictureInfo';
+import makeProIDs from './makeProIDs';
 import findMatch from './findMatch';
 import checkStreaming from './checkStreaming';
 import modifyChannelInfo from './modifyChannelInfo';
@@ -19,18 +19,19 @@ import startStreaming from './startStreaming';
 import decideStreaming from './decideStreaming';
 import stopStreaming from './stopStreaming';
 import switchLOLScene from './switchLOLScene';
+import createData from './createData';
 
 export default {
   collectProPicture,
   mapNickToName,
   sleep,
   printDate,
-  spectateGame,
+  startSpectate,
   setUpSpectateIngameInitialSetting,
   fixSpectateView,
   convertPUUIDtoID,
-  createPictureInfo,
-  createProIDs,
+  makePictureInfo,
+  makeProIDs,
   findMatch,
   checkStreaming,
   modifyChannelInfo,
@@ -42,18 +43,19 @@ export default {
   decideStreaming,
   stopStreaming,
   switchLOLScene,
+  createData,
 };
 export {
   collectProPicture,
   mapNickToName,
   sleep,
   printDate,
-  spectateGame,
+  startSpectate,
   setUpSpectateIngameInitialSetting,
   fixSpectateView,
   convertPUUIDtoID,
-  createPictureInfo,
-  createProIDs,
+  makePictureInfo,
+  makeProIDs,
   findMatch,
   checkStreaming,
   modifyChannelInfo,
@@ -65,4 +67,5 @@ export {
   decideStreaming,
   stopStreaming,
   switchLOLScene,
+  createData,
 };

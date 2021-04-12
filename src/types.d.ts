@@ -10,6 +10,7 @@ declare global {
       TWITCH_SECRET: string;
       TWITCH_TOKEN: string;
       OBS_PASSWORD: string;
+      ASSET_PATH: string;
     }
   }
 }
@@ -229,14 +230,15 @@ export type GameStats = {
 };
 
 export type Data = {
-  picturePath: string;
   isSpectating: boolean;
   isProStreaming: boolean;
   isStreaming: boolean;
   spectateRank: number;
+  exSpectateRank: number;
   encryptionKey: string;
   gameId: number;
   peopleCount: number;
+  lastHighRankSpectateTime: number;
   lastSpectateTime: number;
   httpsAgent: Agent;
   pq: Heap<{ name: string; playerIndex: number }>;

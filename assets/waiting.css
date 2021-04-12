@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Inter';
+  src: url(./Inter.ttf);
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans';
+  src: url(./SpoqaHanSansNeo-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url(./Anton-Regular.ttf);
+}
+
+#container {
+  background-color: black;
+  width: 1920px;
+  height: 1080px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#container div {
+  margin: 0 auto;
+  text-align: center;
+}
+
+p {
+  all: unset;
+  display: block;
+  color: #c1c1c1;
+  font-size: 75px;
+  font-family: 'Inter', 'Spoqa Han Sans', 'Segoe UI', Sans-Serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+h1 {
+  all: unset;
+  display: block;
+  color: #e2012d;
+  font-size: 200px;
+  font-family: 'Inter', 'Spoqa Han Sans', 'Segoe UI', Sans-Serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-weight: bold;
+}

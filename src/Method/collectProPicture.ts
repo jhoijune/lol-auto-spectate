@@ -5,7 +5,10 @@ import path from 'path';
 import mapNickToName from './mapNickToName';
 
 export default async () => {
-  const picturesPath = path.join(__dirname, '..', '..', 'assets', 'pictures');
+  const { ASSET_PATH } = process.env;
+  const picturesPath =
+    (ASSET_PATH && path.join(ASSET_PATH, 'pictures')) ||
+    path.join(__dirname, '..', '..', 'assets', 'pictures');
   let isDirectoryExist = false;
   try {
     // folder init

@@ -32,7 +32,7 @@ export default async (rankLimit: number, idPriority: string[][]) => {
           },
         });
         if (
-          rank === Constants.FAKER_RANK ||
+          (rank === Constants.FAKER_RANK && participants.length > 1) ||
           (mapId === Constants.SUMMONERS_RIFT_ID &&
             gameQueueConfigId === Constants.SOLO_RANK_ID)
         ) {

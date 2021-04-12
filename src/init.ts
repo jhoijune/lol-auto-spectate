@@ -1,12 +1,17 @@
 import fs from 'fs';
 import { join } from 'path';
+import { config } from 'dotenv';
+
+if (fs.existsSync(join(__dirname, '..', 'assets'))) {
+  process.env.ASSET_PATH = join(__dirname, '..', 'assets');
+} else {
+  process.env.ASSET_PATH = join(__dirname, 'assets');
+}
+
 import { collectProPicture } from './Method';
 
-// TODO: .env파일 최상위 디렉토리에 없으면 만들고 있으면 내비둠
-// TODO: collect picture로 사진 모으기
-
 (async () => {
-  const envPath = join(__dirname, '..', '.env');
+  const envPath = join(process.env.ASSET_PATH, '..');
   const envArticles = [
     'RIOT_API_KEY',
     'TWITCH_ID',

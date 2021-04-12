@@ -3,8 +3,12 @@ import { join } from 'path';
 
 import printDate from './printDate';
 
+const { ASSET_PATH } = process.env;
+
 let ymd = '';
-const logPath = join(__dirname, '..', '..', 'log');
+const logPath =
+  (ASSET_PATH && join(ASSET_PATH, '..', 'log')) ||
+  join(__dirname, '..', '..', 'log');
 
 process.stderr.write = (
   str: string | Uint8Array,

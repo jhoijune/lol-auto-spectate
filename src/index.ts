@@ -1,5 +1,15 @@
 import { join } from 'path';
 import inquirer from 'inquirer';
+import { config } from 'dotenv';
+import fs from 'fs';
+
+if (fs.existsSync(join(__dirname, 'assets'))) {
+  process.env.ASSET_PATH = join(__dirname, 'assets');
+} else {
+  process.env.ASSET_PATH = join(__dirname, '..', 'assets');
+}
+
+config();
 
 import app from './app';
 import { Config } from './types';
@@ -29,7 +39,7 @@ import { Config } from './types';
       type: 'number',
       name: 'spectateWaitLimitMinute',
       message:
-        'How many minutes would you like to set the waiting time to spectate Faker?',
+        'How many minutes would you like to set the waiting time to spectate high rank?',
       default: 60,
     },
     {
@@ -43,7 +53,7 @@ import { Config } from './types';
       type: 'input',
       name: 'correctFileLoc',
       message: 'What is the path of the correction file?',
-      default: join(__dirname, '..', 'assets', 'correct.txt'),
+      default: join(process.env.ASSET_PATH, 'correct.txt'),
     },
   ]);
   app(config);

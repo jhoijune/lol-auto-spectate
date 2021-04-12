@@ -25,8 +25,6 @@ export default class {
 
   static SOLO_RANK_ID = 420 as const;
 
-  static GAME_END = 'GameEnd' as const;
-
   static NONE = -1 as const;
 
   static FAKER_RANK = 0 as const;
@@ -48,13 +46,13 @@ export default class {
     'T1 Zeus': 7,
     'T1 Oner': 8,
     'T1 Clozer': 9,
-    'T1C Roach': 10,
-    'T1C Hoit': 11,
-    'T1C Mowgli': 11,
-    'T1C Mireu': 11,
-    'T1C Berserker': 11,
-    'T1C Asper': 11,
-    'T1A Fisher': 12,
+    'T1.C Roach': 10,
+    'T1.C Hoit': 11,
+    'T1.C Mowgli': 11,
+    'T1.C Mireu': 11,
+    'T1.C Berserker': 11,
+    'T1.C Asper': 11,
+    'T1.A Fisher': 12,
   } as const;
 
   static LEAGUE_URLS = [
@@ -73,121 +71,125 @@ export default class {
     't1zeus_',
     't1_oner',
     'clozer_t1',
+    't1zeus_',
+    't1_oner',
   ] as const;
+
+  static foo = [];
 
   static PUUID = {
     'T1 Faker': [
-      'K-RHiagBRJBET8cgrCowFJBrqvDGVZnFtzJEkiaOibR7QkZu9Y6cEFOaKVl6phy8MriK-uvWbVYcbQ',
-      'OfZwaHMryx1JN2QWBMwWKvp-jAIwIp2tdylDIDp1aU16VgZQbA0_87HqRoh9AHfaIF4sLzSG5C0Rfw',
+      'UWLdkv7QfJLoaA3pQXEKpmmjrUspydRl7h0h4vZT6U0uSFM9RWXlWw_PXGDrcQs87UmXtvyh_iMAvw',
+      'yUP2nDkAUIqoHf6NUCRhrVNcGUWfRaFHW2U1ObXXapqPJdLdAUIiiyw9cjY5JKdsH1SbQ8m8Z_1lNw',
     ],
     'T1 Teddy': [
-      'Uas0diIOJ8PFAWqecY_FpI2a9uOtf_dBnyS0s5eq89uVv-jGIP6-UhxDIfbsOH5Z2t4-sQ2GFNDx9A',
-      'teC8OvkGMz9lXRzyWR-egykPb2yihOESqCGA1bcyi4IW6SORnvz9aF0-7L7JYfDGMLz-K92l_BcZKA',
+      'hZrIKNtOVPgQwzto1szBbbKZFp3kaYrcNxC75VCEgfptW1yT34NR0mk-HStLDMiD73F-7qh1dd3KfQ',
+      '9aDj-tgh_WvSw-gtSENUrlQm7h0ZKP0ZKSeVljcKdjy7vylCHXvNBQfUXLH2cg2dBtaeHeJ9i5GbNQ',
     ],
     'T1 Cuzz': [
-      'r3GgaNjXqKqKVcSIytC95zXK-lcOsigBmClNybJe-K_mJWHqLDN-Dmk7qASAI2is5yDNeDWS8cFcDA',
-      '6Lt-b4CJ3JsFVXvB7eHItNte-rPsdh0ZEpd0ivVfdlpcXOsxXNyWGuTO8GZC0gs9A7IMNbmCGkOdaw',
-      'iH8cKuPjrhH5qKOy1AKOBBLlXZQlJuKV9IMZWx4UASoInNT5aUsbnMP2j6BZXGLee9-fseEpqH_rPA',
-      '9Y9TLhmThj95pm5m_vwzo4Y8rNltkBuTb6_xkvl1xOc6NlxPJ_GP3OJRRyOFrF6xYhYGRd8_yRcCjQ',
+      'BthRtIUa_k30h1zYGsZZc-mET0AKzdk1fOr0GcyjtYPzOE2X_lW6d7xgP3qhhwfryoMm59HxOceGTA',
+      '2S9-PoYaxCxbZgEXKlQrSNg1RKFGNzLko8h1KJL-NwIhV63HSvF95ogpAvREAVtxipkokNl15saiRg',
+      'mLcxi-d4OOjIFcgrPKzgwqQwHq9QckGDLz8tx1FqHIiCtBs1E9ylSRTDARYSZD6Rij1hEvM-eMoHHQ',
+      'Z7M_-KQQ8a2aZ9J57ab_2aLq_aCXqqo45_xX7oxokcN2f7un5mrma3P2mS9rO3SZHpy62iTIKM38aw',
     ],
     'T1 Canna': [
-      'tl5wc9oAfWeAVFL1M_b4-5LkDdTWYduDt8awmXKoTbgFwR8K9vf41-mDVO499jjqtqnvJfd3stbbhg',
-      'ls92yAvIqIO9P4Ech7vRDoc9VL27VfHm9kd4sweMQ7aD6JeU9EHitIVKbWJwZeu_J5Wc9rnMunoE9A',
+      'NjZ3zun7yICZXia63MfsimgX-DuVOTUs8gB8UeHBVb_p7e5icfk-nMQG5f4yx4R0CdiZaOBzeBXQOQ',
+      'lOkIIiHBFsI_oVSqZMTynLToUI1rIq6dFYjNV7uqgc08RDEV0tquel0Eszlsbt4be7FO1y-1vSoSZw',
     ],
     'T1 Ellim': [
-      'xEcxyD9ejDgjJKb3ukadmgDHLk2GfjLzZNdBAsnsft_ReVToo0GZPTHfEromIBm7Ek_dZssd64AR5w',
-      'YfHF2yCIWZAOn-GFLxy9JD1149qLcIWYVnionZO2nX0w6oINGvSGOdcIx956p-cBA1jucqWRG8OSyQ',
-    ],
-    'T1 Keria': [
-      'l10bUc06VU2YccwmNL4EfvkEX_I6URGmAOM5zLSrWvdlrK_ZVpeOSC-PucLu9zNfT7pazLlguYzlGQ',
-      'O_g4xo20sv3k6ZYCNEk2-iZWG5PMrnL8zt_WGd8LJRo5gzVXM2CLtuNgqUP9l-rmu_KFbMkXl7AFKw',
+      'yLCRXIpOx8RXrGIbB2hM3VQnKuWRQ4Xi76tIMeEnBwu7KusExWOJoDDqFIffvidYoGFeaKMO_urbmQ',
+      'NP1_ImmkFtIA6IuzS__2zzZ63M8CpWcdJAtZGYN6MoLxjKfW0L2R7w9nywzj4dAZm9ag9FcE_k8-1A',
     ],
     'T1 Gumayusi': [
-      'S4Fh4OPPkfgh7kVcE0wwSDmXGiDSxd1U8uk-Sa1fUURR8l6Ys-YbkUmPg2gcw2SFr5ZveLsiij8JQQ',
-      'pi_H60WCfILP9cwNnA3La83qvFsceihHSIX3S9UdMwv8ykv4UBjqzhKno35AO427G1KKkVg3aU5lww',
-      '9keb_pM0Gh38sHUW27jdWXGXD1Fl9BX_maierw9OFx6bClu9y2SyNv5e6Fp9t7dZvrGpt3zdnMGX_Q',
+      'es_pEWJv1qYgd6-KAWRjzCun4B8JNtc67Avqn27GM8n5MxryUxGq1RCllA5HDJnkDSWk1_-Cf3gScg',
+      'jUCaat-sZW6ivHH80Di2ByNrLTh448f6LcW9CN8bkSuyMKG7DD1qciOiNyY5bTWu1Kx8yef2qKp4bA',
+      '_iy8yTOfFHtJLD0jME7k5Pg0oMS06PvIUcSV9fZtB0H_0zhKv-nPbLdVcX-5ZzkzoMPrY4LdXGYcaw',
+    ],
+    'T1 Keria': [
+      'vqukIGn2xt_ifiNGjQW27f3i0Wwf5CIq0IZ9lwoMBhEN7rDBT6gF-jCvCCi-eDIYiTCWlmoh4CuLtA',
+      'qEM--zGXNVMhLxR06OvdWKwsCQSlytBFByZ2sg9rMBdIAArCKGmRHK3bkwdLDh5866yXSbZ74dWIPQ',
     ],
     'T1 Zeus': [
-      'DCNvnlv_68c1h5W8wg2ekRApYTDZB0zFOi0V4t0vjg6amJ7VUZ4MB6mMeP5zfNUe4tGJheEp6HoWCA',
-      'd8KXg-EVS_zfiVAnX3_wxgCCGHB3zlz6Bgq-8qw7YMBrAR0xLIbDd0WGSgD9l4TwXVaCsxXD_g4jdA',
-      'E17onfoRI2ayPuLfzSIE1Oncvp1vTdSVxf19U0XsBA9JL1G3BKQLvYYxnXK15mXmAvdxKx4_UxE4cg',
+      'GUBCYE4A80jjHFwCDA672pcbRdy0GgPgjHVEQZWIaVfgmrj0aG-eFYEiGtdx8SO30bsibv8CohgquQ',
+      'B8O9AUl5CYPiglELcaXXykTE2GiDCGyeNCnC6MiMOMj0tbtSmnz0zcHHrLUsIouDr11Hb34qskQvyQ',
+      'HNVV7L-WelxzRk6UcazZsmKH3FCOpwCEwFzIVyDw3TogL5rPdT7b5sFrFc80GCpMX162xdxPy1Z0IA',
     ],
     'T1 Oner': [
-      'xdAa8Rt2QEtb85EtMOaM6gq7i6etCmlaRLd6JPa9Wly_E6dHhsI1GAx7_r1TTIvk1_0YE8j7chMT8Q',
-      'VXFW8j3KOFh7W6g4GKrJGGmpxKQjDVswGVFWdZGkUDx9epBmgqgf10-vZ6zMu6Bb1wVEmVWOg5EihQ',
+      'iKnnw00vpUcA_Pg5TbfQC78KsZGp_svWVqLyoCZ73vcp5zC8rNRYPB2k7sWRvKH-icI--obdE1ExVg',
+      'kM5JgMCRqNYhdsf3CxkVbpaVvpilYAGD7oh_tTP6Kk1H4cMxECqpxxE1J7cQBDly92ubf2ZgdYSM7A',
     ],
     'T1 Clozer': [
-      'i_u-TDtuRiIZcxV1CXuqqdOax6nKb7RlYd_sl2kQU23fJdCxchsTu9-YkmG7SR9p9NsSFzBtAhtC0Q',
-      '4tLNNRDyxWcn1U6iF2188DjneHVOm4mXbJJPoEgiKwSxJcRj86X0aj7dlI0_qXGyq_4YdCHT3_5iqg',
-      'xT_wuTLRsuj6Y-SUh58HHSIocIZRxOTbc3Zh95IeCZwTBlnKQ4WouecEb4eJSzjtab4N4Ph2KaaOyw',
+      'OUQe96GYixaVL_9ygBWm2HXpHO1e223VX9C3b6vfvIHoL5ewo7xh02gcAS0em_5wkFuN17lVmcIbng',
+      '2nKp9qzO9u3c6pVrT3ZIXE_Q1w6tpgprs9lyjZ7j2I9dZBLS9LCOqwmnynQTegN8g-X4gZqXvsOHjA',
+      'oEuiIBDdUpNird9P5ld5J6AvXYMd9Zo-pWZycVz_So0ZYlJa7FP2urbUYv5JpULA8A_lMYjC7aX-3A',
     ],
-    'T1C Hoit': [
-      'cMcy76YuzNHdwd9UsqyQDznVhiSYTj96BZIRB0VptsDqQPdH3cb0lMeg6LSIN9-sGTTR-kryK-NewA',
-      'p3qgvFLN3AbelnrIIxVKjgRo0HQVV4nNuk6EP070MwuWLP_tXM3XuyFvRuHVbU3lDNCyiESw0UBLmA',
-      '1gw6ErqS2afKi22C4COyo35gMQPoZLXorB4iVsLoDKare7wNHArAMg6_X9shgK1pq-lUSJiz2fVxTg',
+    'T1.C Roach': [
+      'aOGhr7U8qdOBPx8Y0yp4FlN3To8B6AZC5E4Xcqmo6qf1OLT4PztQh70jZz0vXcqr19z_191S-Mfcgw',
+      'OrlERSiTCROGFMWoLGW1buHvzXpkpKlQzZRgizQUjS3fgWJQYvXxe03OWw3RSLT__AyIgj_AvTWZ-g',
     ],
-    'T1C Roach': [
-      'Z3sDfpx5MyVYLtQogKNCvGtZOQ42N8B_DH1F_eUqApN5Atkn9HL6Q9eNu16Q9WDphNPzwu_KtWW9VQ',
-      'kK3bXZRPYsVQSOsJE2rmdwq00CvQsQbQCoAgFYLDOCBgaRYvyH2EURly4vqOJlXPx-6xMep4Y4843g',
+    'T1.C Hoit': [
+      'ozMZm8gBRpRIYzbxXWwiItzq23cSIW2NUyNLJfaLmk3EKeHZQUqPjwQwsiyDWEdO4aVrBgn6dfU47g',
+      'CAJXxRA8T-XrZIAxi-hbkxZ3RLdJyxqm07HClHrj-FG5CJcxs8ECcHadjfLISr_5IpzY9PLzosxUkg',
+      'CKW9HXSSwfa6w-Yrgs4kl4cIb7skmaS94IQ75a68D6f67HJK6A-4fU1CNshQ10AQG_3FdPRclb7mmw',
     ],
-    'T1C Berserker': [
-      '5nAFnM35saWj1Drrijz8cYHCb0Cr2z3pyUSA_Gr1L0gbhJjoFvMXiqoUWMdOjkLQMZjlZCgqZADPpQ',
+    'T1.C Berserker': [
+      '9OzGLp-ba2bv1WH-ObEt7Xmpe1GhEDItFDDva0P2FB864WfzUAQbLD7DGXSbgJyeL7ZoPI3LU3eIyw',
     ],
-    'T1C Mowgli': [
-      'fCfw6jLKT70Lm_i8xyu-lf1ShAuB9TbZe1GFzy5yvisGmthIhcyMVJJaOlVjYC0Po_Mi-sKQ2ZtsYA',
+    'T1.C Mowgli': [
+      '0XxzszbA2IRjDI-1wmK9bgEHwrtymPU4P668s2QGE2jsaOAVci12jDXy7ybqlSc482WrRdQ0EyAaow',
     ],
-    'T1C Mireu': [
-      'j6JGdklJxdOTVAJoXjeCwT6fDBFRRs9F_iW-2zyo5FNQAOLfhTTf_OZ8mNZkaBKRofBkTiSQzjTITA',
+    'T1.C Mireu': [
+      'Q1cMtcddNZptIFvpkHKZbZ37gMqGVivZMfqheqm0Y75C2zy2L2lqejM0FXcfNXxacjxqsn6EpAo_GQ',
     ],
-    'T1C Asper': [
-      'AerCri17saiPNIc27kjru_VcKRfztTUtNBbTLDHs-tTblPFd_wKXR_s-iicQTCcW8tq4NvCVJAF1eA',
+    'T1.C Asper': [
+      'k7m2u5BKbT1No33WHWebeUcd2cWBlyRgJiGjsTHZgussWIDUxIXWoX9X4SCEzI8AEEyKvhgDy5jd6g',
     ],
-    'T1A Fisher': [
-      'tS3wb65ZACOvp42fxdX97VxUA_BmNKTW5HEY6shzmAZOqRTyENlucPc9BjaQA3QPZmhaAZVhzvYEGw',
+    'T1.A Fisher': [
+      'dpIGxB74HxotkxgFukXAT7AA21nubKriXJKfy03jAnsqFxHsqfQTdqqWnXcJAZ5G9LZYpsR2KzX3gg',
     ],
   } as const;
 
   static PUUID_PRIORITY = [
     [
-      'K-RHiagBRJBET8cgrCowFJBrqvDGVZnFtzJEkiaOibR7QkZu9Y6cEFOaKVl6phy8MriK-uvWbVYcbQ',
-      'OfZwaHMryx1JN2QWBMwWKvp-jAIwIp2tdylDIDp1aU16VgZQbA0_87HqRoh9AHfaIF4sLzSG5C0Rfw',
+      'UWLdkv7QfJLoaA3pQXEKpmmjrUspydRl7h0h4vZT6U0uSFM9RWXlWw_PXGDrcQs87UmXtvyh_iMAvw',
+      'yUP2nDkAUIqoHf6NUCRhrVNcGUWfRaFHW2U1ObXXapqPJdLdAUIiiyw9cjY5JKdsH1SbQ8m8Z_1lNw',
     ],
     [
-      'Uas0diIOJ8PFAWqecY_FpI2a9uOtf_dBnyS0s5eq89uVv-jGIP6-UhxDIfbsOH5Z2t4-sQ2GFNDx9A',
-      'teC8OvkGMz9lXRzyWR-egykPb2yihOESqCGA1bcyi4IW6SORnvz9aF0-7L7JYfDGMLz-K92l_BcZKA',
-      'r3GgaNjXqKqKVcSIytC95zXK-lcOsigBmClNybJe-K_mJWHqLDN-Dmk7qASAI2is5yDNeDWS8cFcDA',
-      '6Lt-b4CJ3JsFVXvB7eHItNte-rPsdh0ZEpd0ivVfdlpcXOsxXNyWGuTO8GZC0gs9A7IMNbmCGkOdaw',
-      'iH8cKuPjrhH5qKOy1AKOBBLlXZQlJuKV9IMZWx4UASoInNT5aUsbnMP2j6BZXGLee9-fseEpqH_rPA',
-      '9Y9TLhmThj95pm5m_vwzo4Y8rNltkBuTb6_xkvl1xOc6NlxPJ_GP3OJRRyOFrF6xYhYGRd8_yRcCjQ',
-      'tl5wc9oAfWeAVFL1M_b4-5LkDdTWYduDt8awmXKoTbgFwR8K9vf41-mDVO499jjqtqnvJfd3stbbhg',
-      'ls92yAvIqIO9P4Ech7vRDoc9VL27VfHm9kd4sweMQ7aD6JeU9EHitIVKbWJwZeu_J5Wc9rnMunoE9A',
-      'xEcxyD9ejDgjJKb3ukadmgDHLk2GfjLzZNdBAsnsft_ReVToo0GZPTHfEromIBm7Ek_dZssd64AR5w',
-      'YfHF2yCIWZAOn-GFLxy9JD1149qLcIWYVnionZO2nX0w6oINGvSGOdcIx956p-cBA1jucqWRG8OSyQ',
-      'l10bUc06VU2YccwmNL4EfvkEX_I6URGmAOM5zLSrWvdlrK_ZVpeOSC-PucLu9zNfT7pazLlguYzlGQ',
-      'O_g4xo20sv3k6ZYCNEk2-iZWG5PMrnL8zt_WGd8LJRo5gzVXM2CLtuNgqUP9l-rmu_KFbMkXl7AFKw',
-      'S4Fh4OPPkfgh7kVcE0wwSDmXGiDSxd1U8uk-Sa1fUURR8l6Ys-YbkUmPg2gcw2SFr5ZveLsiij8JQQ',
-      'pi_H60WCfILP9cwNnA3La83qvFsceihHSIX3S9UdMwv8ykv4UBjqzhKno35AO427G1KKkVg3aU5lww',
-      '9keb_pM0Gh38sHUW27jdWXGXD1Fl9BX_maierw9OFx6bClu9y2SyNv5e6Fp9t7dZvrGpt3zdnMGX_Q',
-      'DCNvnlv_68c1h5W8wg2ekRApYTDZB0zFOi0V4t0vjg6amJ7VUZ4MB6mMeP5zfNUe4tGJheEp6HoWCA',
-      'd8KXg-EVS_zfiVAnX3_wxgCCGHB3zlz6Bgq-8qw7YMBrAR0xLIbDd0WGSgD9l4TwXVaCsxXD_g4jdA',
-      'E17onfoRI2ayPuLfzSIE1Oncvp1vTdSVxf19U0XsBA9JL1G3BKQLvYYxnXK15mXmAvdxKx4_UxE4cg',
-      'xdAa8Rt2QEtb85EtMOaM6gq7i6etCmlaRLd6JPa9Wly_E6dHhsI1GAx7_r1TTIvk1_0YE8j7chMT8Q',
-      'VXFW8j3KOFh7W6g4GKrJGGmpxKQjDVswGVFWdZGkUDx9epBmgqgf10-vZ6zMu6Bb1wVEmVWOg5EihQ',
-      'i_u-TDtuRiIZcxV1CXuqqdOax6nKb7RlYd_sl2kQU23fJdCxchsTu9-YkmG7SR9p9NsSFzBtAhtC0Q',
-      '4tLNNRDyxWcn1U6iF2188DjneHVOm4mXbJJPoEgiKwSxJcRj86X0aj7dlI0_qXGyq_4YdCHT3_5iqg',
-      'xT_wuTLRsuj6Y-SUh58HHSIocIZRxOTbc3Zh95IeCZwTBlnKQ4WouecEb4eJSzjtab4N4Ph2KaaOyw',
+      'hZrIKNtOVPgQwzto1szBbbKZFp3kaYrcNxC75VCEgfptW1yT34NR0mk-HStLDMiD73F-7qh1dd3KfQ',
+      '9aDj-tgh_WvSw-gtSENUrlQm7h0ZKP0ZKSeVljcKdjy7vylCHXvNBQfUXLH2cg2dBtaeHeJ9i5GbNQ',
+      'BthRtIUa_k30h1zYGsZZc-mET0AKzdk1fOr0GcyjtYPzOE2X_lW6d7xgP3qhhwfryoMm59HxOceGTA',
+      '2S9-PoYaxCxbZgEXKlQrSNg1RKFGNzLko8h1KJL-NwIhV63HSvF95ogpAvREAVtxipkokNl15saiRg',
+      'mLcxi-d4OOjIFcgrPKzgwqQwHq9QckGDLz8tx1FqHIiCtBs1E9ylSRTDARYSZD6Rij1hEvM-eMoHHQ',
+      'Z7M_-KQQ8a2aZ9J57ab_2aLq_aCXqqo45_xX7oxokcN2f7un5mrma3P2mS9rO3SZHpy62iTIKM38aw',
+      'NjZ3zun7yICZXia63MfsimgX-DuVOTUs8gB8UeHBVb_p7e5icfk-nMQG5f4yx4R0CdiZaOBzeBXQOQ',
+      'lOkIIiHBFsI_oVSqZMTynLToUI1rIq6dFYjNV7uqgc08RDEV0tquel0Eszlsbt4be7FO1y-1vSoSZw',
+      'yLCRXIpOx8RXrGIbB2hM3VQnKuWRQ4Xi76tIMeEnBwu7KusExWOJoDDqFIffvidYoGFeaKMO_urbmQ',
+      'NP1_ImmkFtIA6IuzS__2zzZ63M8CpWcdJAtZGYN6MoLxjKfW0L2R7w9nywzj4dAZm9ag9FcE_k8-1A',
+      'es_pEWJv1qYgd6-KAWRjzCun4B8JNtc67Avqn27GM8n5MxryUxGq1RCllA5HDJnkDSWk1_-Cf3gScg',
+      'jUCaat-sZW6ivHH80Di2ByNrLTh448f6LcW9CN8bkSuyMKG7DD1qciOiNyY5bTWu1Kx8yef2qKp4bA',
+      '_iy8yTOfFHtJLD0jME7k5Pg0oMS06PvIUcSV9fZtB0H_0zhKv-nPbLdVcX-5ZzkzoMPrY4LdXGYcaw',
+      'vqukIGn2xt_ifiNGjQW27f3i0Wwf5CIq0IZ9lwoMBhEN7rDBT6gF-jCvCCi-eDIYiTCWlmoh4CuLtA',
+      'qEM--zGXNVMhLxR06OvdWKwsCQSlytBFByZ2sg9rMBdIAArCKGmRHK3bkwdLDh5866yXSbZ74dWIPQ',
+      'GUBCYE4A80jjHFwCDA672pcbRdy0GgPgjHVEQZWIaVfgmrj0aG-eFYEiGtdx8SO30bsibv8CohgquQ',
+      'B8O9AUl5CYPiglELcaXXykTE2GiDCGyeNCnC6MiMOMj0tbtSmnz0zcHHrLUsIouDr11Hb34qskQvyQ',
+      'HNVV7L-WelxzRk6UcazZsmKH3FCOpwCEwFzIVyDw3TogL5rPdT7b5sFrFc80GCpMX162xdxPy1Z0IA',
+      'iKnnw00vpUcA_Pg5TbfQC78KsZGp_svWVqLyoCZ73vcp5zC8rNRYPB2k7sWRvKH-icI--obdE1ExVg',
+      'kM5JgMCRqNYhdsf3CxkVbpaVvpilYAGD7oh_tTP6Kk1H4cMxECqpxxE1J7cQBDly92ubf2ZgdYSM7A',
     ],
     [
-      'cMcy76YuzNHdwd9UsqyQDznVhiSYTj96BZIRB0VptsDqQPdH3cb0lMeg6LSIN9-sGTTR-kryK-NewA',
-      'p3qgvFLN3AbelnrIIxVKjgRo0HQVV4nNuk6EP070MwuWLP_tXM3XuyFvRuHVbU3lDNCyiESw0UBLmA',
-      '1gw6ErqS2afKi22C4COyo35gMQPoZLXorB4iVsLoDKare7wNHArAMg6_X9shgK1pq-lUSJiz2fVxTg',
-      'Z3sDfpx5MyVYLtQogKNCvGtZOQ42N8B_DH1F_eUqApN5Atkn9HL6Q9eNu16Q9WDphNPzwu_KtWW9VQ',
-      'kK3bXZRPYsVQSOsJE2rmdwq00CvQsQbQCoAgFYLDOCBgaRYvyH2EURly4vqOJlXPx-6xMep4Y4843g',
-      '5nAFnM35saWj1Drrijz8cYHCb0Cr2z3pyUSA_Gr1L0gbhJjoFvMXiqoUWMdOjkLQMZjlZCgqZADPpQ',
-      'fCfw6jLKT70Lm_i8xyu-lf1ShAuB9TbZe1GFzy5yvisGmthIhcyMVJJaOlVjYC0Po_Mi-sKQ2ZtsYA',
-      'j6JGdklJxdOTVAJoXjeCwT6fDBFRRs9F_iW-2zyo5FNQAOLfhTTf_OZ8mNZkaBKRofBkTiSQzjTITA',
-      'AerCri17saiPNIc27kjru_VcKRfztTUtNBbTLDHs-tTblPFd_wKXR_s-iicQTCcW8tq4NvCVJAF1eA',
-      'tS3wb65ZACOvp42fxdX97VxUA_BmNKTW5HEY6shzmAZOqRTyENlucPc9BjaQA3QPZmhaAZVhzvYEGw',
+      'OUQe96GYixaVL_9ygBWm2HXpHO1e223VX9C3b6vfvIHoL5ewo7xh02gcAS0em_5wkFuN17lVmcIbng',
+      '2nKp9qzO9u3c6pVrT3ZIXE_Q1w6tpgprs9lyjZ7j2I9dZBLS9LCOqwmnynQTegN8g-X4gZqXvsOHjA',
+      'oEuiIBDdUpNird9P5ld5J6AvXYMd9Zo-pWZycVz_So0ZYlJa7FP2urbUYv5JpULA8A_lMYjC7aX-3A',
+      'aOGhr7U8qdOBPx8Y0yp4FlN3To8B6AZC5E4Xcqmo6qf1OLT4PztQh70jZz0vXcqr19z_191S-Mfcgw',
+      'OrlERSiTCROGFMWoLGW1buHvzXpkpKlQzZRgizQUjS3fgWJQYvXxe03OWw3RSLT__AyIgj_AvTWZ-g',
+      'ozMZm8gBRpRIYzbxXWwiItzq23cSIW2NUyNLJfaLmk3EKeHZQUqPjwQwsiyDWEdO4aVrBgn6dfU47g',
+      'CAJXxRA8T-XrZIAxi-hbkxZ3RLdJyxqm07HClHrj-FG5CJcxs8ECcHadjfLISr_5IpzY9PLzosxUkg',
+      'CKW9HXSSwfa6w-Yrgs4kl4cIb7skmaS94IQ75a68D6f67HJK6A-4fU1CNshQ10AQG_3FdPRclb7mmw',
+      '9OzGLp-ba2bv1WH-ObEt7Xmpe1GhEDItFDDva0P2FB864WfzUAQbLD7DGXSbgJyeL7ZoPI3LU3eIyw',
+      '0XxzszbA2IRjDI-1wmK9bgEHwrtymPU4P668s2QGE2jsaOAVci12jDXy7ybqlSc482WrRdQ0EyAaow',
+      'Q1cMtcddNZptIFvpkHKZbZ37gMqGVivZMfqheqm0Y75C2zy2L2lqejM0FXcfNXxacjxqsn6EpAo_GQ',
+      'k7m2u5BKbT1No33WHWebeUcd2cWBlyRgJiGjsTHZgussWIDUxIXWoX9X4SCEzI8AEEyKvhgDy5jd6g',
+      'dpIGxB74HxotkxgFukXAT7AA21nubKriXJKfy03jAnsqFxHsqfQTdqqWnXcJAZ5G9LZYpsR2KzX3gg',
     ],
   ] as const;
 
@@ -214,7 +216,7 @@ export default class {
     'Sengoku Gaming': 'SG',
     'Beşiktaş Esports': 'BJK',
     'Flamengo eSports': 'FLA',
-    'T1 Challengers': 'T1C',
+    'T1 Challengers': 'T1.C',
     'Rascal Jester': 'RJ',
     Griffin: 'GRF',
     Winners: 'WNS',
@@ -268,7 +270,7 @@ export default class {
     'Rogue Warriors Shark': 'RWS',
     'Dominus Esports': 'TT',
     eStar: 'ES',
-    'Top Esports Challenger': 'TESC',
+    'Top Esports Challenger': 'TES.C',
     'Young Miracles': 'YM',
     'Hong Kong Attitude': 'HKA',
     'Suning Gaming-S': 'SNS',

@@ -9,7 +9,10 @@ import printDate from './printDate';
 type TEAM_NAME = keyof typeof Constants.TEAM_ACRONYM;
 
 export default async (correctFileLoc?: string) => {
-  const listPath = join(__dirname, '..', '..', 'assets', 'prolist.txt');
+  const { ASSET_PATH } = process.env;
+  const listPath =
+    (ASSET_PATH && join(ASSET_PATH, 'prolist.txt')) ||
+    join(__dirname, '..', '..', 'assets', 'prolist.txt');
   const map = new Map<string, string>();
   let html: string;
   try {

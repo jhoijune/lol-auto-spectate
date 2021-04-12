@@ -26,7 +26,10 @@ export default async (
   overlayInfos: { index: number; name: string; imgSrc?: string }[],
   data: Data
 ) => {
-  const overlayPath = join(__dirname, '..', '..', 'assets', 'overlay');
+  const { ASSET_PATH } = process.env;
+  const overlayPath =
+    (ASSET_PATH && join(ASSET_PATH, 'overlay')) ||
+    join(__dirname, '..', '..', 'assets', 'overlay');
   let isDirectoryExist = false;
   try {
     // folder init

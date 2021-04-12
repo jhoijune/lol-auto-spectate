@@ -11,6 +11,7 @@ export default async (httpsAgent: https.Agent) => {
       data: { gameTime },
     } = await axios.get<GameStats>(Constants.GAME_STATS_URL, {
       httpsAgent,
+      timeout: 5000,
     });
     return gameTime;
   } catch {
