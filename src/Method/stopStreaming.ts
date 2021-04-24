@@ -1,7 +1,7 @@
 import OBSWebSocket from 'obs-websocket-js';
 import { Data } from '../types';
 
-export default async (obs: OBSWebSocket, data: Data) => {
+export default async (data: Data, obs: OBSWebSocket) => {
   try {
     await obs.send('SetCurrentScene', {
       'scene-name': 'Waiting',

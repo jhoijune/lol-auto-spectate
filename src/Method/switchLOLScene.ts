@@ -2,7 +2,7 @@ import OBSWebSocket from 'obs-websocket-js';
 import { join } from 'path';
 import { Data } from '../types';
 
-export default async (obs: OBSWebSocket, data: Data) => {
+export default async (data: Data, obs: OBSWebSocket) => {
   const { ASSET_PATH } = process.env;
   try {
     const path =

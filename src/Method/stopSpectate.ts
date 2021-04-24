@@ -1,5 +1,5 @@
 import { exec } from 'child_process';
-import { ChildProcessWithoutNullStreams } from 'node:child_process';
+import { ChildProcessWithoutNullStreams } from 'child_process';
 import { type } from 'os';
 
 export default (gameProcess: ChildProcessWithoutNullStreams) => {

@@ -13,6 +13,7 @@ config();
 
 import app from './app';
 import { Config } from './types';
+import test from './test';
 
 (async () => {
   const config = await inquirer.prompt<Config>([
@@ -20,8 +21,8 @@ import { Config } from './types';
       type: 'list',
       name: 'type',
       message: 'What type would you like to start with?',
-      choices: ['limitless', 'limit', 'limit-confirm'],
-      default: 'limit-confirm',
+      choices: ['permission', 'without permission', 'test'],
+      default: 'permission',
     },
     {
       type: 'number',
@@ -56,5 +57,9 @@ import { Config } from './types';
       default: join(process.env.ASSET_PATH, 'correct.txt'),
     },
   ]);
-  app(config);
+  if (config.type === 'test') {
+    test(config);
+  } else {
+    app(config);
+  }
 })();

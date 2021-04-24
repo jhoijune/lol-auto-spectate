@@ -1,6 +1,7 @@
 import axios from 'axios';
 import sleep from './sleep';
 import printDate from './printDate';
+import translatedChampionNames from './translatedChampionNames';
 import Constants from '../Constants';
 import { Data, PlayerList } from '../types';
 
@@ -24,7 +25,7 @@ export default async (data: Data) => {
     }
     let redStart: number = Constants.NONE;
     for (let index = 0; index < gameInfo.length; index++) {
-      const { summonerName, team } = gameInfo[index];
+      const { summonerName, team, championName } = gameInfo[index];
       const trimmedTeam = team.trim();
       if (trimmedTeam === 'CHAOS' && redStart === Constants.NONE) {
         redStart = index;
@@ -57,6 +58,7 @@ export default async (data: Data) => {
           data.pq.add(Constants.PRIORITIES[teamAndName as Name], {
             name,
             playerIndex,
+            championName: translatedChampionNames[championName.trim()],
           });
         }
         overlayInfos.push(info);

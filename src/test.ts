@@ -7,12 +7,10 @@ import {
   switchLOLScene,
   createData,
   determineGameOver,
-  makeStreamingTitle,
   decideGameIntercept,
-  decidePlayGame,
-  decideStopGameAndStreaming,
   isGameRunning,
-  getPermission,
+  searchGame,
+  stopStreaming,
 } from './Method';
 import Constants from './Constants';
 
@@ -26,15 +24,20 @@ export default async (config: Config) => {
     return;
   }
   const { data, obs } = temp;
+  let isTitleChanged = false;
   while (true) {
     while (data.spectateRank === Constants.NONE) {
-      await decidePlayGame(data, obs);
-    }
-    if (!data.isPermitted) {
-      data.isPermitted = await getPermission();
-      if (!data.isPermitted) {
+      const rankLimit = data.isStreaming
+        ? Constants.OTHERS_RANK
+        : Constants.GROUP2_RANK;
+      const matchInfo = await searchGame(rankLimit, data.idPriority);
+      if (matchInfo === null) {
+        if (data.isStreaming) {
+          await stopStreaming(data, obs);
+        }
         return;
       }
+      Object.assign(data, matchInfo);
     }
     const gameProcess = startSpectate(data.encryptionKey, data.gameId);
     if (!(await isGameRunning(data, gameProcess))) {
@@ -45,18 +48,25 @@ export default async (config: Config) => {
       exGameTime: Constants.NONE,
       fixCount: 0,
     };
-    const streamingTitle = makeStreamingTitle(data, auxData);
+    while (!data.pq.isEmpty()) {
+      const [, { playerIndex }] = data.pq.remove();
+      if (auxData.selectedIndex === Constants.NONE) {
+        auxData.selectedIndex = playerIndex;
+      }
+    }
     if (!data.isStreaming) {
       await startStreaming(data, obs);
     }
     await switchLOLScene(data, obs);
-    await modifyChannelInfo(streamingTitle);
-    console.log(streamingTitle);
+    if (!isTitleChanged) {
+      const streamingTitle = 'Test';
+      await modifyChannelInfo(streamingTitle);
+      isTitleChanged = true;
+    }
     while (data.isSpectating) {
       await sleep(1000);
       await determineGameOver(data, auxData);
       await decideGameIntercept(data);
-      await decideStopGameAndStreaming(data, obs);
     }
     if (data.spectateRank === Constants.NONE) {
       await sleep(10 * 1000);
@@ -66,8 +76,5 @@ export default async (config: Config) => {
     });
     await sleep(1000);
     stopSpectate(gameProcess);
-    if (data.spectateRank === Constants.NONE && data.isStreaming) {
-      await modifyChannelInfo('Waiting to spectate');
-    }
   }
 };

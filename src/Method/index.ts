@@ -8,7 +8,7 @@ import fixSpectateView from './fixSpectateView';
 import convertPUUIDtoID from './convertPUUIDtoID';
 import makePictureInfo from './makePictureInfo';
 import makeProIDs from './makeProIDs';
-import findMatch from './findMatch';
+import searchGame from './searchGame';
 import checkStreaming from './checkStreaming';
 import modifyChannelInfo from './modifyChannelInfo';
 import stopSpectate from './stopSpectate';
@@ -16,10 +16,18 @@ import getGameTime from './getGameTime';
 import getGameInfo from './getGameInfo';
 import makeOverlay from './makeOverlay';
 import startStreaming from './startStreaming';
-import decideStreaming from './decideStreaming';
 import stopStreaming from './stopStreaming';
 import switchLOLScene from './switchLOLScene';
 import createData from './createData';
+import translatedChampionNames from './translatedChampionNames';
+import getPermission from './getPermission';
+import determineGameOver from './determineGameOver';
+import makeStreamingTitle from './makeStreamingTitle';
+import decideGameIntercept from './decideGameIntercept';
+import decideStopStreaming from './decideStopStreaming';
+import decidePlayGame from './decidePlayGame';
+import decideStopGameAndStreaming from './decideStopGameAndStreaming';
+import isGameRunning from './isGameRunning';
 
 export default {
   collectProPicture,
@@ -32,7 +40,7 @@ export default {
   convertPUUIDtoID,
   makePictureInfo,
   makeProIDs,
-  findMatch,
+  searchGame,
   checkStreaming,
   modifyChannelInfo,
   stopSpectate,
@@ -40,10 +48,18 @@ export default {
   getGameInfo,
   makeOverlay,
   startStreaming,
-  decideStreaming,
   stopStreaming,
   switchLOLScene,
   createData,
+  getPermission,
+  translatedChampionNames,
+  determineGameOver,
+  makeStreamingTitle,
+  decideGameIntercept,
+  decideStopStreaming,
+  decidePlayGame,
+  decideStopGameAndStreaming,
+  isGameRunning,
 };
 export {
   collectProPicture,
@@ -56,7 +72,7 @@ export {
   convertPUUIDtoID,
   makePictureInfo,
   makeProIDs,
-  findMatch,
+  searchGame,
   checkStreaming,
   modifyChannelInfo,
   stopSpectate,
@@ -64,8 +80,16 @@ export {
   getGameInfo,
   makeOverlay,
   startStreaming,
-  decideStreaming,
   stopStreaming,
   switchLOLScene,
   createData,
+  getPermission,
+  translatedChampionNames,
+  determineGameOver,
+  makeStreamingTitle,
+  decideGameIntercept,
+  decideStopStreaming,
+  decidePlayGame,
+  decideStopGameAndStreaming,
+  isGameRunning,
 };

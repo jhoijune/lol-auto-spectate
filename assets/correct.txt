@@ -128,10 +128,10 @@ YDG Sangyoon : Sangyoon
 저는꿀꿀이에요 : Sangyoon
 슈렐리아의사정 : SKT Wolf
 SKT T1 WoIf : SKT Wolf
-Malrang : DK.C Malrang
-Co24 : DK.C Malrang
-2000 02 09 : DK.C Malrang
-DWG Malrang : DK.C Malrang
+Malrang : DK Malrang
+Co24 : DK Malrang
+2000 02 09 : DK Malrang
+DWG Malrang : DK Malrang
 wh4tever : SHG Zenit
 yurigaoka : SHG Zenit
 HSHTM : SHG Zenit
@@ -148,3 +148,8 @@ KronGG : KronG
 HLE CaD : HLE.C CaD
 나고영잿불거인 : HLE.C CaD
 KT Dove : KT Dove
+Liiv KABBIE : LSB.C Kabbie
+다없수질 : LSB.C Kabbie
+콩알벌래 : LSB.C Kabbie
+읽씹맨 : AF Leo
+AF Le5 : AF Leo

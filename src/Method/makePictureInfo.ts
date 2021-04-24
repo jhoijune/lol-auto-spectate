@@ -12,7 +12,10 @@ export default async () => {
     pictures = await readdir(picturePath);
   } catch (error) {
     console.error(JSON.stringify(error));
-    return;
+    return {
+      pictures,
+      pictureMap,
+    };
   }
   pictures.forEach((file, index) => {
     const [name] = file.split(' ');

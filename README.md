@@ -28,5 +28,3 @@ $ npm start
 ## Implementation
 
 [https://twitch.tv/t1_faker_fan](https://twitch.tv/t1_faker_fan)
-
-<iframe src="https://player.twitch.tv/?channel=t1_faker_fan&parent=github.com" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>

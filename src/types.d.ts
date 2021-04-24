@@ -231,7 +231,6 @@ export type GameStats = {
 
 export type Data = {
   isSpectating: boolean;
-  isProStreaming: boolean;
   isStreaming: boolean;
   spectateRank: number;
   exSpectateRank: number;
@@ -241,12 +240,20 @@ export type Data = {
   lastHighRankSpectateTime: number;
   lastSpectateTime: number;
   httpsAgent: Agent;
-  pq: Heap<{ name: string; playerIndex: number }>;
+  pq: Heap<{ name: string; playerIndex: number; championName?: string }>;
   nickMap: Map<string, string>;
   pictures: string[];
   pictureMap: Map<string, number>;
   idPriority: string[][];
   resolution: 720 | 1080;
-  isConfirm: boolean;
-  isLimit: boolean;
+  isPermitted: boolean;
+  noOnePlayWaitLimit: number;
+  gameWaitLimit: number;
+  spectateWaitLimit: number;
+};
+
+export type AuxData = {
+  selectedIndex: number;
+  exGameTime: number;
+  fixCount: number;
 };

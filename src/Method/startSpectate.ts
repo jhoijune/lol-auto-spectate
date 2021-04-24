@@ -17,6 +17,7 @@ export default (encryptionKey: string, gameId: number) => {
   gameProcess.on('exit', () => {
     gameProcess.isUnusualExit = true;
   });
+  gameProcess.unref();
   console.log('Start spectate!');
   return gameProcess;
 };
