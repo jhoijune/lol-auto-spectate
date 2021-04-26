@@ -28,6 +28,7 @@ import decideStopStreaming from './decideStopStreaming';
 import decidePlayGame from './decidePlayGame';
 import decideStopGameAndStreaming from './decideStopGameAndStreaming';
 import isGameRunning from './isGameRunning';
+import injectChatCommand from './injectChatCommand';
 
 export default {
   collectProPicture,
@@ -60,6 +61,7 @@ export default {
   decidePlayGame,
   decideStopGameAndStreaming,
   isGameRunning,
+  injectChatCommand,
 };
 export {
   collectProPicture,
@@ -92,4 +94,5 @@ export {
   decidePlayGame,
   decideStopGameAndStreaming,
   isGameRunning,
+  injectChatCommand,
 };

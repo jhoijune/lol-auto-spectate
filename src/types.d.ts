@@ -11,6 +11,8 @@ declare global {
       TWITCH_TOKEN: string;
       OBS_PASSWORD: string;
       ASSET_PATH: string;
+      CHANNEL: string;
+      AUTH_USERS: string;
     }
   }
 }
@@ -232,6 +234,7 @@ export type GameStats = {
 export type Data = {
   isSpectating: boolean;
   isStreaming: boolean;
+  isPaused: boolean;
   spectateRank: number;
   exSpectateRank: number;
   encryptionKey: string;
@@ -247,6 +250,7 @@ export type Data = {
   idPriority: string[][];
   resolution: 720 | 1080;
   isPermitted: boolean;
+  isCommandAvailable: boolean;
   noOnePlayWaitLimit: number;
   gameWaitLimit: number;
   spectateWaitLimit: number;

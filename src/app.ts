@@ -13,6 +13,7 @@ import {
   decideStopGameAndStreaming,
   isGameRunning,
   getPermission,
+  injectChatCommand,
 } from './Method';
 import Constants from './Constants';
 
@@ -26,9 +27,15 @@ export default async (config: Config) => {
     return;
   }
   const { data, obs } = temp;
+  injectChatCommand(data, obs);
   while (true) {
+    data.isCommandAvailable = true;
     while (data.spectateRank === Constants.NONE) {
-      await decidePlayGame(data, obs);
+      if (!data.isPaused) {
+        await decidePlayGame(data, obs);
+      } else {
+        await sleep(10 * 1000);
+      }
     }
     if (!data.isPermitted) {
       data.isPermitted = await getPermission();
@@ -36,6 +43,7 @@ export default async (config: Config) => {
         return;
       }
     }
+    data.isCommandAvailable = false;
     const gameProcess = startSpectate(data.encryptionKey, data.gameId);
     if (!(await isGameRunning(data, gameProcess))) {
       continue;
@@ -52,6 +60,7 @@ export default async (config: Config) => {
     await switchLOLScene(data, obs);
     await modifyChannelInfo(streamingTitle);
     console.log(streamingTitle);
+    data.isCommandAvailable = true;
     while (data.isSpectating) {
       await sleep(1000);
       await determineGameOver(data, auxData);

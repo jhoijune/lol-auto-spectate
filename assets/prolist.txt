@@ -19,7 +19,7 @@ DWG Hachani : Hachani
 귀찮타정말 : Space
 1264404del : DayDream
 닉변한다데 : dade
-김구거구거 : GuGer
+메가구거 : GuGer
 1303549del : Piccaboo
 Dutch Coffee : Wraith
 jiace : Ace
@@ -142,7 +142,7 @@ JJUN12 : Jjun
 리밋 top : Limit
 17692376del : BokGu
 17950649del : Apdo
-그냥웃기다 : Smeb
+메가봉박 : Smeb
 권유령 : Wraith
 라쿤99 : Racoon
 Owned u : Emperor
@@ -226,7 +226,7 @@ shirushi : Haru
 공수다잘함 : Ben
 45170701del : BLG Aiming
 KunikidaHanamaru : Haru
-제드  최   강 : CheonGo
+Everything BIack : CheonGo
 Oct0ber : Punch
 겨울나라얼음공주 : Bless
 weilin : Cepted
@@ -349,7 +349,7 @@ lilililllliilili : DIG LirA
 0Xr9AR1cV8sma05T : DIG Huni
 Riris1 : VSG Riris
 물불풀풀불물 : VSG Ggoong
-GG00NG : VSG Ggoong
+3133805del : VSG Ggoong
 3153049del : VSG Mightybear
 Gen G Ggoong : VSG Ggoong
 이현경사랑해 : VSG Pure
@@ -508,7 +508,7 @@ FDG Jorda : FLA Grey
 T1 Roach : T1.C Roach
 404호 너구리 : T1.C Hoit
 기요미 라이언 : T1.C Hoit
-태기베어 : T1.C Asper
+이게 태긴데욤 : T1.C Asper
 새벽밤공기밤하늘 : T1.C Mireu
 호잇이 : T1.C Hoit
 Roach : T1.C Roach
@@ -603,7 +603,7 @@ HLE Deft1 : HLE Deft
 따봉 람머스 : HLE DuDu
 HLE Morgan1 : HLE Morgan
 0vLqOPWje51isE6Y : HLE Deft
-생각 몰라 : HLE Vsta
+V스타 : HLE Vsta
 정쵸뭉 : HLE Chovy
 다죽이기 : HLE Deft
 1일2이3삼4사 : HLE Chovy
@@ -767,7 +767,7 @@ choujiao : CGA hachamecha
 95282440del : CGA Grendel
 MooJin777 : V3 Moojin
 DK Edge : DK.A Edge
-kept going : RNW KronG
+Poirierr : RNW KronG
 하리보 다 내꺼야 : V3 Moojin
 맥스의 형벌 : RNW Mask
 VaIhaIIa : BC Once

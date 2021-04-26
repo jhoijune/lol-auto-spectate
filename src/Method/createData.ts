@@ -55,6 +55,8 @@ export default async (
     data: {
       isSpectating: false,
       isStreaming: (await obs.send('GetStreamingStatus')).streaming,
+      isCommandAvailable: false,
+      isPaused: false,
       spectateRank: Constants.NONE, // -1: none 0: faker 1: 1군 2: 2군 3: 프로 챌린저
       exSpectateRank: Constants.NONE,
       encryptionKey: '',

@@ -11,6 +11,7 @@ import {
   isGameRunning,
   searchGame,
   stopStreaming,
+  injectChatCommand,
 } from './Method';
 import Constants from './Constants';
 
@@ -24,21 +25,28 @@ export default async (config: Config) => {
     return;
   }
   const { data, obs } = temp;
+  injectChatCommand(data, obs);
   let isTitleChanged = false;
   while (true) {
+    data.isCommandAvailable = true;
     while (data.spectateRank === Constants.NONE) {
-      const rankLimit = data.isStreaming
-        ? Constants.OTHERS_RANK
-        : Constants.GROUP2_RANK;
-      const matchInfo = await searchGame(rankLimit, data.idPriority);
-      if (matchInfo === null) {
-        if (data.isStreaming) {
-          await stopStreaming(data, obs);
+      if (!data.isPaused) {
+        const rankLimit = data.isStreaming
+          ? Constants.OTHERS_RANK
+          : Constants.GROUP2_RANK;
+        const matchInfo = await searchGame(rankLimit, data.idPriority);
+        if (matchInfo === null) {
+          if (data.isStreaming) {
+            await stopStreaming(data, obs);
+          }
+          return;
         }
-        return;
+        Object.assign(data, matchInfo);
+      } else {
+        await sleep(10 * 1000);
       }
-      Object.assign(data, matchInfo);
     }
+    data.isCommandAvailable = false;
     const gameProcess = startSpectate(data.encryptionKey, data.gameId);
     if (!(await isGameRunning(data, gameProcess))) {
       continue;
@@ -63,6 +71,7 @@ export default async (config: Config) => {
       await modifyChannelInfo(streamingTitle);
       isTitleChanged = true;
     }
+    data.isCommandAvailable = true;
     while (data.isSpectating) {
       await sleep(1000);
       await determineGameOver(data, auxData);
