@@ -1,11 +1,12 @@
 import { Agent } from 'https';
+import { ChildProcessWithoutNullStreams } from 'child_process';
 import { Heap } from './DataStructure';
 
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
       RIOT_API_KEY: string;
-      TWITCH_ID: number;
+      TWITCH_ID: string;
       TWITCH_CLIENT_ID: string;
       TWITCH_SECRET: string;
       TWITCH_TOKEN: string;
@@ -254,6 +255,7 @@ export type Data = {
   noOnePlayWaitLimit: number;
   gameWaitLimit: number;
   spectateWaitLimit: number;
+  gameProcess?: ChildProcessWithoutNullStreams;
 };
 
 export type AuxData = {

@@ -1,8 +1,9 @@
 import { type } from 'os';
 import { spawn } from 'child_process';
 import { join } from 'path';
+import { Data } from '../types';
 
-export default (encryptionKey: string, gameId: number) => {
+export default (data: Data) => {
   const { ASSET_PATH } = process.env;
   const scriptPath =
     (ASSET_PATH && join(ASSET_PATH, 'script')) ||
@@ -11,13 +12,16 @@ export default (encryptionKey: string, gameId: number) => {
     type() === 'Darwin'
       ? join(scriptPath, 'spectate.sh')
       : join(scriptPath, 'spectate.bat');
-  const gameProcess = spawn(scriptLoc, [encryptionKey, gameId.toString()], {
-    detached: true,
-  });
+  const gameProcess = spawn(
+    scriptLoc,
+    [data.encryptionKey, data.gameId.toString()],
+    {
+      detached: true,
+    }
+  );
   gameProcess.on('exit', () => {
     gameProcess.isUnusualExit = true;
   });
-  gameProcess.unref();
   console.log('Start spectate!');
   return gameProcess;
 };

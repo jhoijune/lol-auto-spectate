@@ -1,7 +1,6 @@
 import robot from 'robotjs';
 
 import fixSpectateView from './fixSpectateView';
-import Constants from '../Constants';
 
 export default (playerIndex: number) => {
   const { width, height } = robot.getScreenSize();

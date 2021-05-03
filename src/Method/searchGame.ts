@@ -1,16 +1,16 @@
 import sleep from './sleep';
-import { CurrentGameInfo } from '../types';
+import { CurrentGameInfo, Data } from '../types';
 import Constants from '../Constants';
 import axios from 'axios';
 import printDate from './printDate';
 
-export default async (rankLimit: number, idPriority: string[][]) => {
+export default async (data: Data, rankLimit: number) => {
   const { RIOT_API_KEY } = process.env;
-  for (let rank = 0; rank <= rankLimit; rank++) {
-    const ids = idPriority[rank];
+  for (let rank = 0; rank <= rankLimit && !data.isPaused; rank++) {
+    const ids = data.idPriority[rank];
     const size = ids.length;
     let index = 0;
-    while (index < size) {
+    while (index < size && !data.isPaused) {
       const id = ids[index];
       try {
         await sleep(Constants.RIOT_API_WAIT_TIME);

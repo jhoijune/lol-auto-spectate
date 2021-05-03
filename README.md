@@ -36,6 +36,7 @@ $ npm start
 | !stopprogram    |                   stop program                   |
 | !pauseprogram   |                  pause program                   |
 | !restartprogram |                 restart program                  |
+| !openinterface  |            open lol client interface             |
 | !fix\<num\>     |    fix view if the game is currently running     |
 
 ## Implementation

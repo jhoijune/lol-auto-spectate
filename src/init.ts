@@ -19,6 +19,8 @@ import { collectProPicture } from './Method';
     'TWITCH_SECRET',
     'TWITCH_TOKEN',
     'OBS_PASSWORD',
+    'CHANNEL',
+    'AUTH_USERS',
   ];
   if (!fs.existsSync(envPath)) {
     fs.writeFile(envPath, envArticles.join('=\n') + '=', (error) => {

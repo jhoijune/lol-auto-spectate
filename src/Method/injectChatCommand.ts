@@ -5,22 +5,20 @@ import { Data } from '../types';
 import Constants from '../Constants';
 import stopStreaming from './stopStreaming';
 import fixSpectateView from './fixSpectateView';
-
-const stopGame = function (data: Data) {
-  if (data.isSpectating) {
-    data.isSpectating = false;
-    if (data.spectateRank === Constants.FAKER_RANK) {
-      data.lastHighRankSpectateTime = new Date().valueOf();
-    }
-    data.lastSpectateTime = new Date().valueOf();
-    data.exSpectateRank = data.spectateRank;
-  }
-  data.spectateRank = Constants.NONE;
-};
+import setUpSpectateIngameInitialSetting from './setUpSpectateIngameInitialSetting';
+import sleep from './sleep';
+import stopSpectate from './stopSpectate';
+import orderStopSpectate from './orderStopSpectate';
 
 // FIXME: 버그가 백퍼 있다
 
 export default (data: Data, obs: OBSWebSocket) => {
+  const wrapper = async function (func: Function) {
+    while (!data.isCommandAvailable) {
+      await sleep(1000);
+    }
+    await func();
+  };
   const { CHANNEL, AUTH_USERS } = process.env;
   const userSet = new Set(AUTH_USERS.toLowerCase().split('&'));
   const chatClient = new tmi.Client({
@@ -29,38 +27,67 @@ export default (data: Data, obs: OBSWebSocket) => {
   });
   chatClient.connect();
   chatClient.on('message', async (channel, tags, message, self) => {
-    if (data.isCommandAvailable) {
-      const name = tags['display-name'];
+    const name = tags['display-name'];
+    if (name && userSet.has(name.toLowerCase())) {
       console.log(`${name} : ${message}`);
-      if (name && userSet.has(name.toLowerCase())) {
-        if (message === '!stopgame') {
-          stopGame(data);
-        } else if (message === '!stopstreaming') {
+      if (message === '!stopgame') {
+        await wrapper(() => {
+          if (data.isSpectating) {
+            orderStopSpectate(data);
+          }
+          data.spectateRank = Constants.NONE;
+        });
+      } else if (message === '!stopstreaming') {
+        await wrapper(async () => {
           if (data.isStreaming) {
             await stopStreaming(data, obs);
           }
-          stopGame(data);
-        } else if (message === '!stopprogram') {
+          if (data.isSpectating) {
+            orderStopSpectate(data);
+          }
+          data.spectateRank = Constants.NONE;
+        });
+      } else if (message === '!stopprogram') {
+        await wrapper(async () => {
           if (data.isStreaming) {
             await stopStreaming(data, obs);
           }
-          stopGame(data);
+          if (data.isSpectating) {
+            stopSpectate(data.gameProcess!);
+          }
           process.exit();
-        } else if (message === '!pauseprogram') {
+        });
+      } else if (message === '!pauseprogram') {
+        await wrapper(async () => {
           if (data.isStreaming) {
             await stopStreaming(data, obs);
           }
-          stopGame(data);
-          data.isPaused = true;
-        } else if (message === '!restartprogram') {
-          data.isPaused = false;
-        } else if (data.isSpectating && /^\!fix\d{1,2}$/.test(message)) {
-          const charNum = message.slice(4);
-          const num = Number(charNum);
-          if (num >= 1 && num <= 10) {
-            fixSpectateView(num - 1);
+          if (data.isSpectating) {
+            orderStopSpectate(data);
           }
-        }
+          data.spectateRank = Constants.NONE;
+          data.isPaused = true;
+        });
+      } else if (message === '!restartprogram') {
+        await wrapper(() => {
+          data.isPaused = false;
+        });
+      } else if (message === '!openinterface') {
+        await wrapper(() => {
+          if (data.isSpectating) {
+            setUpSpectateIngameInitialSetting(Constants.NONE);
+          }
+        });
+      } else if (/^\!fix\d{1,2}$/.test(message)) {
+        await wrapper(() => {
+          if (data.isSpectating) {
+            const charNum = message.slice(4);
+            const num = Number(charNum);
+            if (num >= 1 && num <= 10) {
+              fixSpectateView(num - 1);
+            }
+          }
+        });
       }
     }
   });

@@ -75,8 +75,6 @@ export default class {
     't1_oner',
   ] as const;
 
-  static foo = [];
-
   static PUUID = {
     'T1 Faker': [
       'UWLdkv7QfJLoaA3pQXEKpmmjrUspydRl7h0h4vZT6U0uSFM9RWXlWw_PXGDrcQs87UmXtvyh_iMAvw',
@@ -175,11 +173,11 @@ export default class {
       'NP1_ImmkFtIA6IuzS__2zzZ63M8CpWcdJAtZGYN6MoLxjKfW0L2R7w9nywzj4dAZm9ag9FcE_k8-1A',
       'iKnnw00vpUcA_Pg5TbfQC78KsZGp_svWVqLyoCZ73vcp5zC8rNRYPB2k7sWRvKH-icI--obdE1ExVg',
       'kM5JgMCRqNYhdsf3CxkVbpaVvpilYAGD7oh_tTP6Kk1H4cMxECqpxxE1J7cQBDly92ubf2ZgdYSM7A',
-    ],
-    [
       'OUQe96GYixaVL_9ygBWm2HXpHO1e223VX9C3b6vfvIHoL5ewo7xh02gcAS0em_5wkFuN17lVmcIbng',
       '2nKp9qzO9u3c6pVrT3ZIXE_Q1w6tpgprs9lyjZ7j2I9dZBLS9LCOqwmnynQTegN8g-X4gZqXvsOHjA',
       'oEuiIBDdUpNird9P5ld5J6AvXYMd9Zo-pWZycVz_So0ZYlJa7FP2urbUYv5JpULA8A_lMYjC7aX-3A',
+    ],
+    [
       'aOGhr7U8qdOBPx8Y0yp4FlN3To8B6AZC5E4Xcqmo6qf1OLT4PztQh70jZz0vXcqr19z_191S-Mfcgw',
       'OrlERSiTCROGFMWoLGW1buHvzXpkpKlQzZRgizQUjS3fgWJQYvXxe03OWw3RSLT__AyIgj_AvTWZ-g',
       'ozMZm8gBRpRIYzbxXWwiItzq23cSIW2NUyNLJfaLmk3EKeHZQUqPjwQwsiyDWEdO4aVrBgn6dfU47g',

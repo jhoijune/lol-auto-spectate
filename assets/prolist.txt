@@ -120,7 +120,7 @@ lIIIllIllIIIl : WeiYan
 Afreeca Mystic : Mystic
 10076133del : Do1u1u
 뽀오뽀오 : Cheong
-모난 뿔 펨펨 : Choyul
+온 봄 : Choyul
 GCA NoRoo : NoRoo
 스폰지밥식 탑 : Flame
 By 불비 : FireRain
@@ -159,7 +159,7 @@ CooNzz : CooN
 PawN1 : PawN
 Roar12 : Roar
 21851695del : PawN
-원딜 왕자 이채환 : Aries
+alewlak : Aries
 Fanch : Punch
 Liiv gyuvee : gyuvee
 Ddend : dade
@@ -181,7 +181,7 @@ cogcog : Wyvern
 쿠쟈니 : Kuzan
 Secret : Secret
 재훈Tv : Destiny
-마이티비어 : Mightybear
+병든곰 : Mightybear
 Gen G Lonely : Gen.C Lonely
 간다라쿤다 : Lindarang
 유튜브 승우아빠 : Hyuni
@@ -214,7 +214,7 @@ wh4tever : SHG Zenit
 미치광이탑솔러 : Jihoon
 빌었어 : Khalis
 lure heart : Nugget
-애완바위게 : Savage
+Rox Coach : Savage
 조 울 : Arrow
 2000 02 09 : DK Malrang
 불질러 : Blossom
@@ -295,7 +295,7 @@ SylphyRoxyEris : Dantal
 돌쇠10주년 : HaeSeong
 FA MlD : Jiin
 75570648del : Husky
-젠지 영재 : YeongJae
+영재키러브 : YeongJae
 UijU : V5 Trigger
 78651087del : JGY
 yurigaoka : SHG Zenit
@@ -314,7 +314,7 @@ Falco Lombardi : Deus
 86690861del : 7WO
 Permaban10334177 : M1anhua
 88910569del : Mingjing
-Aimingg : BLG Aiming
+아이린 : Aiming
 90421442del : PraY
 90961178del : Rwei
 95601465del : Kongyue
@@ -325,7 +325,7 @@ huisongtou : GRX Yoon
 Zerofire : T1 Zefa
 Hide on bush : T1 Faker
 구마유시 : T1 Gumayusi
-테디팎 : T1 Teddy
+갱오면죽는원딜 : T1 Teddy
 엘 림 : T1 Ellim
 Onerrr : T1 Oner
 Cuzzzzzzz : T1 Cuzz
@@ -343,15 +343,15 @@ T1 Canna : T1 Canna
 아릉사태연 : T1 Canna
 우 제 : T1 Zeus
 95873761del : T1 Zeus
-날 누가 막을건데 : T1 Oner
-lilililllliilili : DIG LirA
+oONERr : T1 Oner
+AF LirA : DIG LirA
 뚱후니 : DIG Huni
 0Xr9AR1cV8sma05T : DIG Huni
 Riris1 : VSG Riris
 물불풀풀불물 : VSG Ggoong
 3133805del : VSG Ggoong
 3153049del : VSG Mightybear
-Gen G Ggoong : VSG Ggoong
+Gen G Ggoong : GEN Ggoong
 이현경사랑해 : VSG Pure
 BLACK VENOM : VSG Riris
 메이지로즌 : Frozen
@@ -359,7 +359,7 @@ BLACK VENOM : VSG Riris
 DaYE : AXZ Hoglet
 PAKAZOA : AXZ Hide
 Hoglet : AXZ Hoglet
-epicgamermoment : AXZ Corporal
+full reset : AXZ Corporal
 idontlikebanana : AXZ Gariaru
 95272442del : AXZ uinyan
 썸썸데이 : 100 Ssumday
@@ -508,7 +508,7 @@ FDG Jorda : FLA Grey
 T1 Roach : T1.C Roach
 404호 너구리 : T1.C Hoit
 기요미 라이언 : T1.C Hoit
-이게 태긴데욤 : T1.C Asper
+별 수호자 김태기 : T1.C Asper
 새벽밤공기밤하늘 : T1.C Mireu
 호잇이 : T1.C Hoit
 Roach : T1.C Roach
@@ -520,7 +520,7 @@ DFM viviD : RJ viviD
 solobolo : RJ Cogcog
 very angry papa : RJ hachamecha
 Naehyun : CGA Naehyun
-Blue tongue : GRF GBM
+T1 GBM : GRF GBM
 이도류 : Sword
 2405432del : WNS GAP
 None Ella : WNS Ella
@@ -528,7 +528,7 @@ None Ella : WNS Ella
 ililililillili : WNS Lucifer
 감동이 중요해요 : FL Profit
 그러는 그대는 : FL Profit
-reMember Mistake : RSG reM
+2528997del : RSG reM
 미음디귿치읓이응 : RSG reM
 검은머리사나이 : AF Fly
 StephanFelix2 : AF Bang
@@ -610,7 +610,7 @@ V스타 : HLE Vsta
 weather i : HLE Vsta
 HLE CaD : HLE.C CaD
 dong ju Lee : HLE Arthur
-나고영잿불거인 : HLE.C CaD
+g3g8g3g8g3g8 : HLE CaD
 재밌고행복하게 : HLE Deft
 서렌누르면대충함 : HLE Chovy
 감자갓 : V3 Neo
@@ -746,7 +746,7 @@ XiaoHuaSheng7 : NS Peanut
 deokdam : NS deokdam
 언차티D : NS Peanut
 Hari2y Quinn : NS Peanut
-이주한1 : NS Juhan
+증명해라 자신을 : NS Juhan
 Jon Sn0w : NS Peanut
 참새크면비둘기 : NS Kellin
 쭌 베 : NS Bay
@@ -767,9 +767,9 @@ choujiao : CGA hachamecha
 95282440del : CGA Grendel
 MooJin777 : V3 Moojin
 DK Edge : DK.A Edge
-Poirierr : RNW KronG
+AF KronG : RNW KronG
 하리보 다 내꺼야 : V3 Moojin
-맥스의 형벌 : RNW Mask
+침대가조아요 : RNW Mask
 VaIhaIIa : BC Once
 whfhy : JT Hfhy
 0830678748 : RA FoFo
@@ -794,11 +794,11 @@ IIIllIlIllIIlIII : DFM Ceros
 모두굿바이 : AK Alive
 FA Cookie : Cookie
 EM 상어 : EM Shark
-Karasss : EM Karas
+카라쮸 : EM Karas
 백수 유리 : EM Scarlet
 Gen G Envy : Gen.C Envyy
 나는야 쩡후이 : EM Execute
-Liiv TolanD : LSB.A TolanD
+ppLLLzz : LSB.A TolanD
 Liiv Pump : LSB.A Ice
 Liiv Howling : LSB.A Howling
 xiaomingaa : LSB.A Ten10
@@ -820,7 +820,7 @@ mide gui tou : MCX M1ssion
 95651461del : MCX Koala
 숲속의 작은 마녀 : KLG Serenity
 Please DIE KR D1 : KLG Serenity
-AF MapSSi : AF.A MapSSi
+맵을 보다 : AF.A MapSSi
 Semo Fan : AF.A Na Kyung
 FA BaeKHo : AF.A BaeKHo
 블루베뤼 스무디 : AF.A Burry
@@ -870,6 +870,7 @@ C9 Zven : C9 Zven
 95990380del : GAM Kiaya
 95790381del : GAM Zeros
 95700382del : GAM Levi
+DIG Dardoch : DIGNITAS Dardoch
 BRO Chieftatin : BRO Chieftatin
 BRO 치프틴 : BRO Chieftain
 쿠 리 : Kuri
@@ -931,6 +932,7 @@ ulolu : KT Blank
 happy game : BLG.J Able
 ggggjjjjj : Uzi
 바위게도우미에요 : LNG Hoyoung
+Aimingg : BLG Aiming
 heimao : KronG
 마지막1년 : Trick
 YDG Sangyoon : Sangyoon
@@ -940,5 +942,7 @@ HSHTM : SHG Zenit
 Cube12 : AXZ Cube
 우와 대단해 : HLE.C Mask
 19980409 : V3 Moojin
-나 쁜 녀석 들1 : Uzi
 KronGG : KronG
+나고영잿불거인 : HLE.C CaD
+농가 고기 볶 음 : Uzi
+KT Dean : BLG Aiming

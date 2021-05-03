@@ -22,7 +22,7 @@ export default async (data: Data, obs: OBSWebSocket) => {
   const rankLimit = data.isStreaming
     ? Constants.GROUP1_RANK
     : Constants.FAKER_RANK;
-  const matchInfo = await searchGame(rankLimit, data.idPriority);
+  const matchInfo = await searchGame(data, rankLimit);
   if (matchInfo === null) {
     if (data.isStreaming) {
       await stopStreaming(data, obs);
@@ -31,4 +31,11 @@ export default async (data: Data, obs: OBSWebSocket) => {
   }
   Object.assign(data, matchInfo);
   await decideStopStreaming(data, obs);
+  if (
+    data.isPaused ||
+    (!data.isStreaming && data.spectateRank > Constants.FAKER_RANK)
+  ) {
+    // command 보정용
+    data.spectateRank = Constants.NONE;
+  }
 };

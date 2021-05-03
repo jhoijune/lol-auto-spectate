@@ -5,7 +5,7 @@ import searchGame from './searchGame';
 export default async (data: Data) => {
   // 랭크가 낮으면 높은거 있는지 확인
   if (data.isSpectating) {
-    const matchInfo = await searchGame(data.spectateRank - 1, data.idPriority);
+    const matchInfo = await searchGame(data, data.spectateRank - 1);
     if (
       matchInfo !== null &&
       matchInfo.spectateRank !== Constants.NONE &&

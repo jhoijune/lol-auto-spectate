@@ -2,6 +2,7 @@ import Constants from '../Constants';
 import { AuxData, Data } from '../types';
 import fixSpectateView from './fixSpectateView';
 import getGameTime from './getGameTime';
+import orderStopSpectate from './orderStopSpectate';
 import setUpSpectateIngameInitialSetting from './setUpSpectateIngameInitialSetting';
 
 export default async (data: Data, auxData: AuxData) => {
@@ -17,23 +18,13 @@ export default async (data: Data, auxData: AuxData) => {
       }
       if (auxData.exGameTime === gameTime && gameTime > 0) {
         // 게임 종료
-        data.isSpectating = false;
-        if (data.spectateRank === Constants.FAKER_RANK) {
-          data.lastHighRankSpectateTime = new Date().valueOf();
-        }
-        data.lastSpectateTime = new Date().valueOf();
-        data.exSpectateRank = data.spectateRank;
+        orderStopSpectate(data);
         data.spectateRank = Constants.NONE;
       }
       auxData.exGameTime = gameTime;
     } else {
       console.log('Detected abnormal termination');
-      data.isSpectating = false;
-      if (data.spectateRank === Constants.FAKER_RANK) {
-        data.lastHighRankSpectateTime = new Date().valueOf();
-      }
-      data.lastSpectateTime = new Date().valueOf();
-      data.exSpectateRank = data.spectateRank;
+      orderStopSpectate(data);
     }
   }
 };

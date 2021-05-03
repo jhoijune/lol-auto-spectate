@@ -2,13 +2,12 @@ import { exec } from 'child_process';
 import inquirer from 'inquirer';
 import { type } from 'os';
 import { join } from 'path';
-import { Data } from '../types';
 
 export default async () => {
   const { ASSET_PATH } = process.env;
   const soundPath =
-    (ASSET_PATH && join(ASSET_PATH, 'bgm.m4a')) ||
-    join(__dirname, '..', '..', 'assets', 'bgm.m4a');
+    (ASSET_PATH && join(ASSET_PATH, 'bgm.wav')) ||
+    join(__dirname, '..', '..', 'assets', 'bgm.wav');
   let intervalID: NodeJS.Timeout;
   if (type() === 'Darwin') {
     exec(`afplay ${soundPath}`);
@@ -16,8 +15,14 @@ export default async () => {
       exec(`afplay ${soundPath}`);
     }, 15 * 1000);
   } else {
-    // TODO: window상에서 소리 틀기
-    intervalID = setInterval(() => {}, 15 * 1000);
+    exec(
+      `powershell -c (New-Object Media.SoundPlayer '${soundPath}').PlaySync()`
+    );
+    intervalID = setInterval(() => {
+      exec(
+        `powershell -c (New-Object Media.SoundPlayer '${soundPath}').PlaySync()`
+      );
+    }, 15 * 1000);
   }
   const isPermitted = (
     await inquirer.prompt<{ isPermitted: boolean }>({

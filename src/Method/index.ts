@@ -29,6 +29,9 @@ import decidePlayGame from './decidePlayGame';
 import decideStopGameAndStreaming from './decideStopGameAndStreaming';
 import isGameRunning from './isGameRunning';
 import injectChatCommand from './injectChatCommand';
+import injectKeypressEvent from './injectKeypressEvent';
+import orderStopSpectate from './orderStopSpectate';
+import COMMAND_SAFE_SECTION from './COMMAND_SAFE_SECTION';
 
 export default {
   collectProPicture,
@@ -62,6 +65,9 @@ export default {
   decideStopGameAndStreaming,
   isGameRunning,
   injectChatCommand,
+  injectKeypressEvent,
+  orderStopSpectate,
+  COMMAND_SAFE_SECTION,
 };
 export {
   collectProPicture,
@@ -95,4 +101,7 @@ export {
   decideStopGameAndStreaming,
   isGameRunning,
   injectChatCommand,
+  injectKeypressEvent,
+  orderStopSpectate,
+  COMMAND_SAFE_SECTION,
 };

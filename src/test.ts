@@ -12,7 +12,9 @@ import {
   searchGame,
   stopStreaming,
   injectChatCommand,
+  injectKeypressEvent,
 } from './Method';
+import COMMAND_SAFE_SECTION from './Method/COMMAND_SAFE_SECTION';
 import Constants from './Constants';
 
 import { AuxData, Config } from './types';
@@ -25,29 +27,40 @@ export default async (config: Config) => {
     return;
   }
   const { data, obs } = temp;
+  injectKeypressEvent(data);
   injectChatCommand(data, obs);
   let isTitleChanged = false;
   while (true) {
-    data.isCommandAvailable = true;
-    while (data.spectateRank === Constants.NONE) {
-      if (!data.isPaused) {
-        const rankLimit = data.isStreaming
-          ? Constants.OTHERS_RANK
-          : Constants.GROUP2_RANK;
-        const matchInfo = await searchGame(rankLimit, data.idPriority);
-        if (matchInfo === null) {
-          if (data.isStreaming) {
-            await stopStreaming(data, obs);
+    //data.isCommandAvailable = true;
+    await COMMAND_SAFE_SECTION(data, async () => {
+      while (data.spectateRank === Constants.NONE) {
+        if (!data.isPaused) {
+          /*
+          const rankLimit = data.isStreaming
+            ? Constants.OTHERS_RANK
+            : Constants.GROUP2_RANK;
+            */
+          const rankLimit = Constants.OTHERS_RANK;
+          const matchInfo = await searchGame(data, rankLimit);
+          if (matchInfo === null) {
+            if (data.isStreaming) {
+              await stopStreaming(data, obs);
+            }
+            return;
           }
-          return;
+          Object.assign(data, matchInfo);
+          if (data.isPaused) {
+            // command 보정용
+            data.spectateRank = Constants.NONE;
+          }
+        } else {
+          await sleep(10 * 1000);
         }
-        Object.assign(data, matchInfo);
-      } else {
-        await sleep(10 * 1000);
       }
-    }
-    data.isCommandAvailable = false;
-    const gameProcess = startSpectate(data.encryptionKey, data.gameId);
+    });
+    //data.isCommandAvailable = false;
+    const gameProcess = startSpectate(data);
+    data.gameProcess = gameProcess;
     if (!(await isGameRunning(data, gameProcess))) {
       continue;
     }
@@ -62,21 +75,28 @@ export default async (config: Config) => {
         auxData.selectedIndex = playerIndex;
       }
     }
+    /*
     if (!data.isStreaming) {
       await startStreaming(data, obs);
     }
+    */
     await switchLOLScene(data, obs);
+    /*
     if (!isTitleChanged) {
       const streamingTitle = 'Test';
       await modifyChannelInfo(streamingTitle);
       isTitleChanged = true;
     }
-    data.isCommandAvailable = true;
-    while (data.isSpectating) {
-      await sleep(1000);
-      await determineGameOver(data, auxData);
-      await decideGameIntercept(data);
-    }
+    */
+    //data.isCommandAvailable = true;
+    await COMMAND_SAFE_SECTION(data, async () => {
+      while (data.isSpectating) {
+        await sleep(1000);
+        await determineGameOver(data, auxData);
+        await decideGameIntercept(data);
+      }
+    });
+    //data.isCommandAvailable = false;
     if (data.spectateRank === Constants.NONE) {
       await sleep(10 * 1000);
     }
