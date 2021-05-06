@@ -1,9 +1,10 @@
 import { join } from 'path';
 import inquirer from 'inquirer';
 import { config } from 'dotenv';
-import fs from 'fs';
+import { existsSync } from 'fs';
+import OBSWebSocket from 'obs-websocket-js';
 
-if (fs.existsSync(join(__dirname, 'assets'))) {
+if (existsSync(join(__dirname, 'assets'))) {
   process.env.ASSET_PATH = join(__dirname, 'assets');
 } else {
   process.env.ASSET_PATH = join(__dirname, '..', 'assets');
@@ -14,8 +15,35 @@ config();
 import app from './app';
 import { Config } from './types';
 import test from './test';
+import Constants from './Constants';
+import { connectDB } from './Method';
 
 (async () => {
+  const { ASSET_PATH, OBS_PASSWORD } = process.env;
+  const obs = new OBSWebSocket();
+  try {
+    await obs.connect({
+      address: Constants.OBS_ADDRESS,
+      password: OBS_PASSWORD,
+    });
+  } catch (error) {
+    if (error.error === 'Connection error.') {
+      console.log('Turn on OBS!!!!');
+    } else if (error.error === 'Authentication Failed.') {
+      console.log('password is wrong');
+    } else {
+      console.error(error);
+    }
+    return;
+  }
+  const dbPath =
+    (ASSET_PATH && join(ASSET_PATH, 'db.sqlite3')) ||
+    join(__dirname, '..', 'assets', 'db.sqlite3');
+  if (!existsSync(dbPath)) {
+    console.log('Initialize the database');
+    return;
+  }
+  const db = await connectDB();
   const config = await inquirer.prompt<Config>([
     {
       type: 'list',
@@ -50,16 +78,10 @@ import test from './test';
       choices: [1080, 720],
       default: 1080,
     },
-    {
-      type: 'input',
-      name: 'correctFileLoc',
-      message: 'What is the path of the correction file?',
-      default: join(process.env.ASSET_PATH, 'correct.txt'),
-    },
   ]);
   if (config.type === 'test') {
-    test(config);
+    test(config, obs, db);
   } else {
-    app(config);
+    app(config, obs, db);
   }
 })();

@@ -1,10 +1,10 @@
-import { LeagueItemDTO, LeagueListDTO } from '../types';
+import { DB, LeagueItemDTO, LeagueListDTO } from '../types';
 import Constants from '../Constants';
 import sleep from './sleep';
 import axios from 'axios';
 import printDate from './printDate';
 
-export default async (nickMap: Map<string, string>) => {
+export default async (db: DB) => {
   const { RIOT_API_KEY } = process.env;
   const IDs: string[] = [];
   const _ = async (url: string) => {
@@ -34,9 +34,20 @@ export default async (nickMap: Map<string, string>) => {
     }
     entries.sort(({ leaguePoints: a }, { leaguePoints: b }) => b - a);
     for (const { summonerId, summonerName } of entries) {
-      const proNick = nickMap.get(summonerName);
-      if (proNick !== undefined && proNick.split(' ').length === 2) {
-        IDs.push(summonerId);
+      const summonerInstance = await db.Summoner.findOne({
+        where: {
+          summoner_id: summonerId,
+        },
+      });
+      if (summonerInstance !== null) {
+        const proInstance = await db.Pro.findOne({
+          where: {
+            id: summonerInstance.pro_id,
+          },
+        });
+        if (proInstance !== null && proInstance.team_id !== null) {
+          IDs.push(summonerId);
+        }
       }
     }
     return true;

@@ -1,5 +1,6 @@
 import { Agent } from 'https';
 import { ChildProcessWithoutNullStreams } from 'child_process';
+import { Model, ModelCtor, Optional, Sequelize } from 'sequelize';
 import { Heap } from './DataStructure';
 
 declare global {
@@ -41,7 +42,6 @@ export type Config = {
   noOnePlayWaitLimitMinute: number;
   spectateWaitLimitMinute: number;
   resolution: 720 | 1080;
-  correctFileLoc?: string;
 };
 
 export type SummonerDTO = {
@@ -232,6 +232,73 @@ export type GameStats = {
   mapTerrain: string;
 };
 
+export type AuxData = {
+  selectedIndex: number;
+  exGameTime: number;
+  fixCount: number;
+};
+
+export interface ChampionAttributes {
+  id: number;
+  kor_name: string;
+  eng_name: string;
+}
+
+export interface TeamAttributes {
+  id: number;
+  name: string;
+  exact_name: string;
+}
+
+export interface SummonerAttributes {
+  id: number;
+  summoner_id: string;
+  summoner_name: string;
+  pro_id: number;
+}
+
+export interface ProAttributes {
+  id: number;
+  name: string;
+  image_name: string | null;
+  team_id: number | null;
+}
+
+export interface ChampionCreationAttributes
+  extends Optional<ChampionAttributes, 'id'> {}
+
+export interface TeamCreationAttributes
+  extends Optional<TeamAttributes, 'id'> {}
+
+export interface SummonerCreationAttributes
+  extends Optional<SummonerAttributes, 'id'> {}
+
+export interface ProCreationAttributes extends Optional<ProAttributes, 'id'> {}
+
+export interface ChampionInstance
+  extends Model<ChampionAttributes, ChampionCreationAttributes>,
+    ChampionAttributes {}
+
+export interface TeamInstance
+  extends Model<TeamAttributes, TeamCreationAttributes>,
+    TeamAttributes {}
+
+export interface SummonerInstance
+  extends Model<SummonerAttributes, SummonerCreationAttributes>,
+    SummonerAttributes {}
+
+export interface ProInstance
+  extends Model<ProAttributes, ProCreationAttributes>,
+    ProAttributes {}
+
+export type DB = {
+  Champion: ModelCtor<ChampionInstance>;
+  Team: ModelCtor<TeamInstance>;
+  Summoner: ModelCtor<SummonerInstance>;
+  Pro: ModelCtor<ProInstance>;
+  sequelize: Sequelize;
+};
+
 export type Data = {
   isSpectating: boolean;
   isStreaming: boolean;
@@ -245,10 +312,8 @@ export type Data = {
   lastSpectateTime: number;
   httpsAgent: Agent;
   pq: Heap<{ name: string; playerIndex: number; championName?: string }>;
-  nickMap: Map<string, string>;
-  pictures: string[];
-  pictureMap: Map<string, number>;
   idPriority: string[][];
+  currSummonerID: number;
   resolution: 720 | 1080;
   isPermitted: boolean;
   isCommandAvailable: boolean;
@@ -256,10 +321,4 @@ export type Data = {
   gameWaitLimit: number;
   spectateWaitLimit: number;
   gameProcess?: ChildProcessWithoutNullStreams;
-};
-
-export type AuxData = {
-  selectedIndex: number;
-  exGameTime: number;
-  fixCount: number;
 };

@@ -1,13 +1,12 @@
 import axios from 'axios';
 import sleep from './sleep';
 import printDate from './printDate';
-import translatedChampionNames from './translatedChampionNames';
 import Constants from '../Constants';
-import { Data, PlayerList } from '../types';
+import { Data, DB, PlayerList } from '../types';
 
 type Name = keyof typeof Constants.PRIORITIES;
 
-export default async (data: Data) => {
+export default async (data: Data, db: DB) => {
   const overlayInfos: { index: number; name: string; imgSrc?: string }[] = [];
   try {
     await sleep(1000);
@@ -30,38 +29,57 @@ export default async (data: Data) => {
       if (trimmedTeam === 'CHAOS' && redStart === Constants.NONE) {
         redStart = index;
       }
-      const trimmedName = summonerName.trim();
-      if (data.nickMap.has(trimmedName)) {
-        // 프로와 매핑
-        const teamAndName = data.nickMap.get(trimmedName)!;
-        const playerIndex =
-          trimmedTeam === 'ORDER' ? index : 5 + (index - redStart);
-        const info: { index: number; name: string; imgSrc?: string } = {
-          index: playerIndex,
-          name: teamAndName,
-        };
-        const [teamOrName, name] = teamAndName.split(' ');
-        if (
-          name === undefined &&
-          data.pictureMap.has(teamOrName.toLowerCase())
-        ) {
-          const picIndex = data.pictureMap.get(teamOrName.toLowerCase())!;
-          info.imgSrc = data.pictures[picIndex];
-        } else if (
-          name !== undefined &&
-          data.pictureMap.has(name.toLowerCase())
-        ) {
-          const picIndex = data.pictureMap.get(name.toLowerCase())!;
-          info.imgSrc = data.pictures[picIndex];
+      const summonerInstance = await db.Summoner.findOne({
+        where: {
+          summoner_name: summonerName,
+        },
+      });
+      if (summonerInstance !== null) {
+        const proInstance = await db.Pro.findOne({
+          where: {
+            id: summonerInstance.pro_id,
+          },
+        });
+        if (proInstance !== null) {
+          // 프로와 매핑
+          let teamAndName = proInstance.name;
+          if (proInstance.team_id !== null) {
+            const teamInstance = await db.Team.findOne({
+              where: {
+                id: proInstance.team_id,
+              },
+            });
+            if (teamInstance !== null) {
+              teamAndName = `${teamInstance.name} ${proInstance.name}`;
+            }
+          }
+          const playerIndex =
+            trimmedTeam === 'ORDER' ? index : 5 + (index - redStart);
+          const info: { index: number; name: string; imgSrc?: string } = {
+            index: playerIndex,
+            name: teamAndName,
+            imgSrc:
+              proInstance.image_name !== null
+                ? proInstance.image_name
+                : undefined,
+          };
+          if (proInstance.name in Constants.PRIORITIES) {
+            const championInstance = await db.Champion.findOne({
+              where: {
+                kor_name: championName.trim(),
+              },
+            });
+            data.pq.add(Constants.PRIORITIES[proInstance.name as Name], {
+              name: proInstance.name,
+              playerIndex,
+              championName:
+                championInstance !== null
+                  ? championInstance.eng_name
+                  : undefined,
+            });
+          }
+          overlayInfos.push(info);
         }
-        if (teamAndName in Constants.PRIORITIES) {
-          data.pq.add(Constants.PRIORITIES[teamAndName as Name], {
-            name,
-            playerIndex,
-            championName: translatedChampionNames[championName.trim()],
-          });
-        }
-        overlayInfos.push(info);
       }
     }
     data.isSpectating = true;

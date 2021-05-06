@@ -12,10 +12,10 @@ const makeComponent = function (info: {
   const team = info.index < 5 ? 'blue-team' : 'red-team';
   const position = positions[info.index % 5];
   const image = info.imgSrc
-    ? `<div class="image-container"><img src="../pictures/${info.imgSrc}"></div>`
+    ? `<div class="image-container"><img src="../images/${info.imgSrc}"></div>`
     : '';
   return `<div class="${team} ${position}">
-  <p${info.name in Constants.PRIORITIES ? ' style="font-weight:bold"' : ''}>${
+  <p${info.name in Constants.ID ? ' style="font-weight:bold"' : ''}>${
     info.name
   }</p>
   ${image}

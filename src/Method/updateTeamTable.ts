@@ -1,0 +1,83 @@
+import axios from 'axios';
+import cheerio from 'cheerio';
+import { Op } from 'sequelize';
+import { join } from 'path';
+import { readdir } from 'fs/promises';
+
+import Constants from '../Constants';
+import printDate from './printDate';
+import updateDB from './updateDB';
+import { DB } from '../types';
+import connectDB from './connectDB';
+import inquirer from 'inquirer';
+import { stringify } from 'node:querystring';
+
+export default async () => {
+  // 정상적으로 완료되었을시 true 반환
+  const db = await connectDB();
+  const structureDb = await connectDB('structure');
+  let html: string;
+  try {
+    console.log(`Starting GET ${Constants.PRO_LIST_URL} ${printDate()}`);
+    ({ data: html } = await axios.get<string>(Constants.PRO_LIST_URL));
+  } catch (error) {
+    console.error(JSON.stringify(error));
+    console.log("OP.GG Doesn't work");
+    return false;
+  } finally {
+    console.log(
+      `GET request finished for: ${Constants.PRO_LIST_URL} ${printDate()}`
+    );
+  }
+  const $ = cheerio.load(html);
+  const teams = $('.TeamName');
+  const teamNames: string[] = [];
+  teams.each((index, elem) => {
+    const teamName = $(elem).text().trim();
+    teamNames.push(teamName);
+  });
+  for (const teamName of teamNames) {
+    const teamInstance = await db.Team.findOne({
+      where: {
+        [Op.or]: [{ name: teamName }, { exact_name: teamName }],
+      },
+    });
+    if (teamInstance === null) {
+      const { isConfirm } = await inquirer.prompt<{ isConfirm: boolean }>([
+        {
+          type: 'confirm',
+          name: 'isConfirm',
+          message: `[${teamName}] team name does not exist in db Do you want to add it?`,
+          default: false,
+        },
+      ]);
+      if (isConfirm) {
+        const { name, exactName } = await inquirer.prompt<{
+          name: string;
+          exactName: string;
+        }>([
+          {
+            type: 'input',
+            name: 'name',
+            message: `What is team name? [${teamName}]`,
+            default: teamName,
+          },
+          {
+            type: 'input',
+            name: 'exactName',
+            message: `What is exact team name? [${teamName}]`,
+            default: teamName,
+          },
+        ]);
+        db.Team.create({
+          exact_name: exactName,
+          name,
+        });
+        structureDb.Team.create({
+          exact_name: exactName,
+          name,
+        });
+      }
+    }
+  }
+};

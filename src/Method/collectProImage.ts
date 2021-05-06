@@ -1,19 +1,18 @@
 import puppeteer from 'puppeteer';
 import { promises as fs, constants } from 'fs';
 import path from 'path';
+import { DB } from '../types';
 
-import mapNickToName from './mapNickToName';
-
-export default async () => {
+export default async (db: DB) => {
   const { ASSET_PATH } = process.env;
-  const picturesPath =
-    (ASSET_PATH && path.join(ASSET_PATH, 'pictures')) ||
-    path.join(__dirname, '..', '..', 'assets', 'pictures');
+  const imagePath =
+    (ASSET_PATH && path.join(ASSET_PATH, 'images')) ||
+    path.join(__dirname, '..', '..', 'assets', 'images');
   let isDirectoryExist = false;
   try {
     // folder init
     await fs.access(
-      picturesPath,
+      imagePath,
       constants.F_OK || constants.R_OK || constants.W_OK
     );
     isDirectoryExist = true;
@@ -25,43 +24,32 @@ export default async () => {
   }
   if (!isDirectoryExist) {
     try {
-      console.log('Create pictures directory');
-      await fs.mkdir(picturesPath);
+      console.log('Create images directory');
+      await fs.mkdir(imagePath);
     } catch (error) {
       console.error(error);
+      return;
     }
   }
-  const nickMap = await mapNickToName();
-  if (nickMap === null) {
-    return;
-  }
-  const proNameSet = new Set<string>();
-  for (const [, teamName] of nickMap) {
-    const [teamOrName, name] = teamName.split(' ');
-    if (name === undefined) {
-      proNameSet.add(teamOrName);
-    } else {
-      proNameSet.add(name);
-    }
-  }
-  const fileMap = new Map<string, string>();
+  const fileNameMap = new Map<string, string>();
   try {
-    const files = await fs.readdir(picturesPath);
-    for (const file of files) {
-      const [name, fileName] = file.split(' ');
-      fileMap.set(name, fileName);
+    const fileNames = await fs.readdir(imagePath);
+    for (const fileName of fileNames) {
+      const [name, rearFileName] = fileName.split(' ');
+      fileNameMap.set(name.toLowerCase(), rearFileName);
     }
   } catch (error) {
     console.error(error);
+    return;
   }
   const URL = 'https://lol.gamepedia.com/';
   const IMAGE_SELECTOR = '#infoboxPlayer img';
   const browser = await puppeteer.launch({ headless: true });
   let page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
-  const proNames = [...proNameSet];
+  const proInstances = await db.Pro.findAll({});
   const missingNames: string[] = [];
-  const size = proNames.length;
+  const size = proInstances.length;
   let index = 0;
   let isClosed = false;
   while (index < size) {
@@ -72,7 +60,7 @@ export default async () => {
         await page.setDefaultNavigationTimeout(0);
         isClosed = false;
       }
-      const name = proNames[index];
+      const { name } = proInstances[index];
       await page.goto(`${URL}${name}`);
       console.log(`GOTO ${URL}${name}`);
       const imageHref = await page.evaluate((sel) => {
@@ -86,13 +74,13 @@ export default async () => {
         imageHref &&
         !imageHref.includes('Unknown_Infobox_Image_-_Player.png')
       ) {
-        const fileName = imageHref.split('/')[7];
+        const crawledFileName = imageHref.split('/')[7];
         let isWrite = true;
-        if (fileMap.has(name)) {
-          if (fileMap.get(name) !== fileName) {
-            const fileName = `${name} ${fileMap.get(name)!}`;
+        if (fileNameMap.has(name.toLowerCase())) {
+          if (fileNameMap.get(name.toLowerCase()) !== crawledFileName) {
+            const fileName = `${name} ${fileNameMap.get(name.toLowerCase())!}`;
             console.log(`Delete picture ${fileName}`);
-            fs.rm(path.join(picturesPath, fileName));
+            fs.rm(path.join(imagePath, fileName));
           } else {
             isWrite = false;
           }
@@ -101,10 +89,12 @@ export default async () => {
           const endIndex = imageHref.indexOf('/revision');
           const viewSource = await page.goto(imageHref.slice(0, endIndex));
           fs.writeFile(
-            path.join(picturesPath, `${name} ${fileName}`),
+            path.join(imagePath, `${name} ${crawledFileName}`),
             await viewSource.buffer()
           );
-          console.log(`Create picture ${fileName}`);
+          console.log(`Create picture ${crawledFileName}`);
+          proInstances[index].image_name = `${name} ${crawledFileName}`;
+          proInstances[index].save();
         }
       } else {
         missingNames.push(name);

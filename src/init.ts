@@ -8,7 +8,7 @@ if (fs.existsSync(join(__dirname, '..', 'assets'))) {
   process.env.ASSET_PATH = join(__dirname, 'assets');
 }
 
-import { collectProPicture } from './Method';
+import { collectProImage, createDB, connectDB } from './Method';
 
 (async () => {
   const envPath = join(process.env.ASSET_PATH, '..');
@@ -29,5 +29,7 @@ import { collectProPicture } from './Method';
       }
     });
   }
-  await collectProPicture();
+  await createDB();
+  const db = await connectDB();
+  await collectProImage(db);
 })();

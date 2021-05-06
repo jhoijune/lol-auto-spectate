@@ -30,12 +30,7 @@ module.exports = {
           from: 'assets',
           to: 'assets',
           globOptions: {
-            ignore: [
-              '**/pictures/**',
-              '**/overlay/**',
-              '**/correct.txt',
-              '**/prolist.txt',
-            ],
+            ignore: ['**/images/**', '**/overlay/**', '**/db.sqlite3'],
           },
         },
       ],

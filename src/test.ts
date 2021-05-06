@@ -1,3 +1,4 @@
+import OBSWebSocket from 'obs-websocket-js';
 import {
   sleep,
   startSpectate,
@@ -13,20 +14,29 @@ import {
   stopStreaming,
   injectChatCommand,
   injectKeypressEvent,
+  updateDBPeriodically,
+  makeStreamingTitle,
+  updateDBEntirely,
+  updateImageNames,
 } from './Method';
 import COMMAND_SAFE_SECTION from './Method/COMMAND_SAFE_SECTION';
 import Constants from './Constants';
 
-import { AuxData, Config } from './types';
+import { AuxData, Config, DB } from './types';
 
 //import './Method/logError';
 
-export default async (config: Config) => {
-  const temp = await createData(config);
-  if (temp === null) {
+export default async (config: Config, obs: OBSWebSocket, db: DB) => {
+  const data = await createData(config, obs, db);
+  if (data === null) {
     return;
   }
-  const { data, obs } = temp;
+  if (!(await updateImageNames(db))) {
+    return;
+  }
+  if (!(await updateDBEntirely(db))) {
+    return;
+  }
   injectKeypressEvent(data);
   injectChatCommand(data, obs);
   let isTitleChanged = false;
@@ -53,6 +63,9 @@ export default async (config: Config) => {
             // command 보정용
             data.spectateRank = Constants.NONE;
           }
+          if (data.spectateRank === Constants.NONE && !data.isStreaming) {
+            await updateDBPeriodically(data, db);
+          }
         } else {
           await sleep(10 * 1000);
         }
@@ -61,7 +74,7 @@ export default async (config: Config) => {
     //data.isCommandAvailable = false;
     const gameProcess = startSpectate(data);
     data.gameProcess = gameProcess;
-    if (!(await isGameRunning(data, gameProcess))) {
+    if (!(await isGameRunning(data, db, gameProcess))) {
       continue;
     }
     const auxData: AuxData = {
@@ -69,12 +82,8 @@ export default async (config: Config) => {
       exGameTime: Constants.NONE,
       fixCount: 0,
     };
-    while (!data.pq.isEmpty()) {
-      const [, { playerIndex }] = data.pq.remove();
-      if (auxData.selectedIndex === Constants.NONE) {
-        auxData.selectedIndex = playerIndex;
-      }
-    }
+    const streamingTitle = makeStreamingTitle(data, auxData);
+
     /*
     if (!data.isStreaming) {
       await startStreaming(data, obs);
@@ -88,6 +97,7 @@ export default async (config: Config) => {
       isTitleChanged = true;
     }
     */
+    console.log(streamingTitle);
     //data.isCommandAvailable = true;
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.isSpectating) {

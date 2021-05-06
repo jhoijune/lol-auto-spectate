@@ -1,3 +1,4 @@
+import OBSWebSocket from 'obs-websocket-js';
 import {
   sleep,
   startSpectate,
@@ -16,19 +17,27 @@ import {
   injectChatCommand,
   injectKeypressEvent,
   COMMAND_SAFE_SECTION,
+  updateDBPeriodically,
+  updateDBEntirely,
+  updateImageNames,
 } from './Method';
 import Constants from './Constants';
 
-import { AuxData, Config } from './types';
+import { AuxData, Config, DB } from './types';
 
 //import './Method/logError';
 
-export default async (config: Config) => {
-  const temp = await createData(config);
-  if (temp === null) {
+export default async (config: Config, obs: OBSWebSocket, db: DB) => {
+  const data = await createData(config, obs, db);
+  if (data === null) {
     return;
   }
-  const { data, obs } = temp;
+  if (!(await updateImageNames(db))) {
+    return;
+  }
+  if (!(await updateDBEntirely(db))) {
+    return;
+  }
   injectKeypressEvent(data);
   injectChatCommand(data, obs);
   while (true) {
@@ -37,6 +46,9 @@ export default async (config: Config) => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
           await decidePlayGame(data, obs);
+          if (data.spectateRank === Constants.NONE && !data.isStreaming) {
+            await updateDBPeriodically(data, db);
+          }
         } else {
           await sleep(10 * 1000);
         }
@@ -53,7 +65,7 @@ export default async (config: Config) => {
     }
     const gameProcess = startSpectate(data);
     data.gameProcess = gameProcess; // command용
-    if (!(await isGameRunning(data, gameProcess))) {
+    if (!(await isGameRunning(data, db, gameProcess))) {
       continue;
     }
     const auxData: AuxData = {
