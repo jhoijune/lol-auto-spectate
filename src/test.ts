@@ -14,11 +14,9 @@ import {
   stopStreaming,
   injectChatCommand,
   injectKeypressEvent,
-  updateDBPeriodically,
   makeStreamingTitle,
-  updateDBEntirely,
-  updateImageNames,
 } from './Method';
+import { updateDBRegulary, updateDBEntirely, updateImageNames } from './DB';
 import COMMAND_SAFE_SECTION from './Method/COMMAND_SAFE_SECTION';
 import Constants from './Constants';
 
@@ -41,7 +39,6 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
   injectChatCommand(data, obs);
   let isTitleChanged = false;
   while (true) {
-    //data.isCommandAvailable = true;
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
@@ -64,14 +61,13 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
             data.spectateRank = Constants.NONE;
           }
           if (data.spectateRank === Constants.NONE && !data.isStreaming) {
-            await updateDBPeriodically(data, db);
+            await updateDBRegulary(data, db);
           }
         } else {
           await sleep(10 * 1000);
         }
       }
     });
-    //data.isCommandAvailable = false;
     const gameProcess = startSpectate(data);
     data.gameProcess = gameProcess;
     if (!(await isGameRunning(data, db, gameProcess))) {
@@ -98,7 +94,6 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
     }
     */
     console.log(streamingTitle);
-    //data.isCommandAvailable = true;
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.isSpectating) {
         await sleep(1000);
@@ -106,7 +101,6 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
         await decideGameIntercept(data);
       }
     });
-    //data.isCommandAvailable = false;
     if (data.spectateRank === Constants.NONE) {
       await sleep(10 * 1000);
     }

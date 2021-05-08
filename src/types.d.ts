@@ -253,7 +253,7 @@ export interface TeamAttributes {
 export interface SummonerAttributes {
   id: number;
   summoner_id: string;
-  summoner_name: string;
+  name: string;
   pro_id: number;
 }
 

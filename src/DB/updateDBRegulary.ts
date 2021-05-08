@@ -1,6 +1,6 @@
 import { Data, DB } from '../types';
 import updateDBEntirely from './updateDBEntirely';
-import searchSummonerID from './searchSummonerID';
+import { searchSummonerID } from '../Method';
 
 export default async (data: Data, db: DB) => {
   const instance = await db.Summoner.findOne({
@@ -21,8 +21,8 @@ export default async (data: Data, db: DB) => {
           break;
         }
       }
-    } else if (apiData.name !== instance.summoner_name) {
-      instance.summoner_name = apiData.name;
+    } else if (apiData.name !== instance.name) {
+      instance.name = apiData.name;
       instance.save();
     }
     data.currSummonerID += 1;

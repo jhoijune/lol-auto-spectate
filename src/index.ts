@@ -16,7 +16,7 @@ import app from './app';
 import { Config } from './types';
 import test from './test';
 import Constants from './Constants';
-import { connectDB } from './Method';
+import connectDB from './Models';
 
 (async () => {
   const { ASSET_PATH, OBS_PASSWORD } = process.env;

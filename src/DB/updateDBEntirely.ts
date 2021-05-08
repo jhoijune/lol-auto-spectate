@@ -1,30 +1,16 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
-import { join } from 'path';
-import { readdir } from 'fs/promises';
 
 import Constants from '../Constants';
-import printDate from './printDate';
+import { printDate, createImageMap } from '../Method';
 import updateDB from './updateDB';
 import { DB } from '../types';
 
 export default async (db: DB) => {
   // 정상적으로 완료되었을시 true 반환
-  const { ASSET_PATH } = process.env;
-  const imagePath =
-    (ASSET_PATH && join(ASSET_PATH, 'images')) ||
-    join(__dirname, '..', '..', 'assets', 'images');
-  let fileNames: string[];
-  const fileNameMap = new Map<string, string>();
-  try {
-    fileNames = await readdir(imagePath);
-  } catch (error) {
-    console.error(JSON.stringify(error));
+  const imageMap = await createImageMap();
+  if (imageMap === null) {
     return false;
-  }
-  for (const fileName of fileNames) {
-    const [name] = fileName.split(' ');
-    fileNameMap.set(name.trim().toLowerCase(), fileName);
   }
   let html: string;
   try {
@@ -56,7 +42,7 @@ export default async (db: DB) => {
     });
   });
   for (const { summonerName, proName, teamName } of entries) {
-    if (!(await updateDB(db, summonerName, proName, teamName, fileNameMap))) {
+    if (!(await updateDB(db, summonerName, proName, teamName, imageMap))) {
       console.log('update db failed');
       return false;
     }

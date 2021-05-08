@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 
 import { DB } from '../types';
-import searchSummonerName from './searchSummonerName';
+import { searchSummonerName } from '../Method';
 
 export default async (
   db: DB,
@@ -12,7 +12,7 @@ export default async (
 ) => {
   const instance = await db.Summoner.findOne({
     where: {
-      summoner_name: summonerName,
+      name: summonerName,
     },
   });
   if (instance === null) {
@@ -33,7 +33,7 @@ export default async (
     });
     if (instance !== null) {
       // db에 summonerId가 있을 때 db summonerName 갱신
-      instance.summoner_name = data.name;
+      instance.name = data.name;
       instance.save();
     } else {
       // db에 summonerId가 없을 때 새로 추가
@@ -79,7 +79,7 @@ export default async (
       }
       // summoner에 insert
       db.Summoner.create({
-        summoner_name: data.name,
+        name: data.name,
         summoner_id: data.id,
         pro_id: proId,
       });

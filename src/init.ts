@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { join } from 'path';
-import { config } from 'dotenv';
 
 if (fs.existsSync(join(__dirname, '..', 'assets'))) {
   process.env.ASSET_PATH = join(__dirname, '..', 'assets');
@@ -8,7 +7,9 @@ if (fs.existsSync(join(__dirname, '..', 'assets'))) {
   process.env.ASSET_PATH = join(__dirname, 'assets');
 }
 
-import { collectProImage, createDB, connectDB } from './Method';
+import { collectProImage } from './Method';
+import connectDB from './Models';
+import { createDB } from './DB';
 
 (async () => {
   const envPath = join(process.env.ASSET_PATH, '..');

@@ -1,8 +1,10 @@
 import { promises as fs } from 'fs';
 import { join } from 'path';
+
+import connectDB from '../Models';
 import Constants from '../Constants';
-import connectDB from './connectDB';
-import searchSummonerID from './searchSummonerID';
+
+import { createImageMap, searchSummonerID } from '../Method';
 import updateDB from './updateDB';
 import updateDBEntirely from './updateDBEntirely';
 
@@ -19,20 +21,9 @@ export default async () => {
     join(__dirname, '..', '..', 'assets', 'db.sqlite3');
   await fs.writeFile(dbPath, buffers);
   const db = await connectDB();
-  const imagePath =
-    (ASSET_PATH && join(ASSET_PATH, 'images')) ||
-    join(__dirname, '..', '..', 'assets', 'images');
-  let fileNames: string[];
-  const imageMap = new Map<string, string>();
-  try {
-    fileNames = await fs.readdir(imagePath);
-  } catch (error) {
-    console.error(JSON.stringify(error));
+  const imageMap = await createImageMap();
+  if (imageMap === null) {
     return;
-  }
-  for (const fileName of fileNames) {
-    const [name] = fileName.split(' ');
-    imageMap.set(name.trim().toLowerCase(), fileName);
   }
   for (const teamAndName in Constants.ID) {
     if (!(teamAndName in Constants.ID)) continue;
@@ -49,7 +40,9 @@ export default async () => {
           }
         }
       }
-      await updateDB(db, data.name, proName, teamName, imageMap);
+      if (!(await updateDB(db, data.name, proName, teamName, imageMap))) {
+        return;
+      }
     }
   }
   if (!(await updateDBEntirely(db))) {

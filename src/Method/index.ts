@@ -30,12 +30,7 @@ import orderStopSpectate from './orderStopSpectate';
 import COMMAND_SAFE_SECTION from './COMMAND_SAFE_SECTION';
 import searchSummonerName from './searchSummonerName';
 import searchSummonerID from './searchSummonerID';
-import updateDBPeriodically from './updateDBPeriodically';
-import connectDB from './connectDB';
-import createDB from './createDB';
-import updateDB from './updateDB';
-import updateDBEntirely from './updateDBEntirely';
-import updateImageNames from './updateImageNames';
+import createImageMap from './createImageMap';
 
 export default {
   collectProImage,
@@ -70,12 +65,7 @@ export default {
   COMMAND_SAFE_SECTION,
   searchSummonerName,
   searchSummonerID,
-  updateDBPeriodically,
-  connectDB,
-  createDB,
-  updateDB,
-  updateDBEntirely,
-  updateImageNames,
+  createImageMap,
 };
 export {
   collectProImage,
@@ -110,10 +100,5 @@ export {
   COMMAND_SAFE_SECTION,
   searchSummonerName,
   searchSummonerID,
-  updateDBPeriodically,
-  connectDB,
-  createDB,
-  updateDB,
-  updateDBEntirely,
-  updateImageNames,
+  createImageMap,
 };

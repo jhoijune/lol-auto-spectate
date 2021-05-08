@@ -17,10 +17,8 @@ import {
   injectChatCommand,
   injectKeypressEvent,
   COMMAND_SAFE_SECTION,
-  updateDBPeriodically,
-  updateDBEntirely,
-  updateImageNames,
 } from './Method';
+import { updateDBRegulary, updateDBEntirely, updateImageNames } from './DB';
 import Constants from './Constants';
 
 import { AuxData, Config, DB } from './types';
@@ -41,22 +39,18 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
   injectKeypressEvent(data);
   injectChatCommand(data, obs);
   while (true) {
-    //data.isCommandAvailable = true;
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
           await decidePlayGame(data, obs);
           if (data.spectateRank === Constants.NONE && !data.isStreaming) {
-            await updateDBPeriodically(data, db);
+            await updateDBRegulary(data, db);
           }
         } else {
           await sleep(10 * 1000);
         }
       }
     });
-    /*
-    data.isCommandAvailable = false;
-    */
     if (!data.isPermitted) {
       data.isPermitted = await getPermission();
       if (!data.isPermitted) {
@@ -80,7 +74,6 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
     await switchLOLScene(data, obs);
     await modifyChannelInfo(streamingTitle);
     console.log(streamingTitle);
-    //data.isCommandAvailable = true;
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.isSpectating) {
         await sleep(1000);
@@ -89,7 +82,6 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
         await decideStopGameAndStreaming(data, obs);
       }
     });
-    //data.isCommandAvailable = false;
     if (data.spectateRank === Constants.NONE) {
       await sleep(10 * 1000);
     }

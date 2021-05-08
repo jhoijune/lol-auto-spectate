@@ -1,16 +1,11 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 import { Op } from 'sequelize';
-import { join } from 'path';
-import { readdir } from 'fs/promises';
 
+import connectDB from '../Models';
 import Constants from '../Constants';
-import printDate from './printDate';
-import updateDB from './updateDB';
-import { DB } from '../types';
-import connectDB from './connectDB';
+import { printDate } from '../Method';
 import inquirer from 'inquirer';
-import { stringify } from 'node:querystring';
 
 export default async () => {
   // 정상적으로 완료되었을시 true 반환
@@ -43,14 +38,12 @@ export default async () => {
       },
     });
     if (teamInstance === null) {
-      const { isConfirm } = await inquirer.prompt<{ isConfirm: boolean }>([
-        {
-          type: 'confirm',
-          name: 'isConfirm',
-          message: `[${teamName}] team name does not exist in db Do you want to add it?`,
-          default: false,
-        },
-      ]);
+      const { isConfirm } = await inquirer.prompt<{ isConfirm: boolean }>({
+        type: 'confirm',
+        name: 'isConfirm',
+        message: `[${teamName}] team name does not exist in db Do you want to add it?`,
+        default: false,
+      });
       if (isConfirm) {
         const { name, exactName } = await inquirer.prompt<{
           name: string;

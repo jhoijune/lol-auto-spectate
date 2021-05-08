@@ -31,7 +31,7 @@ export default async (data: Data, db: DB) => {
       }
       const summonerInstance = await db.Summoner.findOne({
         where: {
-          summoner_name: summonerName,
+          name: summonerName,
         },
       });
       if (summonerInstance !== null) {

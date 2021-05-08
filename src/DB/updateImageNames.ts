@@ -9,14 +9,14 @@ export default async (db: DB) => {
   const imagePath =
     (ASSET_PATH && join(ASSET_PATH, 'images')) ||
     join(__dirname, '..', '..', 'assets', 'images');
-  let fileNames: string[];
+  let imageNames: string[];
   try {
-    fileNames = await fs.readdir(imagePath);
+    imageNames = await fs.readdir(imagePath);
   } catch (error) {
     console.error(error);
     return false;
   }
-  const fileNameSet = new Set(fileNames);
+  const imageNameSet = new Set(imageNames);
   /*
       사진을 변경하거나 추가했을 경우
        pictures 폴더에 파일이름들 split해서 pro디비에 lowercase 이름으로
@@ -24,8 +24,8 @@ export default async (db: DB) => {
        인스턴스가 없다면 파일 삭제
     */
   const operations: Promise<boolean>[] = [];
-  for (const fileName of fileNameSet) {
-    const [name] = fileName.split(' ');
+  for (const imageName of imageNameSet) {
+    const [name] = imageName.split(' ');
     const opertaion = db.Pro.findOne({
       where: {
         name: {
@@ -34,11 +34,11 @@ export default async (db: DB) => {
       },
     })
       .then((instance) => {
-        if (instance !== null && instance.image_name !== fileName) {
-          instance.image_name = fileName;
+        if (instance !== null && instance.image_name !== imageName) {
+          instance.image_name = imageName;
           instance.save();
         } else if (instance === null) {
-          fs.rm(join(imagePath, fileName));
+          fs.rm(join(imagePath, imageName));
         }
         return true;
       })
@@ -68,7 +68,7 @@ export default async (db: DB) => {
     for (const proInstance of proInstances) {
       if (
         proInstance.image_name !== null &&
-        !fileNameSet.has(proInstance.image_name)
+        !imageNameSet.has(proInstance.image_name)
       ) {
         proInstance.image_name = null;
         proInstance.save();
