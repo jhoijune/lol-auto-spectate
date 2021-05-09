@@ -25,7 +25,8 @@ export default async (db: DB) => {
     */
   const operations: Promise<boolean>[] = [];
   for (const imageName of imageNameSet) {
-    const [name] = imageName.split(' ');
+    const index = imageName.lastIndexOf(' ');
+    const name = imageName.slice(0, index);
     const opertaion = db.Pro.findOne({
       where: {
         name: {

@@ -60,10 +60,16 @@ export default async (db: DB) => {
     const $ = cheerio.load(html);
     const nameAndTeam = $('section.content-header h1').text().trim();
     const index = nameAndTeam.indexOf(' ');
-    const [proName, teamName] = [
-      nameAndTeam.slice(0, index),
-      nameAndTeam.slice(index + 1),
-    ];
+    let proName: string;
+    let teamName = 'Progamer';
+    if (index === -1) {
+      proName = nameAndTeam;
+    } else {
+      [proName, teamName] = [
+        nameAndTeam.slice(0, index),
+        nameAndTeam.slice(index + 1),
+      ];
+    }
     const infoBox = $('.player-info-inner');
     const rows = $(infoBox[infoBox.length - 2]).find('tr');
     const entries: {

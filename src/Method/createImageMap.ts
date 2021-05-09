@@ -15,8 +15,9 @@ export default async () => {
     return null;
   }
   for (const imageName of imageNames) {
-    const [name] = imageName.split(' ');
-    imageMap.set(name.trim().toLowerCase(), imageName);
+    const index = imageName.lastIndexOf(' ');
+    const name = imageName.slice(0, index).trim().toLowerCase();
+    imageMap.set(name, imageName);
   }
   return imageMap;
 };

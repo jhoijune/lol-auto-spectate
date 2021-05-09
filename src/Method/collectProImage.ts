@@ -35,14 +35,16 @@ export default async (db: DB) => {
   try {
     const fileNames = await fs.readdir(imagePath);
     for (const fileName of fileNames) {
-      const [name, rearFileName] = fileName.split(' ');
-      fileNameMap.set(name.toLowerCase(), rearFileName);
+      const index = fileName.lastIndexOf(' ');
+      const name = fileName.slice(0, index).toLowerCase();
+      const rearFileName = fileName.slice(index + 1);
+      fileNameMap.set(name, rearFileName);
     }
   } catch (error) {
     console.error(error);
     return;
   }
-  const URL = 'https://lol.gamepedia.com/';
+  const URL = 'https://lol.fandom.com/wiki/';
   const IMAGE_SELECTOR = '#infoboxPlayer img';
   const browser = await puppeteer.launch({ headless: true });
   let page = await browser.newPage();

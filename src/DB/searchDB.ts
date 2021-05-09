@@ -27,7 +27,8 @@ export default async () => {
     }
     return logs;
   };
-  do {
+
+  while (true) {
     const { category, name } = await inquirer.prompt<{
       category: Category;
       name: string;
@@ -52,11 +53,11 @@ export default async () => {
           name: { [Op.like]: `%${name}%` },
         },
       });
-      for (const summonerInsance of summonerInstances) {
-        logs.push(`Summoner Name : ${summonerInsance.name}`);
+      for (const summonerInstance of summonerInstances) {
+        logs.push(`Summoner Name : ${summonerInstance.name}`);
         const proInstance = await Pro.findOne({
           where: {
-            id: summonerInsance.pro_id,
+            id: summonerInstance.pro_id,
           },
         });
         if (proInstance !== null) {
@@ -74,7 +75,7 @@ export default async () => {
           logs.push('');
         } else {
           console.log(
-            `Pro Id with [${summonerInsance.pro_id}] does not exist, so please correct it`
+            `Pro Id with [${summonerInstance.pro_id}] does not exist, so please correct it`
           );
           return;
         }
@@ -99,6 +100,14 @@ export default async () => {
           }
           logs.push(...teamLogs);
         }
+        const summonerInstances = await Summoner.findAll({
+          where: {
+            pro_id: proInstance.id,
+          },
+        });
+        for (const summonerInstance of summonerInstances) {
+          logs.push(`Summoner Name : ${summonerInstance.name}`);
+        }
         logs.push('');
       }
     } else {
@@ -113,6 +122,26 @@ export default async () => {
       for (const teamInstance of teamInstances) {
         logs.push(`Team Name : ${teamInstance.name}`);
         logs.push(`Exact Team Name : ${teamInstance.exact_name}`);
+        const proInstances = await Pro.findAll({
+          where: {
+            team_id: teamInstance.id,
+          },
+        });
+        for (const proInstance of proInstances) {
+          logs.push('');
+          logs.push(`Pro Name : ${proInstance.name}`);
+          if (proInstance.image_name !== null) {
+            logs.push(`Image Name : ${proInstance.image_name}`);
+          }
+          const summonerInstances = await Summoner.findAll({
+            where: {
+              pro_id: proInstance.id,
+            },
+          });
+          for (const summonerInstance of summonerInstances) {
+            logs.push(`Summoner Name : ${summonerInstance.name}`);
+          }
+        }
         logs.push('');
       }
     }
@@ -120,14 +149,5 @@ export default async () => {
     console.log(`What you've entered is ${name}`);
     console.log();
     console.log(logs.join('\n'));
-  } while (
-    (
-      await inquirer.prompt({
-        type: 'confirm',
-        name: 'confirm',
-        message: 'Do you want to continue searching?',
-        default: false,
-      })
-    ).confirm
-  );
+  }
 };

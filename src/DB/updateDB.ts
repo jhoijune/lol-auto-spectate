@@ -39,7 +39,7 @@ export default async (
       // db에 summonerId가 없을 때 새로 추가
       const proInstance = await db.Pro.findOne({
         where: {
-          name: proName,
+          name: { [Op.like]: proName },
         },
       });
       let proId: number;
@@ -50,7 +50,10 @@ export default async (
           // team테이블에서 teamName으로 exact_name 레코드 검색해서 id 반환
           const teamInstance = await db.Team.findOne({
             where: {
-              [Op.or]: [{ name: teamName }, { exact_name: teamName }],
+              [Op.or]: [
+                { name: { [Op.like]: teamName } },
+                { exact_name: { [Op.like]: teamName } },
+              ],
             },
           });
           if (teamInstance === null) {
