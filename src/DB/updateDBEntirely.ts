@@ -38,7 +38,9 @@ export default async (db: DB) => {
       const summonerName = $(elem).find('.SummonerName').text();
       const proName = $(elem).find('.SummonerExtra').text().trim();
       const teamName = $(elem).find('.SummonerTeam').text().trim();
-      entries.push({ summonerName, proName, teamName });
+      if (!/^\d+del$/.test(summonerName)) {
+        entries.push({ summonerName, proName, teamName });
+      }
     });
   });
   for (const { summonerName, proName, teamName } of entries) {

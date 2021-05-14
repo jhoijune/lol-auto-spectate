@@ -95,7 +95,7 @@ export default async (db: DB) => {
             await viewSource.buffer()
           );
           console.log(`Create picture ${crawledFileName}`);
-          proInstances[index].image_name = `${name} ${crawledFileName}`;
+          proInstances[index].imageName = `${name} ${crawledFileName}`;
           proInstances[index].save();
         }
       } else {

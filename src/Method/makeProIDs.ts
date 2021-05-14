@@ -33,19 +33,19 @@ export default async (db: DB) => {
       }
     }
     entries.sort(({ leaguePoints: a }, { leaguePoints: b }) => b - a);
-    for (const { summonerId, summonerName } of entries) {
+    for (const { summonerId } of entries) {
       const summonerInstance = await db.Summoner.findOne({
         where: {
-          summoner_id: summonerId,
+          summonerId,
         },
       });
       if (summonerInstance !== null) {
         const proInstance = await db.Pro.findOne({
           where: {
-            id: summonerInstance.pro_id,
+            id: summonerInstance.proId,
           },
         });
-        if (proInstance !== null && proInstance.team_id !== null) {
+        if (proInstance !== null && proInstance.teamId !== null) {
           IDs.push(summonerId);
         }
       }

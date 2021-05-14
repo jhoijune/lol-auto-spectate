@@ -88,7 +88,7 @@ export default async (db: DB) => {
           regionAndNick.slice(0, index),
           regionAndNick.slice(index + 1),
         ];
-        if (region === '[KR]') {
+        if (region === '[KR]' && !/^\d+del$/.test(summonerName)) {
           entries.push({ summonerName, proName, teamName });
         }
       }

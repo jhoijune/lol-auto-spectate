@@ -9,7 +9,7 @@ export default async (data: Data, db: DB) => {
     },
   });
   if (instance !== null) {
-    const apiData = await searchSummonerID(instance.summoner_id);
+    const apiData = await searchSummonerID(instance.summonerId);
     if (typeof apiData === 'number') {
       // 에러 발생
       switch (apiData) {

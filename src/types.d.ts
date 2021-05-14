@@ -240,28 +240,28 @@ export type AuxData = {
 
 export interface ChampionAttributes {
   id: number;
-  kor_name: string;
-  eng_name: string;
+  korName: string;
+  engName: string;
 }
 
 export interface TeamAttributes {
   id: number;
   name: string;
-  exact_name: string;
+  exactName: string;
 }
 
 export interface SummonerAttributes {
   id: number;
-  summoner_id: string;
+  summonerId: string;
   name: string;
-  pro_id: number;
+  proId: number;
 }
 
 export interface ProAttributes {
   id: number;
   name: string;
-  image_name: string | null;
-  team_id: number | null;
+  imageName: string | null;
+  teamId: number | null;
 }
 
 export interface ChampionCreationAttributes

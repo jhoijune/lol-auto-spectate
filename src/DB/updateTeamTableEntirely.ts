@@ -34,7 +34,7 @@ export default async () => {
   for (const teamName of teamNames) {
     const teamInstance = await db.Team.findOne({
       where: {
-        [Op.or]: [{ name: teamName }, { exact_name: teamName }],
+        [Op.or]: [{ name: teamName }, { exactName: teamName }],
       },
     });
     if (teamInstance === null) {
@@ -63,11 +63,11 @@ export default async () => {
           },
         ]);
         db.Team.create({
-          exact_name: exactName,
+          exactName: exactName,
           name,
         });
         structureDb.Team.create({
-          exact_name: exactName,
+          exactName: exactName,
           name,
         });
       }

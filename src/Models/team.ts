@@ -14,10 +14,11 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      exact_name: {
+      exactName: {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
+        field: 'exact_name',
       },
     },
     {

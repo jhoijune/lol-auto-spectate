@@ -1,23 +1,31 @@
 export default class {
   static PRO_LIST_URL = 'https://op.gg/spectate/list' as const;
 
-  static PLAYERLIST_URL = 'https://127.0.0.1:2999/liveclientdata/playerlist' as const;
+  static PLAYERLIST_URL =
+    'https://127.0.0.1:2999/liveclientdata/playerlist' as const;
 
-  static EVENDATA_URL = 'https://127.0.0.1:2999/liveclientdata/eventdata' as const;
+  static EVENDATA_URL =
+    'https://127.0.0.1:2999/liveclientdata/eventdata' as const;
 
-  static GAME_STATS_URL = 'https://127.0.0.1:2999/liveclientdata/gamestats' as const;
+  static GAME_STATS_URL =
+    'https://127.0.0.1:2999/liveclientdata/gamestats' as const;
 
-  static SUMMONER_PUUID_URL = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/' as const;
+  static SUMMONER_PUUID_URL =
+    'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/' as const;
 
-  static SUMMONER_NAME_URL = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/' as const;
+  static SUMMONER_NAME_URL =
+    'https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/' as const;
 
-  static SUMMONER_ID_URL = 'https://kr.api.riotgames.com/lol/summoner/v4/summoners/' as const;
+  static SUMMONER_ID_URL =
+    'https://kr.api.riotgames.com/lol/summoner/v4/summoners/' as const;
 
-  static SPECTATE_URL = 'https://kr.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/' as const;
+  static SPECTATE_URL =
+    'https://kr.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/' as const;
 
   static STREAMS_URL = 'https://api.twitch.tv/helix/streams' as const;
 
-  static BROADCASTER_URL = 'https://api.twitch.tv/helix/channels?broadcaster_id' as const;
+  static BROADCASTER_URL =
+    'https://api.twitch.tv/helix/channels?broadcaster_id' as const;
 
   static OBS_ADDRESS = 'localhost:4444' as const;
 
@@ -84,29 +92,18 @@ export default class {
       '3XgyIfpjVnlRYOiVJi9BuzYXABU4srlKnNCd7zO6ou4r9Q',
       '3kFXTl-XQ6ckWRDnPevKx-hzfY8xMmrw0nv9D6W_8W32ag',
     ],
-    'T1 Teddy': [
-      'Lp2if0FZhWCVmVCLNIl7biKcydzFQOOBGWPCT7Ru17MoHH0',
-      'bpo39bz8ZWjGI0rj00mRjFYzCRymGqkV6xXgykMV3rp57js',
-    ],
+    'T1 Teddy': ['Lp2if0FZhWCVmVCLNIl7biKcydzFQOOBGWPCT7Ru17MoHH0'],
     'T1 Cuzz': [
       '7i-1vJWjO6a_Z-UfsWP1veTiPY0V3TC6CzYlaxbAT6bk5Yg',
       'sCj2TgopepW0VQKGVfV9zP9YdL2KVRAzCjKnyi2R0FPc4z4',
       'wTNxvyFMyQ3QkZ1kqbvMt25Fc8jOyFpnDhk5BpfQpLmKkJk',
-      'PeTp3Rfa_f6j25H27aVt10ke2mx5yBRSF3DoSJ4oxy7pSJk',
     ],
-    'T1 Canna': [
-      'Rpmv4q-p9jw_XywfvtMfaD9YAeR0OvGgQHSGs7N0Ugt721E',
-      '4DN2JakRykjWRuENPImKJQ6M6q6nr2MNB9L67_ItMbBIAUg',
-    ],
+    'T1 Canna': ['Rpmv4q-p9jw_XywfvtMfaD9YAeR0OvGgQHSGs7N0Ugt721E'],
     'T1 Ellim': [
       'X-cmR6H-54lFtI-WWRmWVh-15etQ5D9Yofrn5ep3jjr0KnE',
       '05IoegFtxkYL2o69GUzMNQzETWimOsUZ3qykAc8BnJI7x1o',
     ],
-    'T1 Gumayusi': [
-      'WSD8-_fi6vmR6lRBIKg2mLI5rvnKc5FalGBz5ynNUzVkRi8',
-      'QTQFU6OubT3w4s3rJ70scYNPvO2kq61Hl4jlN95Bglu4TA',
-      'k1h4Ct6wh_EB3kHMX8EK4SYwmcAr1TRx_CKIT07mreApWNBPBULfRnol4g',
-    ],
+    'T1 Gumayusi': ['WSD8-_fi6vmR6lRBIKg2mLI5rvnKc5FalGBz5ynNUzVkRi8'],
     'T1 Keria': [
       'hOTwMMHiUoE7uB0s3pJmfeDVOYou0m2WDrjV7kHe4uNP0UE',
       'foe5GUqR2nD1RvUVk7srD4Cqh-FkPosDDiGpWn7D8nMYw0s',
@@ -114,16 +111,16 @@ export default class {
     'T1 Zeus': [
       'vc3SXcYKhVhTrAt8Xgg0-rOv9vvY6ilaBERlegto-BrmPTk',
       '8IxiySn4-R0oi_0xXGgbsfmma-PXJvpW94WIaKG1Oy5wEzE',
-      'o5A_KMplNw9TBT7YS7DWXOapNdPAOk0D0-7D2lkQOTfLs5M',
+      '_KsnqhF5237SndycuCOJ1oHNR1Cutw1g-rx4VYnZC5JVVF1_VCvD5vWtKw',
     ],
     'T1 Oner': [
       'IXtLthCZ0Qw_OgCkkCVs15krMmJpPYmZ6NweYlKrPaAW5LXlcLNsj5k4dg',
       'DoYpR6ll4MgLyibG6ww1s9IPaw5defOu695gPTnnYjC0LQs',
+      '18E3LyMMEsnbmpGC7q1hMyLmPHUAYN8uAFnZ1VPgCgXK5X9j49MO4zaBuQ',
     ],
     'T1 Clozer': [
       '9v7Azbh82ox7Te3T3BEMq-IZdaylvDw3J06cmGS8J1bmbkPF9OV-bET6wA',
       'rkMjlQDkla0Rsk4AbfMwRasOMP_AopxJcprKSA_-SeaioyQ',
-      'fTi0pPvsk2-1ttIAw_l6ixg3e2lbwVLNRaYBQMKMPXuQgfA',
     ],
     'T1.C Roach': [
       '3ed4S0Be6loem7nbaFY1ksHoncd05Oxohtj9szZifIuO7A',
@@ -131,7 +128,6 @@ export default class {
     ],
     'T1.C Hoit': [
       'wFBeLnyc-WaO1otfgEohXHolKlnvjtOkCPY2EKxJMa_nRDs',
-      'k4qd8N6tj4LOy-bha1yVGwDVN5tgNjCrMV3OD_m1Oo8FKA',
       'dWjF04z47wN95VD8qANyUW3YDRsItPW5kPM_4t0apC-aOTo',
     ],
     'T1.C Berserker': ['-ZTgOZPToM8AlQoaU8jFCvXfmAaf7_GrMuGnuW5ZpPXTsgM'],
@@ -148,34 +144,28 @@ export default class {
     ],
     [
       'Lp2if0FZhWCVmVCLNIl7biKcydzFQOOBGWPCT7Ru17MoHH0',
-      'bpo39bz8ZWjGI0rj00mRjFYzCRymGqkV6xXgykMV3rp57js',
       'Rpmv4q-p9jw_XywfvtMfaD9YAeR0OvGgQHSGs7N0Ugt721E',
-      '4DN2JakRykjWRuENPImKJQ6M6q6nr2MNB9L67_ItMbBIAUg',
       'WSD8-_fi6vmR6lRBIKg2mLI5rvnKc5FalGBz5ynNUzVkRi8',
-      'QTQFU6OubT3w4s3rJ70scYNPvO2kq61Hl4jlN95Bglu4TA',
-      'k1h4Ct6wh_EB3kHMX8EK4SYwmcAr1TRx_CKIT07mreApWNBPBULfRnol4g',
       'hOTwMMHiUoE7uB0s3pJmfeDVOYou0m2WDrjV7kHe4uNP0UE',
       'foe5GUqR2nD1RvUVk7srD4Cqh-FkPosDDiGpWn7D8nMYw0s',
       'vc3SXcYKhVhTrAt8Xgg0-rOv9vvY6ilaBERlegto-BrmPTk',
       '8IxiySn4-R0oi_0xXGgbsfmma-PXJvpW94WIaKG1Oy5wEzE',
-      'o5A_KMplNw9TBT7YS7DWXOapNdPAOk0D0-7D2lkQOTfLs5M',
+      '_KsnqhF5237SndycuCOJ1oHNR1Cutw1g-rx4VYnZC5JVVF1_VCvD5vWtKw',
       '7i-1vJWjO6a_Z-UfsWP1veTiPY0V3TC6CzYlaxbAT6bk5Yg',
       'sCj2TgopepW0VQKGVfV9zP9YdL2KVRAzCjKnyi2R0FPc4z4',
       'wTNxvyFMyQ3QkZ1kqbvMt25Fc8jOyFpnDhk5BpfQpLmKkJk',
-      'PeTp3Rfa_f6j25H27aVt10ke2mx5yBRSF3DoSJ4oxy7pSJk',
       'X-cmR6H-54lFtI-WWRmWVh-15etQ5D9Yofrn5ep3jjr0KnE',
       '05IoegFtxkYL2o69GUzMNQzETWimOsUZ3qykAc8BnJI7x1o',
       'IXtLthCZ0Qw_OgCkkCVs15krMmJpPYmZ6NweYlKrPaAW5LXlcLNsj5k4dg',
       'DoYpR6ll4MgLyibG6ww1s9IPaw5defOu695gPTnnYjC0LQs',
+      '18E3LyMMEsnbmpGC7q1hMyLmPHUAYN8uAFnZ1VPgCgXK5X9j49MO4zaBuQ',
       '9v7Azbh82ox7Te3T3BEMq-IZdaylvDw3J06cmGS8J1bmbkPF9OV-bET6wA',
       'rkMjlQDkla0Rsk4AbfMwRasOMP_AopxJcprKSA_-SeaioyQ',
-      'fTi0pPvsk2-1ttIAw_l6ixg3e2lbwVLNRaYBQMKMPXuQgfA',
     ],
     [
       '3ed4S0Be6loem7nbaFY1ksHoncd05Oxohtj9szZifIuO7A',
       '8f9GfadY9Wa9CMD1qf2RkH07RaZi9H8fyHBTZrz-IrYNFsQ',
       'wFBeLnyc-WaO1otfgEohXHolKlnvjtOkCPY2EKxJMa_nRDs',
-      'k4qd8N6tj4LOy-bha1yVGwDVN5tgNjCrMV3OD_m1Oo8FKA',
       'dWjF04z47wN95VD8qANyUW3YDRsItPW5kPM_4t0apC-aOTo',
       '-ZTgOZPToM8AlQoaU8jFCvXfmAaf7_GrMuGnuW5ZpPXTsgM',
       'hyPZGnGZEEIdUeYC4Z_jCeX1j9CxBF7pkCVrOWtge9qSk1g',

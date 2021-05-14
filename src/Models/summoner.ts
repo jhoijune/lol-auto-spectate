@@ -10,17 +10,19 @@ export default (sequelize: Sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      summoner_id: {
+      summonerId: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
+        field: 'summoner_id',
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      pro_id: {
+      proId: {
         type: DataTypes.INTEGER,
+        field: 'pro_id',
       },
     },
     {

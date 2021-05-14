@@ -10,7 +10,7 @@ export default async (name: string, exactName?: string) => {
       where: {
         [Op.or]: [
           { name: { [Op.like]: name } },
-          { exact_name: { [Op.like]: name } },
+          { exactName: { [Op.like]: name } },
         ],
       },
     });
@@ -18,7 +18,7 @@ export default async (name: string, exactName?: string) => {
       where: {
         [Op.or]: [
           { name: { [Op.like]: name } },
-          { exact_name: { [Op.like]: name } },
+          { exactName: { [Op.like]: name } },
         ],
       },
     });
@@ -37,16 +37,16 @@ export default async (name: string, exactName?: string) => {
   });
   const searchedByExactName = await db.Team.findOne({
     where: {
-      exact_name: exactName,
+      exactName: exactName,
     },
   });
   if (searchedByName === null && searchedByExactName === null) {
     db.Team.create({
-      exact_name: exactName,
+      exactName: exactName,
       name,
     });
     structureDb.Team.create({
-      exact_name: exactName,
+      exactName: exactName,
       name,
     });
   } else if (searchedByName === null && searchedByExactName !== null) {
@@ -54,7 +54,7 @@ export default async (name: string, exactName?: string) => {
     searchedByExactName.save();
     const teamInstance = await structureDb.Team.findOne({
       where: {
-        exact_name: exactName,
+        exactName: exactName,
       },
     });
     if (teamInstance !== null) {
@@ -62,7 +62,7 @@ export default async (name: string, exactName?: string) => {
       teamInstance.save();
     }
   } else if (searchedByExactName === null && searchedByName !== null) {
-    searchedByName.exact_name = exactName;
+    searchedByName.exactName = exactName;
     searchedByName.save();
     const teamInstance = await structureDb.Team.findOne({
       where: {
@@ -70,7 +70,7 @@ export default async (name: string, exactName?: string) => {
       },
     });
     if (teamInstance !== null) {
-      teamInstance.exact_name = exactName;
+      teamInstance.exactName = exactName;
       teamInstance.save();
     }
   }

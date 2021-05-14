@@ -28,7 +28,7 @@ export default async (
     }
     const instance = await db.Summoner.findOne({
       where: {
-        summoner_id: data.id,
+        summonerId: data.id,
       },
     });
     if (instance !== null) {
@@ -47,12 +47,12 @@ export default async (
         // 프로이름이 없을 때
         let teamId: null | number = null;
         if (teamName !== 'Progamer') {
-          // team테이블에서 teamName으로 exact_name 레코드 검색해서 id 반환
+          // team테이블에서 teamName으로 exactName 레코드 검색해서 id 반환
           const teamInstance = await db.Team.findOne({
             where: {
               [Op.or]: [
                 { name: { [Op.like]: teamName } },
-                { exact_name: { [Op.like]: teamName } },
+                { exactName: { [Op.like]: teamName } },
               ],
             },
           });
@@ -72,8 +72,8 @@ export default async (
         proId = (
           await db.Pro.create({
             name: proName,
-            image_name: imageName,
-            team_id: teamId,
+            imageName,
+            teamId,
           })
         ).id;
       } else {
@@ -83,8 +83,8 @@ export default async (
       // summoner에 insert
       db.Summoner.create({
         name: data.name,
-        summoner_id: data.id,
-        pro_id: proId,
+        summonerId: data.id,
+        proId,
       });
     }
   }

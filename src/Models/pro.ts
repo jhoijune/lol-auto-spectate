@@ -14,15 +14,17 @@ export default (sequelize: Sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      image_name: {
+      imageName: {
         type: DataTypes.STRING,
         allowNull: true,
         defaultValue: null,
+        field: 'image_name',
       },
-      team_id: {
+      teamId: {
         type: DataTypes.INTEGER,
         allowNull: true,
         defaultValue: null,
+        field: 'team_id',
       },
     },
     {

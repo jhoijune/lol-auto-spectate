@@ -35,8 +35,8 @@ export default async (db: DB) => {
       },
     })
       .then((instance) => {
-        if (instance !== null && instance.image_name !== imageName) {
-          instance.image_name = imageName;
+        if (instance !== null && instance.imageName !== imageName) {
+          instance.imageName = imageName;
           instance.save();
         } else if (instance === null) {
           fs.rm(join(imagePath, imageName));
@@ -63,15 +63,15 @@ export default async (db: DB) => {
   try {
     const proInstances = await db.Pro.findAll({
       where: {
-        image_name: { [Op.ne]: null },
+        imageName: { [Op.ne]: null },
       },
     });
     for (const proInstance of proInstances) {
       if (
-        proInstance.image_name !== null &&
-        !imageNameSet.has(proInstance.image_name)
+        proInstance.imageName !== null &&
+        !imageNameSet.has(proInstance.imageName)
       ) {
-        proInstance.image_name = null;
+        proInstance.imageName = null;
         proInstance.save();
       }
     }

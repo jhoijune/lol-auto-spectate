@@ -17,6 +17,9 @@ import {
   injectChatCommand,
   injectKeypressEvent,
   COMMAND_SAFE_SECTION,
+  checkStreaming,
+  stopStreaming,
+  decideStopStreaming,
 } from './Method';
 import { updateDBRegulary, updateDBEntirely, updateImageNames } from './DB';
 import Constants from './Constants';
@@ -33,15 +36,27 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
   if (!(await updateImageNames(db))) {
     return;
   }
-  if (!(await updateDBEntirely(db))) {
-    return;
-  }
+  await updateDBEntirely(db);
   injectKeypressEvent(data);
   injectChatCommand(data, obs);
   while (true) {
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
+          let lastFakerStreamingTime: number = Constants.NONE;
+          while (await checkStreaming('faker')) {
+            if (data.isStreaming) {
+              await stopStreaming(data, obs);
+            }
+            lastFakerStreamingTime = new Date().valueOf();
+            await updateDBRegulary(data, db);
+          }
+          while (
+            lastFakerStreamingTime !== Constants.NONE &&
+            new Date().valueOf() - lastFakerStreamingTime < 10 * 60 * 1000
+          ) {
+            await updateDBRegulary(data, db);
+          }
           await decidePlayGame(data, obs);
           if (data.spectateRank === Constants.NONE && !data.isStreaming) {
             await updateDBRegulary(data, db);

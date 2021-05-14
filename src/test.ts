@@ -32,9 +32,7 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
   if (!(await updateImageNames(db))) {
     return;
   }
-  if (!(await updateDBEntirely(db))) {
-    return;
-  }
+  await updateDBEntirely(db);
   injectKeypressEvent(data);
   injectChatCommand(data, obs);
   let isTitleChanged = false;

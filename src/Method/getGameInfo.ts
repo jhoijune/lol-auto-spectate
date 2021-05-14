@@ -37,16 +37,16 @@ export default async (data: Data, db: DB) => {
       if (summonerInstance !== null) {
         const proInstance = await db.Pro.findOne({
           where: {
-            id: summonerInstance.pro_id,
+            id: summonerInstance.proId,
           },
         });
         if (proInstance !== null) {
           // 프로와 매핑
           let teamAndName = proInstance.name;
-          if (proInstance.team_id !== null) {
+          if (proInstance.teamId !== null) {
             const teamInstance = await db.Team.findOne({
               where: {
-                id: proInstance.team_id,
+                id: proInstance.teamId,
               },
             });
             if (teamInstance !== null) {
@@ -59,14 +59,14 @@ export default async (data: Data, db: DB) => {
             index: playerIndex,
             name: teamAndName,
             imgSrc:
-              proInstance.image_name !== null
-                ? proInstance.image_name
+              proInstance.imageName !== null
+                ? proInstance.imageName
                 : undefined,
           };
           if (proInstance.name in Constants.PRIORITIES) {
             const championInstance = await db.Champion.findOne({
               where: {
-                kor_name: championName.trim(),
+                korName: championName.trim(),
               },
             });
             data.pq.add(Constants.PRIORITIES[proInstance.name as Name], {
@@ -74,7 +74,7 @@ export default async (data: Data, db: DB) => {
               playerIndex,
               championName:
                 championInstance !== null
-                  ? championInstance.eng_name
+                  ? championInstance.engName
                   : undefined,
             });
           }

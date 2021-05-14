@@ -13,15 +13,15 @@ export default async () => {
     const logs: string[] = [];
     const teamInstance = await Team.findOne({
       where: {
-        id: proInstance.team_id,
+        id: proInstance.teamId,
       },
     });
     if (teamInstance !== null) {
       logs.push(`Team Name : ${teamInstance.name}`);
-      logs.push(`Exact Team Name : ${teamInstance.exact_name}`);
+      logs.push(`Exact Team Name : ${teamInstance.exactName}`);
     } else {
       console.log(
-        `Team Id with [${proInstance.team_id}] does not exist, so please correct it`
+        `Team Id with [${proInstance.teamId}] does not exist, so please correct it`
       );
       return null;
     }
@@ -57,15 +57,15 @@ export default async () => {
         logs.push(`Summoner Name : ${summonerInstance.name}`);
         const proInstance = await Pro.findOne({
           where: {
-            id: summonerInstance.pro_id,
+            id: summonerInstance.proId,
           },
         });
         if (proInstance !== null) {
           logs.push(`Pro Name : ${proInstance.name}`);
-          if (proInstance.image_name !== null) {
-            logs.push(`Image Name : ${proInstance.image_name}`);
+          if (proInstance.imageName !== null) {
+            logs.push(`Image Name : ${proInstance.imageName}`);
           }
-          if (proInstance.team_id !== null) {
+          if (proInstance.teamId !== null) {
             const teamLogs = await createTeamLog(proInstance);
             if (teamLogs === null) {
               return;
@@ -75,7 +75,7 @@ export default async () => {
           logs.push('');
         } else {
           console.log(
-            `Pro Id with [${summonerInstance.pro_id}] does not exist, so please correct it`
+            `Pro Id with [${summonerInstance.proId}] does not exist, so please correct it`
           );
           return;
         }
@@ -90,10 +90,10 @@ export default async () => {
       });
       for (const proInstance of proInstances) {
         logs.push(`Pro Name : ${proInstance.name}`);
-        if (proInstance.image_name !== null) {
-          logs.push(`Image Name : ${proInstance.image_name}`);
+        if (proInstance.imageName !== null) {
+          logs.push(`Image Name : ${proInstance.imageName}`);
         }
-        if (proInstance.team_id !== null) {
+        if (proInstance.teamId !== null) {
           const teamLogs = await createTeamLog(proInstance);
           if (teamLogs === null) {
             return;
@@ -102,7 +102,7 @@ export default async () => {
         }
         const summonerInstances = await Summoner.findAll({
           where: {
-            pro_id: proInstance.id,
+            proId: proInstance.id,
           },
         });
         for (const summonerInstance of summonerInstances) {
@@ -115,27 +115,27 @@ export default async () => {
         where: {
           [Op.or]: [
             { name: { [Op.like]: `%${name}%` } },
-            { exact_name: { [Op.like]: `%${name}%` } },
+            { exactName: { [Op.like]: `%${name}%` } },
           ],
         },
       });
       for (const teamInstance of teamInstances) {
         logs.push(`Team Name : ${teamInstance.name}`);
-        logs.push(`Exact Team Name : ${teamInstance.exact_name}`);
+        logs.push(`Exact Team Name : ${teamInstance.exactName}`);
         const proInstances = await Pro.findAll({
           where: {
-            team_id: teamInstance.id,
+            teamId: teamInstance.id,
           },
         });
         for (const proInstance of proInstances) {
           logs.push('');
           logs.push(`Pro Name : ${proInstance.name}`);
-          if (proInstance.image_name !== null) {
-            logs.push(`Image Name : ${proInstance.image_name}`);
+          if (proInstance.imageName !== null) {
+            logs.push(`Image Name : ${proInstance.imageName}`);
           }
           const summonerInstances = await Summoner.findAll({
             where: {
-              pro_id: proInstance.id,
+              proId: proInstance.id,
             },
           });
           for (const summonerInstance of summonerInstances) {

@@ -10,15 +10,17 @@ export default (sequelize: Sequelize) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      kor_name: {
+      korName: {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
+        field: 'kor_name',
       },
-      eng_name: {
+      engName: {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
+        field: 'eng_name',
       },
     },
     {
