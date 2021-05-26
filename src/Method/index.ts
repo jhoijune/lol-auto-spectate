@@ -31,6 +31,11 @@ import COMMAND_SAFE_SECTION from './COMMAND_SAFE_SECTION';
 import searchSummonerName from './searchSummonerName';
 import searchSummonerID from './searchSummonerID';
 import createImageMap from './createImageMap';
+import connectOBS from './connectOBS';
+import turnOffOBS from './turnOffOBS';
+import turnOnOBS from './turnOnOBS';
+import isStreaming from './isStreaming';
+import isOBSRunning from './isOBSRunning';
 
 export default {
   collectProImage,
@@ -66,6 +71,10 @@ export default {
   searchSummonerName,
   searchSummonerID,
   createImageMap,
+  connectOBS,
+  turnOffOBS,
+  isStreaming,
+  isOBSRunning,
 };
 export {
   collectProImage,
@@ -101,4 +110,8 @@ export {
   searchSummonerName,
   searchSummonerID,
   createImageMap,
+  connectOBS,
+  turnOnOBS,
+  isStreaming,
+  isOBSRunning,
 };

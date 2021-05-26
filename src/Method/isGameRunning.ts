@@ -25,7 +25,6 @@ export default async (
     }
   }
   if (!data.isSpectating) {
-    data.exSpectateRank = data.spectateRank;
     data.spectateRank = Constants.NONE;
     stopSpectate(gameProcess);
     return false;

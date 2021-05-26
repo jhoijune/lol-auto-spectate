@@ -15,6 +15,6 @@ export default async (data: Data, obs: OBSWebSocket) => {
   ) {
     orderStopSpectate(data);
     data.spectateRank = Constants.NONE;
-    await stopStreaming(data, obs);
+    await stopStreaming(obs);
   }
 };

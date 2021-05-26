@@ -1,14 +1,11 @@
 import OBSWebSocket from 'obs-websocket-js';
-import { Data } from '../types';
+import turnOffOBS from './turnOffOBS';
 
-export default async (data: Data, obs: OBSWebSocket) => {
+export default async (obs: OBSWebSocket) => {
   try {
-    await obs.send('SetCurrentScene', {
-      'scene-name': 'Waiting',
-    });
     await obs.send('StopStreaming');
     console.log('Stop streaming');
-    data.isStreaming = false;
+    turnOffOBS();
   } catch (error) {
     console.error(error);
   }

@@ -29,6 +29,12 @@ export default class {
 
   static OBS_ADDRESS = 'localhost:4444' as const;
 
+  static OBS_SUCCESS = 0 as const;
+
+  static OBS_FAIL = 1 as const;
+
+  static OBS_ERROR = 2 as const;
+
   static RIOT_API_WAIT_TIME = 2 * 60 * 10;
 
   static RIOT_API_LIMIT_TIME = 2 * 60 * 1000;
@@ -146,16 +152,16 @@ export default class {
       'Lp2if0FZhWCVmVCLNIl7biKcydzFQOOBGWPCT7Ru17MoHH0',
       'Rpmv4q-p9jw_XywfvtMfaD9YAeR0OvGgQHSGs7N0Ugt721E',
       'WSD8-_fi6vmR6lRBIKg2mLI5rvnKc5FalGBz5ynNUzVkRi8',
-      'hOTwMMHiUoE7uB0s3pJmfeDVOYou0m2WDrjV7kHe4uNP0UE',
-      'foe5GUqR2nD1RvUVk7srD4Cqh-FkPosDDiGpWn7D8nMYw0s',
-      'vc3SXcYKhVhTrAt8Xgg0-rOv9vvY6ilaBERlegto-BrmPTk',
-      '8IxiySn4-R0oi_0xXGgbsfmma-PXJvpW94WIaKG1Oy5wEzE',
-      '_KsnqhF5237SndycuCOJ1oHNR1Cutw1g-rx4VYnZC5JVVF1_VCvD5vWtKw',
       '7i-1vJWjO6a_Z-UfsWP1veTiPY0V3TC6CzYlaxbAT6bk5Yg',
       'sCj2TgopepW0VQKGVfV9zP9YdL2KVRAzCjKnyi2R0FPc4z4',
       'wTNxvyFMyQ3QkZ1kqbvMt25Fc8jOyFpnDhk5BpfQpLmKkJk',
       'X-cmR6H-54lFtI-WWRmWVh-15etQ5D9Yofrn5ep3jjr0KnE',
       '05IoegFtxkYL2o69GUzMNQzETWimOsUZ3qykAc8BnJI7x1o',
+      'hOTwMMHiUoE7uB0s3pJmfeDVOYou0m2WDrjV7kHe4uNP0UE',
+      'foe5GUqR2nD1RvUVk7srD4Cqh-FkPosDDiGpWn7D8nMYw0s',
+      'vc3SXcYKhVhTrAt8Xgg0-rOv9vvY6ilaBERlegto-BrmPTk',
+      '8IxiySn4-R0oi_0xXGgbsfmma-PXJvpW94WIaKG1Oy5wEzE',
+      '_KsnqhF5237SndycuCOJ1oHNR1Cutw1g-rx4VYnZC5JVVF1_VCvD5vWtKw',
       'IXtLthCZ0Qw_OgCkkCVs15krMmJpPYmZ6NweYlKrPaAW5LXlcLNsj5k4dg',
       'DoYpR6ll4MgLyibG6ww1s9IPaw5defOu695gPTnnYjC0LQs',
       '18E3LyMMEsnbmpGC7q1hMyLmPHUAYN8uAFnZ1VPgCgXK5X9j49MO4zaBuQ',

@@ -7,5 +7,4 @@ export default (data: Data) => {
     data.lastHighRankSpectateTime = new Date().valueOf();
   }
   data.lastSpectateTime = new Date().valueOf();
-  data.exSpectateRank = data.spectateRank;
 };

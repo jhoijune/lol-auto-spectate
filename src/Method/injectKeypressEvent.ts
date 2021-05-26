@@ -5,7 +5,7 @@ export default (data: Data) => {
   process.stdin.resume();
   process.stdin.setEncoding('utf8');
   process.stdin.on('data', (key) => {
-    //FIXME: 한번 게임켜지면 작동안하는 버그 있음
+    //FIXME: 한번 게임켜지면 가끔식 작동안하는 버그 있음
     const sequence = key.toString();
     if (sequence === '\u0003') {
       // ctrl + c

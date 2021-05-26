@@ -301,10 +301,8 @@ export type DB = {
 
 export type Data = {
   isSpectating: boolean;
-  isStreaming: boolean;
   isPaused: boolean;
   spectateRank: number;
-  exSpectateRank: number;
   encryptionKey: string;
   gameId: number;
   peopleCount: number;
@@ -321,4 +319,12 @@ export type Data = {
   gameWaitLimit: number;
   spectateWaitLimit: number;
   gameProcess?: ChildProcessWithoutNullStreams;
+};
+
+export type ValidateResponse = {
+  client_id: string;
+  login: string;
+  scopes: string[];
+  user_id: number;
+  expires_in: number;
 };

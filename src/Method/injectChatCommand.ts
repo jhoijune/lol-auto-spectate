@@ -9,8 +9,7 @@ import setUpSpectateIngameInitialSetting from './setUpSpectateIngameInitialSetti
 import sleep from './sleep';
 import stopSpectate from './stopSpectate';
 import orderStopSpectate from './orderStopSpectate';
-
-// FIXME: 버그가 백퍼 있다
+import isStreaming from './isStreaming';
 
 export default (data: Data, obs: OBSWebSocket) => {
   const wrapper = async function (func: Function) {
@@ -39,8 +38,8 @@ export default (data: Data, obs: OBSWebSocket) => {
         });
       } else if (message === '!stopstreaming') {
         await wrapper(async () => {
-          if (data.isStreaming) {
-            await stopStreaming(data, obs);
+          if (await isStreaming(obs)) {
+            await stopStreaming(obs);
           }
           if (data.isSpectating) {
             orderStopSpectate(data);
@@ -49,8 +48,8 @@ export default (data: Data, obs: OBSWebSocket) => {
         });
       } else if (message === '!stopprogram') {
         await wrapper(async () => {
-          if (data.isStreaming) {
-            await stopStreaming(data, obs);
+          if (await isStreaming(obs)) {
+            await stopStreaming(obs);
           }
           if (data.isSpectating) {
             stopSpectate(data.gameProcess!);
@@ -59,8 +58,8 @@ export default (data: Data, obs: OBSWebSocket) => {
         });
       } else if (message === '!pauseprogram') {
         await wrapper(async () => {
-          if (data.isStreaming) {
-            await stopStreaming(data, obs);
+          if (await isStreaming(obs)) {
+            await stopStreaming(obs);
           }
           if (data.isSpectating) {
             orderStopSpectate(data);

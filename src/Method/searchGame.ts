@@ -1,10 +1,10 @@
 import sleep from './sleep';
-import { CurrentGameInfo, Data } from '../types';
+import { CurrentGameInfo, Data, DB } from '../types';
 import Constants from '../Constants';
 import axios from 'axios';
 import printDate from './printDate';
 
-export default async (data: Data, rankLimit: number) => {
+export default async (data: Data, db: DB, rankLimit: number) => {
   const { RIOT_API_KEY } = process.env;
   for (let rank = 0; rank <= rankLimit && !data.isPaused; rank++) {
     const ids = data.idPriority[rank];
@@ -37,7 +37,21 @@ export default async (data: Data, rankLimit: number) => {
             gameQueueConfigId === Constants.SOLO_RANK_ID)
         ) {
           if (gameLength <= 0) {
+            if (data.isSpectating) {
+              index += 1;
+            }
             continue;
+          }
+          for (const { summonerName, summonerId } of participants) {
+            const instance = await db.Summoner.findOne({
+              where: {
+                summonerId,
+              },
+            });
+            if (instance !== null && instance.name !== summonerName) {
+              instance.name = summonerName;
+              await instance.save();
+            }
           }
           console.log('Match was found');
           return {

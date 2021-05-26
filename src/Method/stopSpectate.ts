@@ -7,8 +7,6 @@ export default (gameProcess: ChildProcessWithoutNullStreams) => {
   if (osType === 'Darwin' && !gameProcess.isUnusualExit) {
     process.kill(-gameProcess.pid);
     console.log('Stop spectate');
-  } else if (osType === 'Darwin' && gameProcess.isUnusualExit) {
-    console.log(process.exitCode); // 자체적으로 꺼버렸을 때 코드
   } else if (osType === 'Windows_NT') {
     exec('taskkill /f /im "League of Legends.exe"');
     console.log('Stop spectate');

@@ -19,19 +19,10 @@ export default async (data: Data, obs: OBSWebSocket) => {
   ) {
     isStopStreaming = true;
   } else if (await checkStreaming(...Constants.PRO_STREAMING_IDS)) {
-    if (data.exSpectateRank !== Constants.FAKER_RANK) {
-      isStopStreaming = true;
-    } else if (
-      new Date().valueOf() - data.lastSpectateTime >
-      data.noOnePlayWaitLimit
-    ) {
-      isStopStreaming = true;
-    } else {
-      data.spectateRank = Constants.NONE;
-    }
+    isStopStreaming = true;
   }
   if (isStopStreaming) {
-    await stopStreaming(data, obs);
+    await stopStreaming(obs);
     data.spectateRank = Constants.NONE;
   }
 };

@@ -19,17 +19,26 @@ import {
   COMMAND_SAFE_SECTION,
   checkStreaming,
   stopStreaming,
-  decideStopStreaming,
+  connectOBS,
+  isStreaming,
+  turnOnOBS,
+  isOBSRunning,
 } from './Method';
+import connectDB from './Models';
 import { updateDBRegulary, updateDBEntirely, updateImageNames } from './DB';
 import Constants from './Constants';
 
-import { AuxData, Config, DB } from './types';
+import { AuxData, Config } from './types';
 
 //import './Method/logError';
 
-export default async (config: Config, obs: OBSWebSocket, db: DB) => {
-  const data = await createData(config, obs, db);
+export default async (config: Config) => {
+  const db = await connectDB();
+  const obs = new OBSWebSocket();
+  if ((await connectOBS(obs)) === Constants.OBS_ERROR) {
+    return;
+  }
+  const data = await createData(config, db);
   if (data === null) {
     return;
   }
@@ -43,23 +52,36 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
+          await decidePlayGame(data, obs, db);
           let lastFakerStreamingTime: number = Constants.NONE;
           while (await checkStreaming('faker')) {
-            if (data.isStreaming) {
-              await stopStreaming(data, obs);
+            if (await isStreaming(obs)) {
+              await stopStreaming(obs);
             }
             lastFakerStreamingTime = new Date().valueOf();
             await updateDBRegulary(data, db);
           }
-          while (
-            lastFakerStreamingTime !== Constants.NONE &&
-            new Date().valueOf() - lastFakerStreamingTime < 10 * 60 * 1000
+          if (lastFakerStreamingTime !== Constants.NONE) {
+            while (
+              new Date().valueOf() - lastFakerStreamingTime <
+              10 * 60 * 1000
+            ) {
+              await updateDBRegulary(data, db);
+            }
+            data.spectateRank = Constants.NONE;
+          } else if (
+            data.spectateRank === Constants.NONE &&
+            !(await isStreaming(obs))
           ) {
             await updateDBRegulary(data, db);
           }
-          await decidePlayGame(data, obs);
-          if (data.spectateRank === Constants.NONE && !data.isStreaming) {
-            await updateDBRegulary(data, db);
+          if (
+            data.isPaused ||
+            (!(await isStreaming(obs)) &&
+              data.spectateRank > Constants.FAKER_RANK)
+          ) {
+            // command 보정용
+            data.spectateRank = Constants.NONE;
           }
         } else {
           await sleep(10 * 1000);
@@ -70,6 +92,21 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
       data.isPermitted = await getPermission();
       if (!data.isPermitted) {
         return;
+      }
+    }
+    try {
+      await obs.send('GetStreamingStatus');
+    } catch {
+      if (!isOBSRunning()) {
+        turnOnOBS();
+      }
+      let obsStatus = await connectOBS(obs);
+      if (obsStatus === Constants.OBS_ERROR) {
+        return;
+      }
+      while (obsStatus === Constants.OBS_FAIL) {
+        await sleep(1000);
+        obsStatus = await connectOBS(obs);
       }
     }
     const gameProcess = startSpectate(data);
@@ -83,8 +120,8 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
       fixCount: 0,
     };
     const streamingTitle = makeStreamingTitle(data, auxData);
-    if (!data.isStreaming) {
-      await startStreaming(data, obs);
+    if (!(await isStreaming(obs))) {
+      await startStreaming(obs);
     }
     await switchLOLScene(data, obs);
     await modifyChannelInfo(streamingTitle);
@@ -93,19 +130,21 @@ export default async (config: Config, obs: OBSWebSocket, db: DB) => {
       while (data.isSpectating) {
         await sleep(1000);
         await determineGameOver(data, auxData);
-        await decideGameIntercept(data);
+        await decideGameIntercept(data, db);
         await decideStopGameAndStreaming(data, obs);
       }
     });
     if (data.spectateRank === Constants.NONE) {
       await sleep(10 * 1000);
     }
-    await obs.send('SetCurrentScene', {
-      'scene-name': 'Waiting',
-    });
-    await sleep(1000);
+    try {
+      await obs.send('SetCurrentScene', {
+        'scene-name': 'Waiting',
+      });
+      await sleep(1000);
+    } catch {}
     stopSpectate(gameProcess);
-    if (data.spectateRank === Constants.NONE && data.isStreaming) {
+    if (data.spectateRank === Constants.NONE && (await isStreaming(obs))) {
       await modifyChannelInfo('Waiting to spectate');
     }
   }

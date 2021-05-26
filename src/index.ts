@@ -2,7 +2,6 @@ import { join } from 'path';
 import inquirer from 'inquirer';
 import { config } from 'dotenv';
 import { existsSync } from 'fs';
-import OBSWebSocket from 'obs-websocket-js';
 
 if (existsSync(join(__dirname, 'assets'))) {
   process.env.ASSET_PATH = join(__dirname, 'assets');
@@ -15,35 +14,8 @@ config();
 import app from './app';
 import { Config } from './types';
 import test from './test';
-import Constants from './Constants';
-import connectDB from './Models';
 
 (async () => {
-  const { ASSET_PATH, OBS_PASSWORD } = process.env;
-  const obs = new OBSWebSocket();
-  try {
-    await obs.connect({
-      address: Constants.OBS_ADDRESS,
-      password: OBS_PASSWORD,
-    });
-  } catch (error) {
-    if (error.error === 'Connection error.') {
-      console.log('Turn on OBS!!!!');
-    } else if (error.error === 'Authentication Failed.') {
-      console.log('password is wrong');
-    } else {
-      console.error(error);
-    }
-    return;
-  }
-  const dbPath =
-    (ASSET_PATH && join(ASSET_PATH, 'db.sqlite3')) ||
-    join(__dirname, '..', 'assets', 'db.sqlite3');
-  if (!existsSync(dbPath)) {
-    console.log('Initialize the database');
-    return;
-  }
-  const db = await connectDB();
   const config = await inquirer.prompt<Config>([
     {
       type: 'list',
@@ -80,8 +52,8 @@ import connectDB from './Models';
     },
   ]);
   if (config.type === 'test') {
-    test(config, obs, db);
+    test(config);
   } else {
-    app(config, obs, db);
+    app(config);
   }
 })();
