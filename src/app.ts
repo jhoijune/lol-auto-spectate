@@ -134,9 +134,6 @@ export default async (config: Config) => {
         await decideStopGameAndStreaming(data, obs);
       }
     });
-    if (data.spectateRank === Constants.NONE) {
-      await sleep(10 * 1000);
-    }
     try {
       await obs.send('SetCurrentScene', {
         'scene-name': 'Waiting',

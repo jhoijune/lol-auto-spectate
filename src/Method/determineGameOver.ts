@@ -1,3 +1,4 @@
+import { sleep } from '.';
 import Constants from '../Constants';
 import { AuxData, Data } from '../types';
 import fixSpectateView from './fixSpectateView';
@@ -18,6 +19,9 @@ export default async (data: Data, auxData: AuxData) => {
       }
       if (auxData.exGameTime === gameTime && gameTime > 0) {
         // 게임 종료
+        console.log('Wait 20 seconds for normal shutdown');
+        await sleep(20 * 1000);
+        console.log('Normal Shutdown');
         orderStopSpectate(data);
         data.spectateRank = Constants.NONE;
       }

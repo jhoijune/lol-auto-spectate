@@ -7,7 +7,7 @@ export default async (
   db: DB,
   summonerName: string,
   proName: string,
-  teamName: string,
+  teamName?: string,
   imageMap?: Map<string, string>
 ) => {
   const instance = await db.Summoner.findOne({
@@ -46,7 +46,7 @@ export default async (
       if (proInstance === null) {
         // 프로이름이 없을 때
         let teamId: null | number = null;
-        if (teamName !== 'Progamer') {
+        if (teamName && teamName !== 'Progamer') {
           // team테이블에서 teamName으로 exactName 레코드 검색해서 id 반환
           const teamInstance = await db.Team.findOne({
             where: {

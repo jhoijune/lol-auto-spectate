@@ -6,7 +6,6 @@ import updateImageNames from './updateImageNames';
 import updateProTable from './updateProTable';
 import updateTeamTable from './updateTeamTable';
 import updateTeamTableEntirely from './updateTeamTableEntirely';
-import searchDB from './searchDB';
 
 export default {
   createDB,
@@ -17,7 +16,6 @@ export default {
   updateProTable,
   updateTeamTable,
   updateTeamTableEntirely,
-  searchDB,
 };
 
 export {
@@ -29,5 +27,4 @@ export {
   updateProTable,
   updateTeamTable,
   updateTeamTableEntirely,
-  searchDB,
 };

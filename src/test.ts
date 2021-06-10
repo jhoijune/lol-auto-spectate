@@ -50,11 +50,6 @@ export default async (config: Config) => {
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
-          /*
-          const rankLimit = (await isStreaming(obs))
-            ? Constants.OTHERS_RANK
-            : Constants.GROUP2_RANK;
-            */
           const rankLimit = Constants.OTHERS_RANK;
           const matchInfo = await searchGame(data, db, rankLimit);
           if (matchInfo === null) {
@@ -104,11 +99,10 @@ export default async (config: Config) => {
       exGameTime: Constants.NONE,
       fixCount: 0,
     };
-    const streamingTitle = makeStreamingTitle(data, auxData);
-
+    makeStreamingTitle(data, auxData);
     /*
     if (!(await isStreaming(obs))) {
-      await startStreaming(data, obs);
+      await startStreaming(obs);
     }
     */
     await switchLOLScene(data, obs);
@@ -119,17 +113,13 @@ export default async (config: Config) => {
       isTitleChanged = true;
     }
     */
-    console.log(streamingTitle);
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.isSpectating) {
         await sleep(1000);
         await determineGameOver(data, auxData);
-        await decideGameIntercept(data, db);
+        //await decideGameIntercept(data, db);
       }
     });
-    if (data.spectateRank === Constants.NONE) {
-      await sleep(10 * 1000);
-    }
     try {
       await obs.send('SetCurrentScene', {
         'scene-name': 'Waiting',

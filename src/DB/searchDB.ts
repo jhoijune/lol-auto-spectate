@@ -6,9 +6,8 @@ import { ProInstance } from '../types';
 
 type Category = 'Summoner name' | 'Pro name' | 'Team name';
 
-export default async () => {
+(async () => {
   const { Summoner, Pro, Team } = await connectDB();
-
   const createTeamLog = async function (proInstance: ProInstance) {
     const logs: string[] = [];
     const teamInstance = await Team.findOne({
@@ -150,4 +149,4 @@ export default async () => {
     console.log();
     console.log(logs.join('\n'));
   }
-};
+})();

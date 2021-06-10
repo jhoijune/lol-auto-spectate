@@ -6,6 +6,7 @@ import { sleep } from '.';
 import { DB } from '../types';
 import { updateDB } from '../DB';
 import createImageMap from './createImageMap';
+import { type } from 'os';
 
 export default async (db: DB) => {
   const imageMap = await createImageMap();
@@ -15,7 +16,10 @@ export default async (db: DB) => {
   const startUrl = 'https://www.trackingthepros.com/players/';
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: '/Applications/Chromium.app/Contents/MacOS/Chromium',
+    executablePath:
+      type() === 'Darwin'
+        ? '/Applications/Chromium.app/Contents/MacOS/Chromium'
+        : undefined,
   });
   const page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
