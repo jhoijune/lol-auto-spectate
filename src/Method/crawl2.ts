@@ -5,8 +5,11 @@ import { DB } from '../types';
 import { updateDB } from '../DB';
 import { type } from 'os';
 
+const exceptionList = ['Creme', 'Irma', 'Xiaxu', 'neny', 'shiye'];
+
 export default async (db: DB) => {
   const URL = 'https://www.scoregg.com/big-data/ranking';
+  const exceptionSet = new Set(exceptionList);
   const browser = await puppeteer.launch({
     headless: true,
     executablePath:
@@ -40,7 +43,7 @@ export default async (db: DB) => {
   rows.each((index, row) => {
     const tds = $(row).find('td');
     const proName = $(tds[4]).text().trim();
-    if (proName.length !== 0) {
+    if (proName.length !== 0 && !exceptionSet.has(proName)) {
       const summonerName = $(tds[1]).text().trim();
       entries.push({ summonerName, proName });
     }

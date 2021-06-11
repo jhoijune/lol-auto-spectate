@@ -7,8 +7,7 @@ export default async (
   db: DB,
   summonerName: string,
   proName: string,
-  teamName?: string,
-  imageMap?: Map<string, string>
+  teamName?: string
 ) => {
   const instance = await db.Summoner.findOne({
     where: {
@@ -63,16 +62,11 @@ export default async (
             teamId = teamInstance.id;
           }
         }
-        // image폴터에 pro 이름이 있는지 확인
-        let imageName: null | string = null;
-        if (imageMap && imageMap.has(proName.toLowerCase())) {
-          imageName = imageMap.get(proName.toLowerCase())!;
-        }
         // pro 테이블에 insert한뒤 id반환
         proId = (
           await db.Pro.create({
             name: proName,
-            imageName,
+            imageName: null,
             teamId,
           })
         ).id;

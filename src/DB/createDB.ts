@@ -21,10 +21,6 @@ export default async () => {
     join(__dirname, '..', '..', 'assets', 'db.sqlite3');
   await fs.writeFile(dbPath, buffers);
   const db = await connectDB();
-  const imageMap = await createImageMap();
-  if (imageMap === null) {
-    return;
-  }
   for (const teamAndName in Constants.ID) {
     if (!(teamAndName in Constants.ID)) continue;
     const [teamName, proName] = teamAndName.split(' ');
@@ -40,7 +36,7 @@ export default async () => {
           }
         }
       }
-      if (!(await updateDB(db, data.name, proName, teamName, imageMap))) {
+      if (!(await updateDB(db, data.name, proName, teamName))) {
         return;
       }
     }
