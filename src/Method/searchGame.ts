@@ -3,6 +3,7 @@ import { CurrentGameInfo, Data, DB } from '../types';
 import Constants from '../Constants';
 import axios from 'axios';
 import printDate from './printDate';
+import getPermission from './getPermission';
 
 export default async (data: Data, db: DB, rankLimit: number) => {
   const { RIOT_API_KEY } = process.env;
@@ -36,6 +37,12 @@ export default async (data: Data, db: DB, rankLimit: number) => {
           (mapId === Constants.SUMMONERS_RIFT_ID &&
             gameQueueConfigId === Constants.SOLO_RANK_ID)
         ) {
+          if (!data.isPermitted) {
+            data.isPermitted = await getPermission();
+            if (!data.isPermitted) {
+              return null;
+            }
+          }
           if (gameLength <= 0) {
             if (data.isSpectating) {
               index += 1;

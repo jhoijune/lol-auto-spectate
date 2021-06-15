@@ -105,6 +105,7 @@ export default async (config: Config) => {
       await startStreaming(obs);
     }
     */
+
     await switchLOLScene(data, obs);
     /*
     if (!isTitleChanged) {
@@ -117,7 +118,7 @@ export default async (config: Config) => {
       while (data.isSpectating) {
         await sleep(1000);
         await determineGameOver(data, auxData);
-        //await decideGameIntercept(data, db);
+        await decideGameIntercept(data, db);
       }
     });
     try {

@@ -5,14 +5,9 @@ import printDate from './printDate';
 import { sleep } from '.';
 import { DB } from '../types';
 import { updateDB } from '../DB';
-import createImageMap from './createImageMap';
 import { type } from 'os';
 
 export default async (db: DB) => {
-  const imageMap = await createImageMap();
-  if (imageMap === null) {
-    return;
-  }
   const startUrl = 'https://www.trackingthepros.com/players/';
   const browser = await puppeteer.launch({
     headless: true,
@@ -98,7 +93,7 @@ export default async (db: DB) => {
       }
     });
     for (const { summonerName, proName, teamName } of entries) {
-      if (!(await updateDB(db, summonerName, proName, teamName, imageMap))) {
+      if (!(await updateDB(db, summonerName, proName, teamName))) {
         console.log('update db failed');
         return;
       }

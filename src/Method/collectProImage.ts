@@ -62,6 +62,8 @@ const exceptionList = [
   'tf blade',
   'veritas',
   'vins',
+  'crown',
+  'cube (kim chang-seong)',
 ];
 
 export default async (db: DB) => {

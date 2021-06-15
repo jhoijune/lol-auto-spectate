@@ -23,6 +23,7 @@ export default (data: Data) => {
         console.log('Current mode requires permission');
         console.log(`data.isPermitted : ${data.isPermitted}`);
       } else if (sequence === '\u0014') {
+        // ctrl + t
         console.log(
           `Current mode is ${
             data.isPermitted ? 'without permission' : 'permission'

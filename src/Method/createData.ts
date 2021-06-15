@@ -29,7 +29,7 @@ export default async (config: Config, db: DB): Promise<null | Data> => {
     isSpectating: false,
     isCommandAvailable: false,
     isPaused: false,
-    isPermitted: config.type === 'without permission',
+    isPermitted: config.type !== 'permission',
     spectateRank: Constants.NONE, // -1: none 0: faker 1: 1군 2: 2군 3: 프로 챌린저
     encryptionKey: '',
     gameId: Constants.NONE,
@@ -45,7 +45,6 @@ export default async (config: Config, db: DB): Promise<null | Data> => {
       playerIndex: number;
       championName?: string;
     }>(true),
-    resolution: config.resolution,
     noOnePlayWaitLimit: config.noOnePlayWaitLimitMinute * 60 * 1000,
     gameWaitLimit: config.gameWaitLimitMinute * 60 * 1000,
     spectateWaitLimit: config.spectateWaitLimitMinute * 60 * 1000,

@@ -1,0 +1,109 @@
+@font-face {
+  font-family: 'Inter';
+  src: url(./Inter.ttf);
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans';
+  src: url(./SpoqaHanSansNeo-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url(./Anton-Regular.ttf);
+}
+
+.blue-team {
+  position: fixed;
+}
+
+.red-team {
+  position: fixed;
+  text-align: right;
+  right: 0px;
+}
+
+p {
+  all: unset;
+  min-width: 112.5px;
+  font-size: 24px;
+  display: inline-block;
+  color: white;
+  background-color: black;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 3.75px 5px;
+}
+
+.top {
+  top: 121px;
+}
+
+.jungle {
+  top: 224px;
+}
+
+.mid {
+  top: 327px;
+}
+
+.adc {
+  top: 430px;
+}
+
+.supporter {
+  top: 533px;
+}
+
+.image-container {
+  position: absolute;
+  height: 67px;
+  top: 36px;
+}
+
+img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.blue-team .image-container {
+  left: 76px;
+}
+
+.red-team .image-container {
+  right: 76px;
+}
+
+#waiting {
+  background-color: black;
+  width: 1920px;
+  height: 1080px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#waiting div {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#waiting p {
+  all: unset;
+  display: block;
+  color: #c1c1c1;
+  font-size: 75px;
+  font-family: 'Inter', 'Spoqa Han Sans', 'Segoe UI', Sans-Serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+}
+
+#waiting h1 {
+  all: unset;
+  display: block;
+  color: #e2012d;
+  font-size: 200px;
+  font-family: 'Inter', 'Spoqa Han Sans', 'Segoe UI', Sans-Serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-weight: bold;
+}

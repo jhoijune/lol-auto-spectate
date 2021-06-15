@@ -42,12 +42,12 @@ export default async (name: string, exactName?: string) => {
   });
   if (searchedByName === null && searchedByExactName === null) {
     db.Team.create({
-      exactName: exactName,
       name,
+      exactName: exactName,
     });
     structureDb.Team.create({
-      exactName: exactName,
       name,
+      exactName: exactName,
     });
   } else if (searchedByName === null && searchedByExactName !== null) {
     searchedByExactName.name = name;

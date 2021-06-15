@@ -2,16 +2,12 @@ import axios from 'axios';
 import cheerio from 'cheerio';
 
 import Constants from '../Constants';
-import { printDate, createImageMap } from '../Method';
+import { printDate } from '../Method';
 import updateDB from './updateDB';
 import { DB } from '../types';
 
 export default async (db: DB) => {
   // 정상적으로 완료되었을시 true 반환
-  const imageMap = await createImageMap();
-  if (imageMap === null) {
-    return false;
-  }
   let html: string;
   try {
     console.log(`Starting GET ${Constants.PRO_LIST_URL} ${printDate()}`);
@@ -44,7 +40,7 @@ export default async (db: DB) => {
     });
   });
   for (const { summonerName, proName, teamName } of entries) {
-    if (!(await updateDB(db, summonerName, proName, teamName, imageMap))) {
+    if (!(await updateDB(db, summonerName, proName, teamName))) {
       console.log('update db failed');
       return false;
     }

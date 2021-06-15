@@ -41,7 +41,6 @@ export type Config = {
   gameWaitLimitMinute: number;
   noOnePlayWaitLimitMinute: number;
   spectateWaitLimitMinute: number;
-  resolution: 720 | 1080;
 };
 
 export type SummonerDTO = {
@@ -312,7 +311,6 @@ export type Data = {
   pq: Heap<{ name: string; playerIndex: number; championName?: string }>;
   idPriority: string[][];
   currSummonerID: number;
-  resolution: 720 | 1080;
   isPermitted: boolean;
   isCommandAvailable: boolean;
   noOnePlayWaitLimit: number;

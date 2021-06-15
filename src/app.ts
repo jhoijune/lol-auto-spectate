@@ -13,7 +13,6 @@ import {
   decidePlayGame,
   decideStopGameAndStreaming,
   isGameRunning,
-  getPermission,
   injectChatCommand,
   injectKeypressEvent,
   COMMAND_SAFE_SECTION,
@@ -52,7 +51,9 @@ export default async (config: Config) => {
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
-          await decidePlayGame(data, obs, db);
+          if (!(await decidePlayGame(data, obs, db))) {
+            return;
+          }
           let lastFakerStreamingTime: number = Constants.NONE;
           while (await checkStreaming('faker')) {
             if (await isStreaming(obs)) {
@@ -88,12 +89,6 @@ export default async (config: Config) => {
         }
       }
     });
-    if (!data.isPermitted) {
-      data.isPermitted = await getPermission();
-      if (!data.isPermitted) {
-        return;
-      }
-    }
     try {
       await obs.send('GetStreamingStatus');
     } catch {

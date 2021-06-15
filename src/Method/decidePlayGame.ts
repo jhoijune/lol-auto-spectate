@@ -19,10 +19,11 @@ export default async (data: Data, obs: OBSWebSocket, db: DB) => {
     if (await isStreaming(obs)) {
       await stopStreaming(obs);
     }
-    return;
+    return false;
   }
   Object.assign(data, matchInfo);
   if ((await isStreaming(obs)) && data.spectateRank !== Constants.FAKER_RANK) {
     await decideStopStreaming(data, obs);
   }
+  return true;
 };

@@ -5,7 +5,7 @@ import { DB } from '../types';
 import { updateDB } from '../DB';
 import { type } from 'os';
 
-const exceptionList = ['Creme', 'Irma', 'Xiaxu', 'neny', 'shiye'];
+const exceptionList = ['Creme', 'irma', 'Xiaoxu', 'neny', 'shiye', 'S1xu'];
 
 export default async (db: DB) => {
   const URL = 'https://www.scoregg.com/big-data/ranking';

@@ -145,11 +145,13 @@ export default class {
       'wFBeLnyc-WaO1otfgEohXHolKlnvjtOkCPY2EKxJMa_nRDs',
       'dWjF04z47wN95VD8qANyUW3YDRsItPW5kPM_4t0apC-aOTo',
     ],
-    'T1C Berserker': ['-ZTgOZPToM8AlQoaU8jFCvXfmAaf7_GrMuGnuW5ZpPXTsgM'],
+    'T1C Berserker': [
+      '-ZTgOZPToM8AlQoaU8jFCvXfmAaf7_GrMuGnuW5ZpPXTsgM',
+      'Y2ooX-BpyM7ootxPb3b_5d39hMrycC19MBltMqeAWrHZVZY',
+    ],
     'T1C Mowgli': ['hyPZGnGZEEIdUeYC4Z_jCeX1j9CxBF7pkCVrOWtge9qSk1g'],
     'T1C Mireu': ['UK9eE3qNzV4kMD9JU9pt7pNfSim4LdnGW3ohVkILoWBCOdE'],
     'T1C Asper': ['oXDJiJRcX_AgzawO-yamimEoZ1J0GzvMvS-76GK3s-3uBtY'],
-    'T1A Fisher': ['XGCsjHeykKEjU1LG8fhRgi5HaIFTMky1mF7YOAw6t3HGWHw'],
     'T1 Zefa': ['BpWV0KVNi49v_MpSvjoA-80LOzSsIbqtTB7lVuygvrHNAg'],
     'T1 Daeny': ['4PY_IiRx6CAZhTdWQSQyO_uRCJpXGF2j6vpdY9QSTbwW4g'],
   };
@@ -188,10 +190,10 @@ export default class {
       'wFBeLnyc-WaO1otfgEohXHolKlnvjtOkCPY2EKxJMa_nRDs',
       'dWjF04z47wN95VD8qANyUW3YDRsItPW5kPM_4t0apC-aOTo',
       '-ZTgOZPToM8AlQoaU8jFCvXfmAaf7_GrMuGnuW5ZpPXTsgM',
+      'Y2ooX-BpyM7ootxPb3b_5d39hMrycC19MBltMqeAWrHZVZY',
       'hyPZGnGZEEIdUeYC4Z_jCeX1j9CxBF7pkCVrOWtge9qSk1g',
       'UK9eE3qNzV4kMD9JU9pt7pNfSim4LdnGW3ohVkILoWBCOdE',
       'oXDJiJRcX_AgzawO-yamimEoZ1J0GzvMvS-76GK3s-3uBtY',
-      'XGCsjHeykKEjU1LG8fhRgi5HaIFTMky1mF7YOAw6t3HGWHw',
     ],
   ] as const;
 }

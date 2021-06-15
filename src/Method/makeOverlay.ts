@@ -57,17 +57,14 @@ export default async (
   const html = `
   <!DOCTYPE html>
     <head>
-      <link rel="stylesheet" href="../overlay-${data.resolution}p.css"/>
+      <link rel="stylesheet" href="../style.css"/>
     </head>
     <body>
     ${components.join('')}
     </body>
   </html>`;
   try {
-    await fs.writeFile(
-      join(overlayPath, `${data.gameId}-${data.resolution}p.html`),
-      html
-    );
+    await fs.writeFile(join(overlayPath, `${data.gameId}.html`), html);
   } catch (error) {
     console.error(error);
   }

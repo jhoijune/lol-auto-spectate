@@ -7,7 +7,11 @@ import { Data, DB, PlayerList } from '../types';
 type Name = keyof typeof Constants.PRIORITIES;
 
 export default async (data: Data, db: DB) => {
-  const overlayInfos: { index: number; name: string; imgSrc?: string }[] = [];
+  const overlayInfos: {
+    index: number;
+    name: string;
+    imgSrc?: string;
+  }[] = [];
   try {
     await sleep(1000);
     console.log(`Starting GET ${Constants.PLAYERLIST_URL} ${printDate()}`);
@@ -55,7 +59,11 @@ export default async (data: Data, db: DB) => {
           }
           const playerIndex =
             trimmedTeam === 'ORDER' ? index : 5 + (index - redStart);
-          const info: { index: number; name: string; imgSrc?: string } = {
+          const info: {
+            index: number;
+            name: string;
+            imgSrc?: string;
+          } = {
             index: playerIndex,
             name: teamAndName,
             imgSrc:

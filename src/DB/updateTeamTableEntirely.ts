@@ -63,12 +63,12 @@ export default async () => {
           },
         ]);
         db.Team.create({
-          exactName: exactName,
           name,
+          exactName: exactName,
         });
         structureDb.Team.create({
-          exactName: exactName,
           name,
+          exactName: exactName,
         });
       }
     }

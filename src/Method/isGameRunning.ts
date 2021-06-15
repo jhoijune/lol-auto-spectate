@@ -12,7 +12,11 @@ export default async (
   gameProcess: ChildProcessWithoutNullStreams
 ) => {
   const startTime = new Date().valueOf();
-  let overlayInfos: { index: number; name: string; imgSrc?: string }[] = [];
+  let overlayInfos: {
+    index: number;
+    name: string;
+    imgSrc?: string;
+  }[] = [];
   while (
     !data.isSpectating &&
     new Date().valueOf() - startTime < data.gameWaitLimit
