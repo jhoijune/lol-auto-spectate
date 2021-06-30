@@ -23,7 +23,7 @@ JRE must be installed if you are using Window and OBS,obs-websocket must be inst
 
 ```bash
 $ npm install
-$ npm run init
+$ npx tsc
 $ npm start
 ```
 
