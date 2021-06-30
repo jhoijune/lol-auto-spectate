@@ -11,7 +11,6 @@ import { DB, ProInstance } from '../types';
 const exceptionList = [
   'faker',
   'fisher',
-  'rudy',
   'ace',
   'tom',
   'lucid',
@@ -64,6 +63,7 @@ const exceptionList = [
   'vins',
   'crown',
   'cube (kim chang-seong)',
+  'winner',
 ];
 
 export default async (db: DB) => {

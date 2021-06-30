@@ -113,6 +113,7 @@ export default async (config: Config) => {
       selectedIndex: Constants.NONE,
       exGameTime: Constants.NONE,
       fixCount: 0,
+      endReservation: false,
     };
     const streamingTitle = makeStreamingTitle(data, auxData);
     if (!(await isStreaming(obs))) {

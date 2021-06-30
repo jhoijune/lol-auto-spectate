@@ -1,30 +1,9 @@
-import createDB from './createDB';
-import updateDB from './updateDB';
-import updateDBEntirely from './updateDBEntirely';
-import updateDBRegulary from './updateDBRegulary';
-import updateImageNames from './updateImageNames';
-import updateProTable from './updateProTable';
-import updateTeamTable from './updateTeamTable';
-import updateTeamTableEntirely from './updateTeamTableEntirely';
-
-export default {
-  createDB,
-  updateDB,
-  updateDBEntirely,
-  updateDBRegulary,
-  updateImageNames,
-  updateProTable,
-  updateTeamTable,
-  updateTeamTableEntirely,
-};
-
-export {
-  createDB,
-  updateDB,
-  updateDBEntirely,
-  updateDBRegulary,
-  updateImageNames,
-  updateProTable,
-  updateTeamTable,
-  updateTeamTableEntirely,
-};
+export { default as createDB } from './createDB';
+export { default as updateDB } from './updateDB';
+export { default as updateDBEntirely } from './updateDBEntirely';
+export { default as updateDBRegulary } from './updateDBRegulary';
+export { default as updateImageNames } from './updateImageNames';
+export { default as updateProTable } from './updateProTable';
+export { default as updateTeamTable } from './updateTeamTable';
+export { default as updateTeamTableEntirely } from './updateTeamTableEntirely';
+export { default as initDB } from './initDB';

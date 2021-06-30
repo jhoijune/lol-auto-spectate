@@ -47,6 +47,10 @@ export default async (data: Data, db: DB) => {
         if (proInstance !== null) {
           // 프로와 매핑
           let teamAndName = proInstance.name;
+          const bracketIndex = teamAndName.indexOf('(');
+          if (bracketIndex !== -1) {
+            teamAndName = teamAndName.slice(0, bracketIndex - 1);
+          }
           if (proInstance.teamId !== null) {
             const teamInstance = await db.Team.findOne({
               where: {
@@ -54,7 +58,7 @@ export default async (data: Data, db: DB) => {
               },
             });
             if (teamInstance !== null) {
-              teamAndName = `${teamInstance.name} ${proInstance.name}`;
+              teamAndName = `${teamInstance.name} ${teamAndName}`;
             }
           }
           const playerIndex =

@@ -5,7 +5,7 @@ import { DB } from '../types';
 import { updateDB } from '../DB';
 import { type } from 'os';
 
-const exceptionList = ['Creme', 'irma', 'Xiaoxu', 'neny', 'shiye', 'S1xu'];
+const exceptionList = ['shiye'];
 
 export default async (db: DB) => {
   const URL = 'https://www.scoregg.com/big-data/ranking';
@@ -31,11 +31,13 @@ export default async (db: DB) => {
       await page.click('div.more-page');
       await sleep(1000);
     } catch (error) {
+      console.log(count);
       console.error(error);
       return;
     }
   }
   const html = await page.content();
+  console.log(html);
   await browser.close();
   const $ = cheerio.load(html);
   const rows = $('div.tables tbody tr');

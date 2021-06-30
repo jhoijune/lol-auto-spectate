@@ -18,12 +18,18 @@ export default async (data: Data, auxData: AuxData) => {
         auxData.fixCount += 1;
       }
       if (auxData.exGameTime === gameTime && gameTime > 0) {
-        // 게임 종료
-        console.log('Wait 20 seconds for normal shutdown');
-        await sleep(20 * 1000);
-        console.log('Normal Shutdown');
-        orderStopSpectate(data);
-        data.spectateRank = Constants.NONE;
+        if (auxData.endReservation) {
+          console.log('Wait 10 seconds for normal shutdown');
+          await sleep(10 * 1000);
+          console.log('Normal Shutdown');
+          orderStopSpectate(data);
+          data.spectateRank = Constants.NONE;
+        } else {
+          console.log('The time is the same, so it is scheduled to end');
+          auxData.endReservation = true;
+        }
+      } else if (auxData.exGameTime !== gameTime && gameTime > 0) {
+        auxData.endReservation = false;
       }
       auxData.exGameTime = gameTime;
     } else {
