@@ -34,7 +34,7 @@ import test from './test';
       type: 'number',
       name: 'noOnePlayWaitLimitMinute',
       message: 'How many minutes will you wait until no one is playing',
-      default: 10,
+      default: 0,
     },
     {
       type: 'number',

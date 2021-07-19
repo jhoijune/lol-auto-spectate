@@ -11,9 +11,12 @@ import stopStreaming from './stopStreaming';
  * 현재 게임중인 프로확인 작업
  */
 export default async (data: Data, obs: OBSWebSocket, db: DB) => {
+  /*
   const rankLimit = (await isStreaming(obs))
     ? Constants.GROUP1_RANK
     : Constants.FAKER_RANK;
+    */
+  const rankLimit = Constants.FAKER_RANK;
   const matchInfo = await searchGame(data, db, rankLimit);
   if (matchInfo === null) {
     if (await isStreaming(obs)) {

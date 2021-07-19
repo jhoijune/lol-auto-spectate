@@ -41,4 +41,4 @@ $ npm start
 
 ## Implementation
 
-[https://twitch.tv/t1_faker_fan](https://twitch.tv/t1_faker_fan)
+[https://twitch.tv/fan_of_faker](https://twitch.tv/fan_of_faker)

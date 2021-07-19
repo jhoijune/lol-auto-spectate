@@ -48,12 +48,9 @@ export default async (config: Config) => {
   injectKeypressEvent(data);
   injectChatCommand(data, obs);
   while (true) {
-    await COMMAND_SAFE_SECTION(data, async () => {
+    const isNormal = await COMMAND_SAFE_SECTION(data, async () => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
-          if (!(await decidePlayGame(data, obs, db))) {
-            return;
-          }
           let lastFakerStreamingTime: number = Constants.NONE;
           while (await checkStreaming('faker')) {
             if (await isStreaming(obs)) {
@@ -69,8 +66,11 @@ export default async (config: Config) => {
             ) {
               await updateDBRegulary(data, db);
             }
-            data.spectateRank = Constants.NONE;
-          } else if (
+          }
+          if (!(await decidePlayGame(data, obs, db))) {
+            return false;
+          }
+          if (
             data.spectateRank === Constants.NONE &&
             !(await isStreaming(obs))
           ) {
@@ -89,6 +89,9 @@ export default async (config: Config) => {
         }
       }
     });
+    if (!isNormal) {
+      return;
+    }
     try {
       await obs.send('GetStreamingStatus');
     } catch {
@@ -138,7 +141,8 @@ export default async (config: Config) => {
     } catch {}
     stopSpectate(gameProcess);
     if (data.spectateRank === Constants.NONE && (await isStreaming(obs))) {
-      await modifyChannelInfo('Waiting to spectate');
+      //await modifyChannelInfo('Waiting to spectate');
+      await stopStreaming(obs);
     }
   }
 };

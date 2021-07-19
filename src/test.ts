@@ -47,7 +47,7 @@ export default async (config: Config) => {
   injectChatCommand(data, obs);
   let isTitleChanged = false;
   while (true) {
-    await COMMAND_SAFE_SECTION(data, async () => {
+    const isNormal = await COMMAND_SAFE_SECTION(data, async () => {
       while (data.spectateRank === Constants.NONE) {
         if (!data.isPaused) {
           const rankLimit = Constants.OTHERS_RANK;
@@ -56,7 +56,7 @@ export default async (config: Config) => {
             if (await isStreaming(obs)) {
               await stopStreaming(obs);
             }
-            return;
+            return false;
           }
           Object.assign(data, matchInfo);
           if (
@@ -74,6 +74,9 @@ export default async (config: Config) => {
         }
       }
     });
+    if (!isNormal) {
+      return;
+    }
     /*
     try {
       await obs.send('GetStreamingStatus');
