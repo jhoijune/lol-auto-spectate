@@ -22,6 +22,5 @@ export default (data: Data) => {
   gameProcess.on('exit', () => {
     gameProcess.isUnusualExit = true;
   });
-  console.log('Start spectate!');
   return gameProcess;
 };

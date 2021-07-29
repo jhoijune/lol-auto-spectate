@@ -8,7 +8,7 @@ export default async (title: string) => {
   const url = `${Constants.BROADCASTER_URL}=${TWITCH_ID}`;
   try {
     console.log(`Starting PATCH ${url} ${printDate()}`);
-    const { status } = await axios.patch(
+    await axios.patch(
       url,
       { title },
       {
@@ -19,9 +19,6 @@ export default async (title: string) => {
         },
       }
     );
-    if (status === 204) {
-      return;
-    }
   } catch (error) {
     console.error(error);
   } finally {

@@ -64,6 +64,7 @@ const exceptionList = [
   'crown',
   'cube (kim chang-seong)',
   'winner',
+  'untara',
 ];
 
 export default async (db: DB) => {

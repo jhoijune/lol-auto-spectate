@@ -124,7 +124,6 @@ export default async (config: Config) => {
     }
     await switchLOLScene(data, obs);
     await modifyChannelInfo(streamingTitle);
-    console.log(streamingTitle);
     await COMMAND_SAFE_SECTION(data, async () => {
       while (data.isSpectating) {
         await sleep(1000);

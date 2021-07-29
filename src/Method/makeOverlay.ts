@@ -15,9 +15,7 @@ const makeComponent = function (info: {
     ? `<div class="image-container"><img src="../images/${info.imgSrc}"></div>`
     : '';
   return `<div class="${team} ${position}">
-  <p${info.name in Constants.ID ? ' style="font-weight:bold"' : ''}>${
-    info.name
-  }</p>
+  <p${info.name in Constants.ID ? ' class="highlight"' : ''}>${info.name}</p>
   ${image}
   </div>`;
 };

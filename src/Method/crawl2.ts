@@ -21,7 +21,7 @@ export default async (db: DB) => {
   await page.setDefaultNavigationTimeout(0);
   try {
     await page.goto(URL);
-    await sleep(5 * 1000);
+    await sleep(1000);
   } catch (error) {
     console.error(error);
     return;
@@ -29,7 +29,7 @@ export default async (db: DB) => {
   for (let count = 0; count < 150; count++) {
     try {
       await page.click('div.more-page');
-      await sleep(5 * 1000);
+      await sleep(1000);
     } catch (error) {
       console.log(count);
       console.error(error);
@@ -49,11 +49,7 @@ export default async (db: DB) => {
       entries.push({ summonerName, proName });
     }
   });
-  const map = new Map<string, string>();
   for (const { summonerName, proName } of entries) {
-    map.set(summonerName, proName);
     await updateDB(db, summonerName, proName);
   }
-  console.log(map);
-  console.log(map.size);
 };

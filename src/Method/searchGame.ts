@@ -60,7 +60,6 @@ export default async (data: Data, db: DB, rankLimit: number) => {
               await instance.save();
             }
           }
-          console.log('Match was found');
           return {
             encryptionKey,
             gameId,

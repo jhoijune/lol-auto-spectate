@@ -29,9 +29,13 @@ p {
   font-size: 24px;
   display: inline-block;
   color: white;
-  background-color: black;
+  background-color: #142c13;
   font-family: Arial, Helvetica, sans-serif;
   padding: 3.75px 5px;
+}
+
+.highlight {
+  font-weight: bold;
 }
 
 .top {

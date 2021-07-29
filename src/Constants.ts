@@ -49,10 +49,27 @@ export default class {
 
   static GROUP1_RANK = 1 as const;
 
-  static OTHERS_RANK = 2 as const;
+  static GROUP2_RANK = 2 as const;
+
+  static OTHERS_RANK = 3 as const;
 
   static PRIORITIES = {
     Faker: 0,
+    Gumayusi: 1,
+    Canna: 2,
+    Keria: 3,
+    Oner: 4,
+    Ellim: 5,
+    Teddy: 6,
+    Zeus: 7,
+    Cuzz: 8,
+    Clozer: 9,
+    Roach: 10,
+    Hoit: 11,
+    Mowgli: 11,
+    Mireu: 11,
+    Berserker: 11,
+    Asper: 11,
   } as const;
 
   static LEAGUE_URLS = [
@@ -80,12 +97,100 @@ export default class {
       '3XgyIfpjVnlRYOiVJi9BuzYXABU4srlKnNCd7zO6ou4r9Q',
       '3kFXTl-XQ6ckWRDnPevKx-hzfY8xMmrw0nv9D6W_8W32ag',
     ],
+    'T1 Teddy': [
+      'Lp2if0FZhWCVmVCLNIl7biKcydzFQOOBGWPCT7Ru17MoHH0',
+      'bpo39bz8ZWjGI0rj00mRjFYzCRymGqkV6xXgykMV3rp57js',
+    ],
+    'T1 Cuzz': [
+      '7i-1vJWjO6a_Z-UfsWP1veTiPY0V3TC6CzYlaxbAT6bk5Yg',
+      'sCj2TgopepW0VQKGVfV9zP9YdL2KVRAzCjKnyi2R0FPc4z4',
+      'wTNxvyFMyQ3QkZ1kqbvMt25Fc8jOyFpnDhk5BpfQpLmKkJk',
+    ],
+    'T1 Canna': [
+      'Rpmv4q-p9jw_XywfvtMfaD9YAeR0OvGgQHSGs7N0Ugt721E',
+      '4DN2JakRykjWRuENPImKJQ6M6q6nr2MNB9L67_ItMbBIAUg',
+    ],
+    'T1 Ellim': [
+      'X-cmR6H-54lFtI-WWRmWVh-15etQ5D9Yofrn5ep3jjr0KnE',
+      '05IoegFtxkYL2o69GUzMNQzETWimOsUZ3qykAc8BnJI7x1o',
+    ],
+    'T1 Gumayusi': [
+      'WSD8-_fi6vmR6lRBIKg2mLI5rvnKc5FalGBz5ynNUzVkRi8',
+      'jaBd0zN4X3FJygQO7g10FGpq3oSVMcfbYLVZjuPpmYGZq9ygKaw0weLe1w',
+    ],
+    'T1 Keria': [
+      'hOTwMMHiUoE7uB0s3pJmfeDVOYou0m2WDrjV7kHe4uNP0UE',
+      'foe5GUqR2nD1RvUVk7srD4Cqh-FkPosDDiGpWn7D8nMYw0s',
+    ],
+    'T1 Zeus': [
+      'vc3SXcYKhVhTrAt8Xgg0-rOv9vvY6ilaBERlegto-BrmPTk',
+      '8IxiySn4-R0oi_0xXGgbsfmma-PXJvpW94WIaKG1Oy5wEzE',
+      '_KsnqhF5237SndycuCOJ1oHNR1Cutw1g-rx4VYnZC5JVVF1_VCvD5vWtKw',
+    ],
+    'T1 Oner': [
+      'IXtLthCZ0Qw_OgCkkCVs15krMmJpPYmZ6NweYlKrPaAW5LXlcLNsj5k4dg',
+      'DoYpR6ll4MgLyibG6ww1s9IPaw5defOu695gPTnnYjC0LQs',
+      '18E3LyMMEsnbmpGC7q1hMyLmPHUAYN8uAFnZ1VPgCgXK5X9j49MO4zaBuQ',
+    ],
+    'T1 Clozer': [
+      '9v7Azbh82ox7Te3T3BEMq-IZdaylvDw3J06cmGS8J1bmbkPF9OV-bET6wA',
+      'rkMjlQDkla0Rsk4AbfMwRasOMP_AopxJcprKSA_-SeaioyQ',
+    ],
+    'T1C Roach': [
+      '3ed4S0Be6loem7nbaFY1ksHoncd05Oxohtj9szZifIuO7A',
+      '8f9GfadY9Wa9CMD1qf2RkH07RaZi9H8fyHBTZrz-IrYNFsQ',
+    ],
+    'T1 Hoit': [
+      'wFBeLnyc-WaO1otfgEohXHolKlnvjtOkCPY2EKxJMa_nRDs',
+      'dWjF04z47wN95VD8qANyUW3YDRsItPW5kPM_4t0apC-aOTo',
+    ],
+    'T1C Berserker': [
+      '-ZTgOZPToM8AlQoaU8jFCvXfmAaf7_GrMuGnuW5ZpPXTsgM',
+      'Y2ooX-BpyM7ootxPb3b_5d39hMrycC19MBltMqeAWrHZVZY',
+    ],
+    'T1C Mowgli': ['hyPZGnGZEEIdUeYC4Z_jCeX1j9CxBF7pkCVrOWtge9qSk1g'],
+    'T1C Mireu': ['UK9eE3qNzV4kMD9JU9pt7pNfSim4LdnGW3ohVkILoWBCOdE'],
+    'T1C Asper': ['oXDJiJRcX_AgzawO-yamimEoZ1J0GzvMvS-76GK3s-3uBtY'],
   };
 
   static ID_PRIORITY = [
     [
       '3XgyIfpjVnlRYOiVJi9BuzYXABU4srlKnNCd7zO6ou4r9Q',
       '3kFXTl-XQ6ckWRDnPevKx-hzfY8xMmrw0nv9D6W_8W32ag',
+    ],
+    [
+      'WSD8-_fi6vmR6lRBIKg2mLI5rvnKc5FalGBz5ynNUzVkRi8',
+      'jaBd0zN4X3FJygQO7g10FGpq3oSVMcfbYLVZjuPpmYGZq9ygKaw0weLe1w',
+      'Rpmv4q-p9jw_XywfvtMfaD9YAeR0OvGgQHSGs7N0Ugt721E',
+      '4DN2JakRykjWRuENPImKJQ6M6q6nr2MNB9L67_ItMbBIAUg',
+      'hOTwMMHiUoE7uB0s3pJmfeDVOYou0m2WDrjV7kHe4uNP0UE',
+      'foe5GUqR2nD1RvUVk7srD4Cqh-FkPosDDiGpWn7D8nMYw0s',
+      'IXtLthCZ0Qw_OgCkkCVs15krMmJpPYmZ6NweYlKrPaAW5LXlcLNsj5k4dg',
+      'DoYpR6ll4MgLyibG6ww1s9IPaw5defOu695gPTnnYjC0LQs',
+      '18E3LyMMEsnbmpGC7q1hMyLmPHUAYN8uAFnZ1VPgCgXK5X9j49MO4zaBuQ',
+      'X-cmR6H-54lFtI-WWRmWVh-15etQ5D9Yofrn5ep3jjr0KnE',
+      '05IoegFtxkYL2o69GUzMNQzETWimOsUZ3qykAc8BnJI7x1o',
+      'Lp2if0FZhWCVmVCLNIl7biKcydzFQOOBGWPCT7Ru17MoHH0',
+      'bpo39bz8ZWjGI0rj00mRjFYzCRymGqkV6xXgykMV3rp57js',
+    ],
+    [
+      'vc3SXcYKhVhTrAt8Xgg0-rOv9vvY6ilaBERlegto-BrmPTk',
+      '8IxiySn4-R0oi_0xXGgbsfmma-PXJvpW94WIaKG1Oy5wEzE',
+      '_KsnqhF5237SndycuCOJ1oHNR1Cutw1g-rx4VYnZC5JVVF1_VCvD5vWtKw',
+      '7i-1vJWjO6a_Z-UfsWP1veTiPY0V3TC6CzYlaxbAT6bk5Yg',
+      'sCj2TgopepW0VQKGVfV9zP9YdL2KVRAzCjKnyi2R0FPc4z4',
+      'wTNxvyFMyQ3QkZ1kqbvMt25Fc8jOyFpnDhk5BpfQpLmKkJk',
+      '9v7Azbh82ox7Te3T3BEMq-IZdaylvDw3J06cmGS8J1bmbkPF9OV-bET6wA',
+      'rkMjlQDkla0Rsk4AbfMwRasOMP_AopxJcprKSA_-SeaioyQ',
+      '3ed4S0Be6loem7nbaFY1ksHoncd05Oxohtj9szZifIuO7A',
+      '8f9GfadY9Wa9CMD1qf2RkH07RaZi9H8fyHBTZrz-IrYNFsQ',
+      'wFBeLnyc-WaO1otfgEohXHolKlnvjtOkCPY2EKxJMa_nRDs',
+      'dWjF04z47wN95VD8qANyUW3YDRsItPW5kPM_4t0apC-aOTo',
+      '-ZTgOZPToM8AlQoaU8jFCvXfmAaf7_GrMuGnuW5ZpPXTsgM',
+      'Y2ooX-BpyM7ootxPb3b_5d39hMrycC19MBltMqeAWrHZVZY',
+      'hyPZGnGZEEIdUeYC4Z_jCeX1j9CxBF7pkCVrOWtge9qSk1g',
+      'UK9eE3qNzV4kMD9JU9pt7pNfSim4LdnGW3ohVkILoWBCOdE',
+      'oXDJiJRcX_AgzawO-yamimEoZ1J0GzvMvS-76GK3s-3uBtY',
     ],
   ] as const;
 }

@@ -1,7 +1,6 @@
 import { join } from 'path';
 import https from 'https';
 import { readFileSync } from 'fs';
-import OBSWebSocket from 'obs-websocket-js';
 
 import makeProIDs from './makeProIDs';
 import { Heap } from '../DataStructure';
