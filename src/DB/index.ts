@@ -7,3 +7,4 @@ export { default as updateProTable } from './updateProTable';
 export { default as updateTeamTable } from './updateTeamTable';
 export { default as updateTeamTableEntirely } from './updateTeamTableEntirely';
 export { default as initDB } from './initDB';
+export { default as updateProTableEntirely } from './updateProTableEntirely';

@@ -4,7 +4,7 @@ import connectDB from '../Models';
 
 export default async (name: string, exactName?: string) => {
   const db = await connectDB();
-  const structureDb = await connectDB('structure');
+  const structureDb = await connectDB({ dbName: 'structure' });
   if (typeof exactName === 'undefined') {
     const dbInstance = await db.Team.findOne({
       where: {

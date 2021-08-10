@@ -9,8 +9,8 @@ import inquirer from 'inquirer';
 
 export default async () => {
   // 정상적으로 완료되었을시 true 반환
-  const db = await connectDB();
-  const structureDb = await connectDB('structure');
+  const db = await connectDB({ logging: false });
+  const structureDb = await connectDB({ logging: false, dbName: 'structure' });
   let html: string;
   try {
     console.log(`Starting GET ${Constants.PRO_LIST_URL} ${printDate()}`);

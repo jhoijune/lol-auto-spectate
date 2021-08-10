@@ -15,5 +15,14 @@ export default (playerIndex: number) => {
   // target timer on
   robot.keyToggle('n', 'down');
   robot.keyToggle('n', 'up');
+  /* see widely
+  robot.keyToggle('control', 'down');
+  robot.keyToggle('shift', 'down');
+  robot.keyToggle('z', 'down');
+  robot.keyToggle('z', 'up');
+  robot.keyToggle('shift', 'up');
+  robot.keyToggle('control', 'up');
+  robot.scrollMouse(0, -250);
+  */
   fixSpectateView(playerIndex);
 };

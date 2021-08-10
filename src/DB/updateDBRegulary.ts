@@ -28,7 +28,7 @@ export default async (data: Data, db: DB) => {
     data.currSummonerID += 1;
   } else {
     const maxId = await db.Summoner.max('id');
-    if (typeof maxId === 'number' && data.currSummonerID <= maxId) {
+    if (typeof maxId === 'number' && data.currSummonerID < maxId) {
       data.currSummonerID += 1;
     } else {
       await updateDBEntirely(db);

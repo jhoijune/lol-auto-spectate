@@ -7,7 +7,7 @@ import { ProInstance } from '../types';
 type Category = 'Summoner name' | 'Pro name' | 'Team name';
 
 (async () => {
-  const { Summoner, Pro, Team } = await connectDB();
+  const { Summoner, Pro, Team } = await connectDB({ logging: false });
   const createTeamLog = async function (proInstance: ProInstance) {
     const logs: string[] = [];
     const teamInstance = await Team.findOne({

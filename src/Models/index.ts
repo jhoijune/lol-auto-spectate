@@ -7,14 +7,24 @@ import Pro from './pro';
 import Summoner from './summoner';
 import Team from './team';
 
-export default async (dbName: string = 'db') => {
+const defaultConfig = {
+  logging: true,
+  dbName: 'db',
+};
+
+export default async (config?: { logging?: boolean; dbName?: string }) => {
+  const mergedConfig = {
+    ...defaultConfig,
+    ...config,
+  };
   const { ASSET_PATH } = process.env;
   const dbPath =
-    (ASSET_PATH && join(ASSET_PATH, `${dbName}.sqlite3`)) ||
-    join(__dirname, '..', '..', 'assets', `${dbName}.sqlite3`);
+    (ASSET_PATH && join(ASSET_PATH, `${mergedConfig.dbName}.sqlite3`)) ||
+    join(__dirname, '..', '..', 'assets', `${mergedConfig.dbName}.sqlite3`);
   const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: dbPath,
+    logging: mergedConfig.logging ? console.log : false,
   });
   const db: DB = {
     Champion: Champion(sequelize),
