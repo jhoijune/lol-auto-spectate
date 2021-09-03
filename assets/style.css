@@ -1,3 +1,10 @@
+:root {
+  --green: #142c13;
+  --gold: #c7a150;
+  --blue: #0034f7;
+  --white: #f8f8f8;
+}
+
 @font-face {
   font-family: 'Inter';
   src: url(./Inter.ttf);
@@ -9,8 +16,8 @@
 }
 
 @font-face {
-  font-family: 'Anton';
-  src: url(./Anton-Regular.ttf);
+  font-family: 'Antonio';
+  src: url(./Antonio-VariableFont_wght.ttf);
 }
 
 .blue-team {
@@ -26,16 +33,23 @@
 p {
   all: unset;
   min-width: 112.5px;
+  /*
   font-size: 24px;
+  */
+  font-size: 25px;
   display: inline-block;
-  color: white;
-  background-color: #142c13;
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--white);
+  background-color: var(--blue);
+  font-family: 'Antonio', Arial, Helvetica, sans-serif;
+  /*
   padding: 3.75px 5px;
+  */
+  padding: 0px 5px 3px 5px;
 }
 
 .highlight {
   font-weight: bold;
+  background-color: var(--gold);
 }
 
 .top {

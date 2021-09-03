@@ -1,5 +1,5 @@
 import { type } from 'os';
-import { exec, spawn } from 'child_process';
+import { exec } from 'child_process';
 
 export default () => {
   if (type() === 'Darwin') {

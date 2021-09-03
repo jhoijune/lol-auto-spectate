@@ -10,6 +10,7 @@ import sleep from './sleep';
 import stopSpectate from './stopSpectate';
 import orderStopSpectate from './orderStopSpectate';
 import isStreaming from './isStreaming';
+import turnOffOBS from './turnOffOBS';
 
 export default (data: Data, obs: OBSWebSocket) => {
   const wrapper = async function (func: Function) {

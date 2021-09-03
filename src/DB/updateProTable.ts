@@ -56,9 +56,6 @@ export default async (db: DB, proName: string, teamName?: string) => {
     if (teamInstance !== null && proInstance.teamId !== teamInstance.id) {
       proInstance.teamId = teamInstance.id;
       proInstance.save();
-    } else if (teamInstance === null && proInstance.teamId !== null) {
-      proInstance.teamId = null;
-      proInstance.save();
     }
   }
   return proInstance;

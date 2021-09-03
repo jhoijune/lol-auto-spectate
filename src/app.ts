@@ -139,7 +139,12 @@ export default async (config: Config) => {
       await sleep(1000);
     } catch {}
     stopSpectate(gameProcess);
-    if (data.spectateRank === Constants.NONE && (await isStreaming(obs))) {
+    if (
+      data.spectateRank === Constants.NONE &&
+      (await isStreaming(obs)) &&
+      new Date().getHours() > 12 &&
+      new Date().getHours() < 23
+    ) {
       //await modifyChannelInfo('Waiting to spectate');
       await stopStreaming(obs);
     }

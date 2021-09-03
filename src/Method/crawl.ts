@@ -22,12 +22,13 @@ export default async (db: DB) => {
   try {
     await page.goto(startUrl);
     await sleep(5 * 1000);
-    await page.select('select.form-control.input-sm', '-1');
+    await page.select('select[name=displayTable_length]', '-1');
     html = await page.content();
-    await browser.close();
   } catch (error) {
     console.error(error);
     return;
+  } finally {
+    await browser.close();
   }
   const $ = cheerio.load(html);
   const rows = $('#displayTable tbody tr');

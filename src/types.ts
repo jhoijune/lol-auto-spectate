@@ -172,9 +172,13 @@ interface Event {
   EventID: number;
   EventName: string;
   EventTime: number;
-  Assisters: string[];
-  KillerName: string;
-  VictimName: string;
+  Assisters?: string[];
+  KillerName?: string;
+  KillStreak?: number;
+  VictimName?: string;
+  TurretKilled?: string;
+  Result?: string;
+  [EventName: string]: any;
 }
 
 export interface EventData {

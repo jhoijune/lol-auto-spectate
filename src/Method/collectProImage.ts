@@ -1,73 +1,17 @@
 import puppeteer from 'puppeteer';
 import { promises as fs, constants } from 'fs';
 import path from 'path';
+import { Op } from 'sequelize';
 import { type } from 'os';
 
 import { DB, ProInstance } from '../types';
+import sleep from './sleep';
+import exceptionList from '../exceptionList';
 
-/**
- * TODO:매개변수로 빼둬야하고 이름을 무조건 소문자로만 적어야됨
- */
-const exceptionList = [
-  'faker',
-  'fisher',
-  'ace',
-  'tom',
-  'lucid',
-  'apdo',
-  'avalon',
-  'bluff',
-  'ambition',
-  'choyul',
-  'cloudtemplar',
-  'crow',
-  'dalka',
-  'dara',
-  'daramg',
-  'daydream',
-  'edge',
-  'firerain',
-  'flahm',
-  'foy',
-  'gap',
-  'haeseong',
-  'highdin',
-  'hipo',
-  'ian',
-  'hw4ng',
-  'jihoon',
-  'jiin',
-  'karas',
-  'light',
-  'maknoon',
-  'mephi',
-  'motive',
-  'natu',
-  'nofe',
-  'nugget',
-  'paladin',
-  'pure',
-  'ragan',
-  'rather',
-  'regank',
-  'rem',
-  'riris',
-  'road',
-  'rumor',
-  'scarlet',
-  'search',
-  'shark',
-  'soar',
-  'tf blade',
-  'veritas',
-  'vins',
-  'crown',
-  'cube (kim chang-seong)',
-  'winner',
-  'untara',
-];
+const URL = 'https://lol.fandom.com/wiki';
+const IMAGE_SELECTOR = '#infoboxPlayer img';
 
-export default async (db: DB) => {
+export default async (db: DB, startId: number = 1) => {
   const { ASSET_PATH } = process.env;
   const imagePath =
     (ASSET_PATH && path.join(ASSET_PATH, 'images')) ||
@@ -109,8 +53,6 @@ export default async (db: DB) => {
     return;
   }
   const exceptionSet = new Set(exceptionList);
-  const URL = 'https://lol.fandom.com/wiki';
-  const IMAGE_SELECTOR = '#infoboxPlayer img';
   const browser = await puppeteer.launch({
     headless: true,
     executablePath:
@@ -120,7 +62,13 @@ export default async (db: DB) => {
   });
   let page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
-  const proInstances = await db.Pro.findAll({});
+  const proInstances = await db.Pro.findAll({
+    where: {
+      id: {
+        [Op.gte]: startId,
+      },
+    },
+  });
   const missingNames: string[] = [];
   const size = proInstances.length;
   let index = 0;
@@ -133,6 +81,7 @@ export default async (db: DB) => {
     try {
       await page.goto(`${url}`);
       console.log(`GOTO ${url}`);
+      await sleep(1000);
       const imageHref = await page.evaluate((sel) => {
         const imageOrNull = document.querySelector<HTMLImageElement>(sel);
         if (!imageOrNull) {

@@ -1,18 +1,17 @@
 import inquirer from 'inquirer';
+import cheerio from 'cheerio';
+import puppeteer from 'puppeteer';
 import { Op } from 'sequelize';
 
 import connectDB from '../Models';
+import { sleep } from '../Method';
+import { ProInstance } from '../types';
+import { type } from 'os';
+
+const DOMAIN = 'https://lol.fandom.com';
 
 export default async (startId: number = 1) => {
-  /**
-   *  선수 한명씩 돌면서
-   * 현재 팀이름 알려주고
-   *  팀이름 같은지 다른지
-   *  다르면 새로운 팀명으로
-   *  새로운 팀명이 없으면  잘못 입력한거로 간주해서 다시 입력하던가
-   *  새로운 팀이름을 추가하던가
-   */
-  const db = await connectDB({ logging: false });
+  const db = await connectDB({ logging: false, dbName: 'db' });
   const structureDb = await connectDB({
     logging: false,
     dbName: 'structure',
@@ -24,7 +23,84 @@ export default async (startId: number = 1) => {
       },
     },
   });
+
+  const browser = await puppeteer.launch({
+    headless: false,
+    executablePath:
+      type() === 'Darwin'
+        ? '/Applications/Chromium.app/Contents/MacOS/Chromium'
+        : undefined,
+    defaultViewport: null,
+  });
+  const page = await browser.newPage();
+  await page.setDefaultNavigationTimeout(0);
+
+  const util = async (
+    path: string,
+    proInstance: ProInstance
+  ): Promise<string | null> => {
+    let html: string;
+    try {
+      await page.goto(`${DOMAIN}${path}`);
+      //await sleep(1 * 1000);
+      html = await page.content();
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+    const $ = cheerio.load(html);
+    const table = $('#infoboxPlayer');
+    if (table.length === 0) {
+      const list = $('#mw-content-text ul');
+      if (list.length === 0 || proInstance.teamId === null) {
+        return null;
+      }
+      const teamInstance = await db.Team.findOne({
+        where: {
+          id: proInstance.teamId,
+        },
+      });
+      if (teamInstance === null) {
+        return null;
+      }
+      let newPath: string | undefined | null = null;
+      $(list[0])
+        .find('li')
+        .each((index, element) => {
+          const teamName = $(element)
+            .find('.teamname')
+            .text()
+            .trim()
+            .toLowerCase();
+          if (
+            teamName == teamInstance.name.toLowerCase() ||
+            teamName === teamInstance.exactName.toLowerCase()
+          ) {
+            newPath = $(element).find('a').attr('href');
+          }
+        });
+      if (newPath == null) {
+        return null;
+      }
+      return util(newPath, proInstance);
+    }
+    const rows = $(table).find('tr');
+    let teamName: string | null = null;
+    rows.each((index, row) => {
+      const cols = $(row).find('td');
+      if (cols.length >= 2 && $(cols[0]).text().trim() === 'Team') {
+        teamName = $(cols[1]).find('.teamname').text().trim();
+      }
+    });
+    return teamName;
+  };
+
   for (const proInstance of proInstances) {
+    console.log(`Current id is ${proInstance.id}`);
+    const foundedTeamName = await util(
+      `/wiki/${proInstance.name}`,
+      proInstance
+    );
     let teamName = 'Progamer';
     if (proInstance.teamId !== null) {
       const teamInstance = await db.Team.findOne({
@@ -33,6 +109,14 @@ export default async (startId: number = 1) => {
         },
       });
       if (teamInstance !== null) {
+        if (
+          foundedTeamName !== null &&
+          (foundedTeamName.toLowerCase() === teamInstance.name.toLowerCase() ||
+            foundedTeamName.toLowerCase() ===
+              teamInstance.exactName.toLowerCase())
+        ) {
+          continue;
+        }
         teamName = `${teamInstance.name} (${teamInstance.exactName})`;
       }
     }
@@ -41,7 +125,11 @@ export default async (startId: number = 1) => {
     }>({
       type: 'confirm',
       name: 'isRightTeamName',
-      message: `[ ${proInstance.name} ] team name is [ ${teamName} ]. Is it right?`,
+      message: `[ ${proInstance.name} ] team name is [ ${teamName} ].${
+        foundedTeamName !== null
+          ? ` The team found is named [ ${foundedTeamName} ].`
+          : ''
+      } Is it right?`,
       default: true,
     });
     if (isRightTeamName) {
@@ -49,26 +137,26 @@ export default async (startId: number = 1) => {
     }
     let isTypeRight = false;
     while (!isTypeRight) {
-      teamName = (
-        await inquirer.prompt<{
-          teamName: string;
-        }>({
-          type: 'input',
-          name: 'teamName',
-          message: `What is the name of the [ ${proInstance.name} ] team?`,
-          default: 'Progamer',
-        })
-      ).teamName;
-      isTypeRight = (
-        await inquirer.prompt<{
-          isTypeRight: boolean;
-        }>({
-          type: 'confirm',
-          name: 'isTypeRight',
-          message: `Is the team name you entered [ ${teamName} ] correct?`,
-          default: true,
-        })
-      ).isTypeRight;
+      ({ teamName } = await inquirer.prompt<{
+        teamName: string;
+      }>({
+        type: 'input',
+        name: 'teamName',
+        message: `What is the name of the [ ${proInstance.name} ] team? ${
+          foundedTeamName !== null
+            ? `The team found is named [ ${foundedTeamName} ]`
+            : ''
+        }`,
+        default: 'Progamer',
+      }));
+      ({ isTypeRight } = await inquirer.prompt<{
+        isTypeRight: boolean;
+      }>({
+        type: 'confirm',
+        name: 'isTypeRight',
+        message: `Is the team name you entered [ ${teamName} ] correct?`,
+        default: true,
+      }));
     }
     if (teamName === 'Progamer') {
       proInstance.teamId = null;
@@ -96,13 +184,21 @@ export default async (startId: number = 1) => {
       {
         type: 'input',
         name: 'name',
-        message: `What is team name?`,
+        message: `What is team name? ${
+          foundedTeamName !== null
+            ? `The team found is named [ ${foundedTeamName} ]`
+            : ''
+        }`,
         default: teamName,
       },
       {
         type: 'input',
         name: 'exactName',
-        message: `What is exact team name?`,
+        message: `What is exact team name? ${
+          foundedTeamName !== null
+            ? `The team found is named [ ${foundedTeamName} ]`
+            : ''
+        }`,
         default: teamName,
       },
     ]);
@@ -117,4 +213,5 @@ export default async (startId: number = 1) => {
     proInstance.teamId = newTeamInstance.id;
     proInstance.save();
   }
+  await browser.close();
 };
