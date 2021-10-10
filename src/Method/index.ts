@@ -36,5 +36,5 @@ export { default as turnOffOBS } from './turnOffOBS';
 export { default as turnOnOBS } from './turnOnOBS';
 export { default as isStreaming } from './isStreaming';
 export { default as isOBSRunning } from './isOBSRunning';
-export { default as crawl } from './crawl';
-export { default as crawl2 } from './crawl2';
+export { default as searchSummonerRank } from './searchSummonerRank';
+export { default as zoomOut } from './zoomOut';

@@ -21,7 +21,12 @@ import {
   isOBSRunning,
 } from './Method';
 import connectDB from './Models';
-import { updateDBRegulary, updateDBEntirely, updateImageNames } from './DB';
+import {
+  updateDBRegulary,
+  crawlingOPGG,
+  updateImageNames,
+  crawlingBC,
+} from './DB';
 import COMMAND_SAFE_SECTION from './Method/COMMAND_SAFE_SECTION';
 import Constants from './Constants';
 
@@ -42,7 +47,6 @@ export default async (config: Config) => {
   if (!(await updateImageNames(db))) {
     return;
   }
-  await updateDBEntirely(db);
   injectKeypressEvent(data);
   injectChatCommand(data, obs);
   let isTitleChanged = false;
@@ -77,7 +81,7 @@ export default async (config: Config) => {
     if (!isNormal) {
       return;
     }
-    /*
+
     try {
       await obs.send('GetStreamingStatus');
     } catch {
@@ -93,7 +97,7 @@ export default async (config: Config) => {
         obsStatus = await connectOBS(obs);
       }
     }
-    */
+
     const gameProcess = startSpectate(data);
     data.gameProcess = gameProcess;
     if (!(await isGameRunning(data, db, gameProcess))) {
@@ -111,9 +115,7 @@ export default async (config: Config) => {
       await startStreaming(obs);
     }
     */
-    /*
     await switchLOLScene(data, obs);
-    */
     /*
     if (!isTitleChanged) {
       const streamingTitle = 'Test';
@@ -125,17 +127,15 @@ export default async (config: Config) => {
       while (data.isSpectating) {
         await sleep(1000);
         await determineGameOver(data, auxData);
-        //await decideGameIntercept(data, db);
+        await decideGameIntercept(data, db);
       }
     });
-    /*
     try {
       await obs.send('SetCurrentScene', {
         'scene-name': 'Waiting',
       });
       await sleep(1000);
     } catch {}
-    */
     stopSpectate(gameProcess);
   }
 };

@@ -11,7 +11,7 @@ import exceptionList from '../exceptionList';
 const URL = 'https://lol.fandom.com/wiki';
 const IMAGE_SELECTOR = '#infoboxPlayer img';
 
-export default async (db: DB, startId: number = 1) => {
+export default async (db: DB, ...teams: string[]) => {
   const { ASSET_PATH } = process.env;
   const imagePath =
     (ASSET_PATH && path.join(ASSET_PATH, 'images')) ||
@@ -62,16 +62,8 @@ export default async (db: DB, startId: number = 1) => {
   });
   let page = await browser.newPage();
   await page.setDefaultNavigationTimeout(0);
-  const proInstances = await db.Pro.findAll({
-    where: {
-      id: {
-        [Op.gte]: startId,
-      },
-    },
-  });
+
   const missingNames: string[] = [];
-  const size = proInstances.length;
-  let index = 0;
   let isClosed = false;
 
   const navigatePage = async (
@@ -156,7 +148,11 @@ export default async (db: DB, startId: number = 1) => {
             });
             return urls;
           },
-          { selector: '.mw-parser-output ul li', loweredName, loweredExactName }
+          {
+            selector: '.mw-parser-output ul li',
+            loweredName,
+            loweredExactName,
+          }
         );
         if (urls === null || urls.length === 0) {
           missingNames.push(`${teamInstance.name} ${proInstance.name}`);
@@ -179,25 +175,43 @@ export default async (db: DB, startId: number = 1) => {
     }
   };
 
-  while (index < size) {
-    try {
-      if (isClosed) {
-        page = await browser.newPage();
-        await page.setDefaultNavigationTimeout(0);
-        isClosed = false;
+  for (const team of teams) {
+    const teamInstance = await db.Team.findOne({
+      where: {
+        [Op.or]: [
+          { name: { [Op.like]: team } },
+          { exactName: { [Op.like]: team } },
+        ],
+      },
+    });
+    if (teamInstance !== null) {
+      const proInstances = await db.Pro.findAll({
+        where: { teamId: teamInstance.id },
+      });
+      const size = proInstances.length;
+      let index = 0;
+      while (index < size) {
+        try {
+          if (isClosed) {
+            page = await browser.newPage();
+            await page.setDefaultNavigationTimeout(0);
+            isClosed = false;
+          }
+          const proInstance = proInstances[index];
+          if (
+            exceptionSet.has(proInstance.name.toLowerCase()) ||
+            (await navigatePage(proInstance, `${URL}/${proInstance.name}`))
+          ) {
+            index += 1;
+          }
+        } catch (error) {
+          console.error(error);
+          isClosed = true;
+        }
       }
-      const proInstance = proInstances[index];
-      if (
-        exceptionSet.has(proInstance.name.toLowerCase()) ||
-        (await navigatePage(proInstance, `${URL}/${proInstance.name}`))
-      ) {
-        index += 1;
-      }
-    } catch (error) {
-      console.error(error);
-      isClosed = true;
     }
   }
+
   await browser.close();
   console.log('Finished pro picture collect');
   missingNames.sort();

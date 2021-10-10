@@ -3,6 +3,9 @@ import { ValidateResponse } from '../types';
 import printDate from './printDate';
 
 export default async () => {
+  /**
+   * 트위치 api 토큰 만료일 계산
+   */
   const { TWITCH_TOKEN } = process.env;
   const URL = 'https://id.twitch.tv/oauth2/validate';
   //curl -H "Authorization: OAuth <access token>" https://id.twitch.tv/oauth2/validate

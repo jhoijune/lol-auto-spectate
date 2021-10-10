@@ -1,6 +1,6 @@
+/*
+KR:
 export default class {
-  static PRO_LIST_URL = 'https://op.gg/spectate/list' as const;
-
   static PLAYERLIST_URL =
     'https://127.0.0.1:2999/liveclientdata/playerlist' as const;
 
@@ -18,6 +18,9 @@ export default class {
 
   static SUMMONER_ID_URL =
     'https://kr.api.riotgames.com/lol/summoner/v4/summoners/' as const;
+
+  static SUMMONER_RANK_URL =
+    'https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/' as const;
 
   static SPECTATE_URL =
     'https://kr.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/' as const;
@@ -168,6 +171,99 @@ export default class {
       'IXtLthCZ0Qw_OgCkkCVs15krMmJpPYmZ6NweYlKrPaAW5LXlcLNsj5k4dg',
       'DoYpR6ll4MgLyibG6ww1s9IPaw5defOu695gPTnnYjC0LQs',
       '18E3LyMMEsnbmpGC7q1hMyLmPHUAYN8uAFnZ1VPgCgXK5X9j49MO4zaBuQ',
+    ],
+  ] as const;
+}
+*/
+
+export default class {
+  static PLAYERLIST_URL =
+    'https://127.0.0.1:2999/liveclientdata/playerlist' as const;
+
+  static EVENTDATA_URL =
+    'https://127.0.0.1:2999/liveclientdata/eventdata' as const;
+
+  static GAME_STATS_URL =
+    'https://127.0.0.1:2999/liveclientdata/gamestats' as const;
+
+  static SUMMONER_PUUID_URL =
+    'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/' as const;
+
+  static SUMMONER_NAME_URL =
+    'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/' as const;
+
+  static SUMMONER_ID_URL =
+    'https://euw1.api.riotgames.com/lol/summoner/v4/summoners/' as const;
+
+  static SUMMONER_RANK_URL =
+    'https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/' as const;
+
+  static SPECTATE_URL =
+    'https://euw1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/' as const;
+
+  static STREAMS_URL = 'https://api.twitch.tv/helix/streams' as const;
+
+  static BROADCASTER_URL =
+    'https://api.twitch.tv/helix/channels?broadcaster_id' as const;
+
+  static OBS_ADDRESS = 'localhost:4444' as const;
+
+  static OBS_SUCCESS = 0 as const;
+
+  static OBS_FAIL = 1 as const;
+
+  static OBS_ERROR = 2 as const;
+
+  static RIOT_API_WAIT_TIME = 2 * 60 * 10;
+
+  static RIOT_API_LIMIT_TIME = 2 * 60 * 1000;
+
+  static SUMMONERS_RIFT_ID = 11 as const;
+
+  static SOLO_RANK_ID = 420 as const;
+
+  static NONE = -1 as const;
+
+  static FAKER_RANK = 0 as const;
+
+  static GROUP1_RANK = 1 as const;
+
+  static OTHERS_RANK = 2 as const;
+
+  static PRIORITIES = {
+    Faker: 0,
+    Canna: 1,
+    Gumayusi: 2,
+    Teddy: 3,
+    Keria: 4,
+    Oner: 5,
+    Cuzz: 6,
+  } as const;
+
+  static LEAGUE_URLS = [
+    'https://euw1.api.riotgames.com/lol/league/v4/challengerleagues/by-queue/RANKED_SOLO_5x5',
+    'https://euw1.api.riotgames.com/lol/league/v4/grandmasterleagues/by-queue/RANKED_SOLO_5x5',
+    'https://euw1.api.riotgames.com/lol/league/v4/masterleagues/by-queue/RANKED_SOLO_5x5',
+  ] as const;
+
+  static ID = {
+    Faker: 'EiPlIIWvybGyrahUg_okkyty2ILKK01xTsTjq4xnGT9Jcme414tH6PzSfQ',
+    'T1 Teddy': 'WNHUOpFIWA0pKaR9VfJyfk7An-vzHerGY42cBxfG3tBmaQsMMitnFUel6Q',
+    'T1 Cuzz': 'yUuwfq0FTizTFIY8PxPuGAWs3_PkMmt3CDd3BQlEUuxuxWddTun9euKu_A',
+    'T1 Canna': '0iFDhJed2qjuPs-qdSz_FB-28_PEgAFnlxbNcDRSpQ5KeVp9e1eJuvUMZQ',
+    'T1 Gumayusi': 'CXJ9jq-v0hf-XL7rWJrd5sk3bbWu3BxwXNJ5hI0BAHI3EgmiF510pZOdog',
+    'T1 Keria': '6poDQiMX5fq5l2OOoNjc44ivKkky_bSZ-HWA34MM0U32cbkHCKw0GlQudQ',
+    'T1 Oner': 's1bcAdubC1iQIS4BifLTtK7qnL2EuB-LgBYO2A-bRalcx4ZlVVCJo-QoVg',
+  };
+
+  static ID_PRIORITY = [
+    ['EiPlIIWvybGyrahUg_okkyty2ILKK01xTsTjq4xnGT9Jcme414tH6PzSfQ'],
+    [
+      '0iFDhJed2qjuPs-qdSz_FB-28_PEgAFnlxbNcDRSpQ5KeVp9e1eJuvUMZQ',
+      'CXJ9jq-v0hf-XL7rWJrd5sk3bbWu3BxwXNJ5hI0BAHI3EgmiF510pZOdog',
+      's1bcAdubC1iQIS4BifLTtK7qnL2EuB-LgBYO2A-bRalcx4ZlVVCJo-QoVg',
+      '6poDQiMX5fq5l2OOoNjc44ivKkky_bSZ-HWA34MM0U32cbkHCKw0GlQudQ',
+      'WNHUOpFIWA0pKaR9VfJyfk7An-vzHerGY42cBxfG3tBmaQsMMitnFUel6Q',
     ],
   ] as const;
 }

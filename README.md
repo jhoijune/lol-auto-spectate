@@ -29,15 +29,16 @@ $ npm start
 
 ## Command List
 
-| Command         |                   Description                    |
-| --------------- | :----------------------------------------------: |
-| !stopgame       |      quit if the game is currently running       |
-| !stopstreaming  | terminate streaming if it is currently streaming |
-| !stopprogram    |                   stop program                   |
-| !pauseprogram   |                  pause program                   |
-| !restartprogram |                 restart program                  |
-| !openinterface  |            open lol client interface             |
-| !fix\<num\>     |    fix view if the game is currently running     |
+| Command           |                     Description                      |
+| ----------------- | :--------------------------------------------------: |
+| !stopgame         |        quit if the game is currently running         |
+| !stopstreaming    |   terminate streaming if it is currently streaming   |
+| !stopprogram      |                     stop program                     |
+| !pauseprogram     |                    pause program                     |
+| !restartprogram   |                   restart program                    |
+| !openinterface    |              open lol client interface               |
+| !fix\<num\>       |      fix view if the game is currently running       |
+| !zoomout(\<num\>) | zoom out the screen if the game is currently running |
 
 ## Implementation
 

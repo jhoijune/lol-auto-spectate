@@ -1,6 +1,7 @@
 import { Data, DB } from '../types';
-import updateDBEntirely from './updateDBEntirely';
+import crawlingOPGG from './crawlingOPGG';
 import { searchSummonerID } from '../Method';
+import crawlingBC from './crawlingBC';
 
 export default async (data: Data, db: DB) => {
   const instance = await db.Summoner.findOne({
@@ -29,9 +30,16 @@ export default async (data: Data, db: DB) => {
   } else {
     const maxId = await db.Summoner.max('id');
     if (typeof maxId === 'number' && data.currSummonerID < maxId) {
-      data.currSummonerID += 1;
+      if (data.currSummonerID === 24) {
+        data.currSummonerID = 1403;
+      } else {
+        data.currSummonerID += 1;
+      }
     } else {
-      await updateDBEntirely(db);
+      /*
+      await crawlingOPGG(db);
+      await crawlingBC(db);
+      */
       data.currSummonerID = 1;
     }
   }

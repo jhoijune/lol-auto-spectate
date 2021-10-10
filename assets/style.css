@@ -3,6 +3,8 @@
   --gold: #c7a150;
   --blue: #0034f7;
   --white: #f8f8f8;
+  --riot-white: #e4e5e7;
+  --t1-red: #e4002b;
 }
 
 @font-face {
@@ -21,11 +23,11 @@
 }
 
 .blue-team {
-  position: fixed;
+  position: absolute;
 }
 
 .red-team {
-  position: fixed;
+  position: absolute;
   text-align: right;
   right: 0px;
 }
@@ -38,7 +40,7 @@ p {
   */
   font-size: 25px;
   display: inline-block;
-  color: var(--white);
+  color: var(--riot-white);
   background-color: var(--blue);
   font-family: 'Antonio', Arial, Helvetica, sans-serif;
   /*
@@ -47,9 +49,14 @@ p {
   padding: 0px 5px 3px 5px;
 }
 
-.highlight {
+.faker {
   font-weight: bold;
   background-color: var(--gold);
+}
+
+.t1 {
+  font-weight: bold;
+  background-color: var(--t1-red);
 }
 
 .top {
@@ -124,4 +131,23 @@ img {
   font-family: 'Inter', 'Spoqa Han Sans', 'Segoe UI', Sans-Serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-weight: bold;
+}
+
+#signature {
+  position: absolute;
+  bottom: 7px;
+  left: 7px;
+  width: 290px;
+  height: 102px;
+  background-color: var(--blue);
+  text-align: center;
+}
+
+#signature p {
+  color: var(--riot-white);
+  font-size: 55px;
+  line-height: 90px;
+  background-color: transparent;
+  line-height: 100px;
+  transform: rotate(-180deg);
 }

@@ -3,9 +3,10 @@ import cheerio from 'cheerio';
 import { Op } from 'sequelize';
 
 import connectDB from '../Models';
-import Constants from '../Constants';
 import { printDate } from '../Method';
 import inquirer from 'inquirer';
+
+const URL = 'https://op.gg/spectate/list';
 
 export default async () => {
   // 정상적으로 완료되었을시 true 반환
@@ -13,16 +14,14 @@ export default async () => {
   const structureDb = await connectDB({ logging: false, dbName: 'structure' });
   let html: string;
   try {
-    console.log(`Starting GET ${Constants.PRO_LIST_URL} ${printDate()}`);
-    ({ data: html } = await axios.get<string>(Constants.PRO_LIST_URL));
+    console.log(`Starting GET ${URL} ${printDate()}`);
+    ({ data: html } = await axios.get<string>(URL));
   } catch (error) {
     console.error(JSON.stringify(error));
     console.log("OP.GG Doesn't work");
     return false;
   } finally {
-    console.log(
-      `GET request finished for: ${Constants.PRO_LIST_URL} ${printDate()}`
-    );
+    console.log(`GET request finished for: ${URL} ${printDate()}`);
   }
   const $ = cheerio.load(html);
   const teams = $('.TeamName');

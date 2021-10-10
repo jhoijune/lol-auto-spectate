@@ -3,19 +3,26 @@ import { join } from 'path';
 import Constants from '../Constants';
 import { Data } from '../types';
 
-const makeComponent = function (info: {
+const POSITIONS = ['top', 'jungle', 'mid', 'adc', 'supporter'];
+
+const makeComponent = (info: {
   index: number;
   name: string;
   imgSrc?: string;
-}): string {
-  const positions = ['top', 'jungle', 'mid', 'adc', 'supporter'];
+}): string => {
   const team = info.index < 5 ? 'blue-team' : 'red-team';
-  const position = positions[info.index % 5];
+  const position = POSITIONS[info.index % 5];
   const image = info.imgSrc
     ? `<div class="image-container"><img src="../images/${info.imgSrc}"></div>`
     : '';
+  const aux =
+    info.name === 'Faker'
+      ? ' class="faker"'
+      : info.name in Constants.ID
+      ? ' class="t1"'
+      : '';
   return `<div class="${team} ${position}">
-  <p${info.name in Constants.ID ? ' class="highlight"' : ''}>${info.name}</p>
+  <p${aux}>${info.name}</p>
   ${image}
   </div>`;
 };

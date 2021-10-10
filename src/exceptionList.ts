@@ -70,6 +70,17 @@ const worlds = [
   'yoppa',
   'zhandia',
   'zytan',
+  'lorlor',
+  'jaxplank',
+  'h4xdefender',
+  'tsarcanya',
+  'relinquished ',
+  'click',
+  'galb',
+  'own3rtcam',
+  'zingy',
+  'totyz',
+  'godsoap',
 ];
 
 export default [
@@ -131,4 +142,6 @@ export default [
   'winner',
   'untara',
   'riris',
+  'syu',
+  'crush',
 ];

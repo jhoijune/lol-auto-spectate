@@ -11,6 +11,7 @@ import stopSpectate from './stopSpectate';
 import orderStopSpectate from './orderStopSpectate';
 import isStreaming from './isStreaming';
 import turnOffOBS from './turnOffOBS';
+import zoomOut from './zoomOut';
 
 export default (data: Data, obs: OBSWebSocket) => {
   const wrapper = async function (func: Function) {
@@ -86,6 +87,14 @@ export default (data: Data, obs: OBSWebSocket) => {
             if (num >= 1 && num <= 10) {
               fixSpectateView(num - 1);
             }
+          }
+        });
+      } else if (/^\!zoomout\d*$/.test(message)) {
+        await wrapper(() => {
+          if (data.isSpectating) {
+            const charNum = message.slice(8);
+            const num = Number(charNum);
+            zoomOut(num);
           }
         });
       }

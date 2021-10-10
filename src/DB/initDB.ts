@@ -1,7 +1,9 @@
 import Constants from '../Constants';
-import { crawl, crawl2, searchSummonerID } from '../Method';
+import { searchSummonerID } from '../Method';
 import updateDB from './updateDB';
-import updateDBEntirely from './updateDBEntirely';
+import crawlingOPGG from './crawlingOPGG';
+import crawlingTTP from './crawlingTTP';
+import crawlingSCOREGG from './crawlingSCOREGG';
 import { DB } from '../types';
 
 type Name = keyof typeof Constants.ID;
@@ -27,10 +29,10 @@ export default async (db: DB) => {
       }
     }
   }
-  if (!(await updateDBEntirely(db))) {
+  if (!(await crawlingOPGG(db))) {
     return;
   }
-  await crawl(db);
-  await crawl2(db);
+  await crawlingTTP(db);
+  await crawlingSCOREGG(db);
   console.log('End db initialization');
 };

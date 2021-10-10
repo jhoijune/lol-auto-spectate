@@ -8,7 +8,8 @@
     "trace": "node --unhandled-rejections=strict dist",
     "init": "node dist/init",
     "build": "npx tsc && npx webpack --config webpack.config.js",
-    "search": "npx ts-node src/DB/searchDB.ts"
+    "search": "npx ts-node src/DB/searchDB.ts",
+    "sandbox": "npx ts-node sandbox.ts"
   },
   "author": "jhoijune",
   "private": true,

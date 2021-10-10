@@ -41,7 +41,7 @@ import test from './test';
       name: 'spectateWaitLimitMinute',
       message:
         'How many minutes would you like to set the waiting time to spectate high rank?',
-      default: 1000,
+      default: 30,
     },
   ]);
   if (config.type === 'test') {

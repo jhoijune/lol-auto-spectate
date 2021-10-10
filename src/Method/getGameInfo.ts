@@ -76,6 +76,13 @@ export default async (data: Data, db: DB) => {
                 : undefined,
           };
           if (proInstance.name in Constants.PRIORITIES) {
+            data.pq.add(Constants.PRIORITIES[proInstance.name as Name], {
+              name: proInstance.name,
+              playerIndex,
+              championName,
+            });
+            /*
+           KR:
             const championInstance = await db.Champion.findOne({
               where: {
                 korName: championName.trim(),
@@ -89,13 +96,14 @@ export default async (data: Data, db: DB) => {
                   ? championInstance.engName
                   : undefined,
             });
+            */
           }
           overlayInfos.push(info);
         }
       }
     }
     data.isSpectating = true;
-  } catch (error) {
+  } catch (error: any) {
     if (error.code === 'ECONNABORTED') {
       return null;
     }
