@@ -2,7 +2,9 @@ import robot from 'robotjs';
 import { type } from 'os';
 // @ts-ignore
 import ks from 'node-key-sender';
+
 import Constants from '../Constants';
+import focusGame from './focusGame';
 
 const mapping = ['1', '2', '3', '4', '5', 'q', 'w', 'e', 'r', 't'] as const;
 
@@ -11,9 +13,7 @@ export default (playerIndex: number) => {
     return;
   }
   const selectedKey = mapping[playerIndex];
-  const { width, height } = robot.getScreenSize();
-  robot.moveMouse(width / 2, height / 2);
-  robot.mouseClick('left');
+  focusGame();
   if (type() === 'Darwin') {
     robot.keyToggle(selectedKey, 'down');
     robot.keyToggle(selectedKey, 'up');

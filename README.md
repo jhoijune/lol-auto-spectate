@@ -1,6 +1,6 @@
 # LOL Auto Spectate
 
-A program that automatically specates and streams when Faker plays solo rank
+A program that automatically specates and streams when Faker plays solo queue
 
 ## Prerequisite
 
@@ -42,4 +42,4 @@ $ npm start
 
 ## Implementation
 
-[https://twitch.tv/fan_of_faker](https://twitch.tv/fan_of_faker)
+[https://bit.ly/3v6Pg7k](https://bit.ly/3v6Pg7k)

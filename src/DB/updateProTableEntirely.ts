@@ -5,13 +5,12 @@ import { Op } from 'sequelize';
 
 import connectDB from '../Models';
 import { sleep } from '../Method';
-import { ProInstance } from '../types';
+import { ProInstance, DB } from '../types';
 import { type } from 'os';
 
 const DOMAIN = 'https://lol.fandom.com';
 
-export default async (startId: number = 1) => {
-  const db = await connectDB({ logging: false, dbName: 'db' });
+export default async (db: DB, startId: number = 1) => {
   const structureDb = await connectDB({
     logging: false,
     dbName: 'structure',

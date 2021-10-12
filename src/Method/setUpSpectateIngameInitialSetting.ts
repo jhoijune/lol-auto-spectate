@@ -1,11 +1,11 @@
 import robot from 'robotjs';
 
 import fixSpectateView from './fixSpectateView';
+import focusGame from './focusGame';
+import zoomOut from './zoomOut';
 
 export default (playerIndex: number) => {
-  const { width, height } = robot.getScreenSize();
-  robot.moveMouse(width / 2, height / 2);
-  robot.mouseClick('left', false);
+  focusGame();
   //  playback menu off
   robot.keyToggle('u', 'down');
   robot.keyToggle('u', 'up');
@@ -16,12 +16,6 @@ export default (playerIndex: number) => {
   robot.keyToggle('n', 'down');
   robot.keyToggle('n', 'up');
   //see widely
-  robot.keyToggle('control', 'down');
-  robot.keyToggle('shift', 'down');
-  robot.keyToggle('z', 'down');
-  robot.keyToggle('z', 'up');
-  robot.keyToggle('shift', 'up');
-  robot.keyToggle('control', 'up');
-  robot.scrollMouse(0, -500);
+  zoomOut(500);
   fixSpectateView(playerIndex);
 };

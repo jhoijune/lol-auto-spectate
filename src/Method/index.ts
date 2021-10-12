@@ -38,3 +38,4 @@ export { default as isStreaming } from './isStreaming';
 export { default as isOBSRunning } from './isOBSRunning';
 export { default as searchSummonerRank } from './searchSummonerRank';
 export { default as zoomOut } from './zoomOut';
+export { default as focusGame } from './focusGame';

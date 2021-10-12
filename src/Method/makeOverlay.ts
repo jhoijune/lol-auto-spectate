@@ -1,4 +1,4 @@
-import { constants, promises as fs } from 'fs';
+import { constants, existsSync, promises as fs } from 'fs';
 import { join } from 'path';
 import Constants from '../Constants';
 import { Data } from '../types';
@@ -57,7 +57,6 @@ export default async (
       console.error(error);
     }
   }
-
   const components = overlayInfos.map(makeComponent);
   const html = `
   <!DOCTYPE html>

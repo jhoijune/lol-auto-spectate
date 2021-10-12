@@ -10,8 +10,8 @@ import sleep from './sleep';
 import stopSpectate from './stopSpectate';
 import orderStopSpectate from './orderStopSpectate';
 import isStreaming from './isStreaming';
-import turnOffOBS from './turnOffOBS';
 import zoomOut from './zoomOut';
+import focusGame from './focusGame';
 
 export default (data: Data, obs: OBSWebSocket) => {
   const wrapper = async function (func: Function) {
@@ -94,6 +94,7 @@ export default (data: Data, obs: OBSWebSocket) => {
           if (data.isSpectating) {
             const charNum = message.slice(8);
             const num = Number(charNum);
+            focusGame();
             zoomOut(num);
           }
         });
