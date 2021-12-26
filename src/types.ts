@@ -322,7 +322,6 @@ export interface Data {
   gameWaitLimit: number;
   spectateWaitLimit: number;
   gameProcess?: ChildProcessWithoutNullStreams;
-  gameStartHour?: number;
 }
 
 export interface ValidateResponse {

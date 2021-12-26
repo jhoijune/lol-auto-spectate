@@ -57,6 +57,10 @@ export default async (
       console.error(error);
     }
   }
+  const filePath = join(overlayPath, `${data.gameId}.html`);
+  if (existsSync(filePath)) {
+    return;
+  }
   const components = overlayInfos.map(makeComponent);
   const html = `
   <!DOCTYPE html>
@@ -68,7 +72,7 @@ export default async (
     </body>
   </html>`;
   try {
-    await fs.writeFile(join(overlayPath, `${data.gameId}.html`), html);
+    await fs.writeFile(filePath, html);
   } catch (error) {
     console.error(error);
   }

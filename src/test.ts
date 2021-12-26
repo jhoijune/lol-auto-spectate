@@ -25,7 +25,6 @@ import {
   updateDBRegulary,
   crawlingOPGG,
   updateImageNames,
-  crawlingBC,
 } from './DB';
 import COMMAND_SAFE_SECTION from './Method/COMMAND_SAFE_SECTION';
 import Constants from './Constants';

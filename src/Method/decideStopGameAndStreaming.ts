@@ -7,8 +7,6 @@ import { Data } from '../types';
 import orderStopSpectate from './orderStopSpectate';
 
 export default async (data: Data, obs: OBSWebSocket) => {
-  /*
-  KR:
   if (
     data.isSpectating &&
     ((await checkStreaming('faker')) ||
@@ -19,5 +17,4 @@ export default async (data: Data, obs: OBSWebSocket) => {
     data.spectateRank = Constants.NONE;
     await stopStreaming(obs);
   }
-  */
 };

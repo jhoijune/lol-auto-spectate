@@ -1,9 +1,9 @@
 import { Op } from 'sequelize';
 
 import connectDB from '../Models';
+import { DB } from '../types';
 
-export default async (name: string, exactName?: string) => {
-  const db = await connectDB();
+export default async (db: DB, name: string, exactName?: string) => {
   const structureDb = await connectDB({ dbName: 'structure' });
   if (typeof exactName === 'undefined') {
     const dbInstance = await db.Team.findOne({

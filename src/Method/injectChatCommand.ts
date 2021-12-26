@@ -85,6 +85,7 @@ export default (data: Data, obs: OBSWebSocket) => {
             const charNum = message.slice(4);
             const num = Number(charNum);
             if (num >= 1 && num <= 10) {
+              focusGame();
               fixSpectateView(num - 1);
             }
           }

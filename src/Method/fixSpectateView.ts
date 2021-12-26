@@ -4,7 +4,6 @@ import { type } from 'os';
 import ks from 'node-key-sender';
 
 import Constants from '../Constants';
-import focusGame from './focusGame';
 
 const mapping = ['1', '2', '3', '4', '5', 'q', 'w', 'e', 'r', 't'] as const;
 
@@ -13,7 +12,6 @@ export default (playerIndex: number) => {
     return;
   }
   const selectedKey = mapping[playerIndex];
-  focusGame();
   if (type() === 'Darwin') {
     robot.keyToggle(selectedKey, 'down');
     robot.keyToggle(selectedKey, 'up');

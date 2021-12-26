@@ -9,7 +9,17 @@
 
 @font-face {
   font-family: 'Inter';
-  src: url(./Inter.ttf);
+  src: url(./Inter-Variable.ttf);
+}
+
+@font-face {
+  font-family: 'Inter Bold';
+  src: url(./Inter-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'Inter Black';
+  src: url(./Inter-Black.ttf);
 }
 
 @font-face {
@@ -34,49 +44,44 @@
 
 p {
   all: unset;
-  min-width: 112.5px;
-  /*
+  min-width: 115px;
   font-size: 24px;
-  */
-  font-size: 25px;
   display: inline-block;
   color: var(--riot-white);
-  background-color: var(--blue);
-  font-family: 'Antonio', Arial, Helvetica, sans-serif;
-  /*
-  padding: 3.75px 5px;
-  */
-  padding: 0px 5px 3px 5px;
+  background-color: var(--green);
+  font-family: 'Inter', 'Antonio', Arial, Helvetica, sans-serif;
+  padding: 0px 5px;
 }
 
 .faker {
-  font-weight: bold;
+  font-family: 'Inter Bold';
   background-color: var(--gold);
 }
 
 .t1 {
-  font-weight: bold;
+  font-weight: 900;
+  font-family: 'Inter Bold';
   background-color: var(--t1-red);
 }
 
 .top {
-  top: 121px;
+  top: 124px;
 }
 
 .jungle {
-  top: 224px;
+  top: 226px;
 }
 
 .mid {
-  top: 327px;
+  top: 329px;
 }
 
 .adc {
-  top: 430px;
+  top: 432px;
 }
 
 .supporter {
-  top: 533px;
+  top: 536px;
 }
 
 .image-container {
@@ -139,15 +144,17 @@ img {
   left: 7px;
   width: 290px;
   height: 102px;
-  background-color: var(--blue);
+  background-color: #0f1613;
   text-align: center;
 }
 
 #signature p {
   color: var(--riot-white);
-  font-size: 55px;
+  font-family: 'Inter Black';
+  font-style: italic;
+  font-weight: 900;
+  font-size: 40px;
   line-height: 90px;
   background-color: transparent;
   line-height: 100px;
-  transform: rotate(-180deg);
 }

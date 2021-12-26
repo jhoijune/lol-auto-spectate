@@ -11,16 +11,6 @@ export default async (data: Data, obs: OBSWebSocket, db: DB) => {
   /**
    * 현재 게임중인 프로확인 작업
    */
-  /*
-  let rankLimit: number;
-  if (new Date().getHours() > 12 && new Date().getHours() < 23) {
-    rankLimit = Constants.FAKER_RANK;
-  } else if (await isStreaming(obs)) {
-    rankLimit = Constants.GROUP1_RANK;
-  } else {
-    rankLimit = Constants.FAKER_RANK;
-  }
-  */
   const rankLimit = (await isStreaming(obs))
     ? Constants.GROUP1_RANK
     : Constants.FAKER_RANK;
@@ -32,7 +22,7 @@ export default async (data: Data, obs: OBSWebSocket, db: DB) => {
     }
     return false;
   }
-  Object.assign(data, matchInfo, { gameStartHour: new Date().getHours() });
+  Object.assign(data, matchInfo);
   if ((await isStreaming(obs)) && data.spectateRank !== Constants.FAKER_RANK) {
     await decideStopStreaming(data, obs);
   }

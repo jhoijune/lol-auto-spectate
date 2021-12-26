@@ -1,7 +1,6 @@
 import { Data, DB } from '../types';
 import crawlingOPGG from './crawlingOPGG';
 import { searchSummonerID } from '../Method';
-import crawlingBC from './crawlingBC';
 
 export default async (data: Data, db: DB) => {
   const instance = await db.Summoner.findOne({
@@ -36,10 +35,7 @@ export default async (data: Data, db: DB) => {
         data.currSummonerID += 1;
       }
     } else {
-      /*
       await crawlingOPGG(db);
-      await crawlingBC(db);
-      */
       data.currSummonerID = 1;
     }
   }

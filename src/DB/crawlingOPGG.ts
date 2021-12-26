@@ -5,8 +5,7 @@ import { printDate } from '../Method';
 import updateDB from './updateDB';
 import { DB } from '../types';
 
-const URL = 'https://euw.op.gg/spectate/list';
-// KR:const URL = 'https://op.gg/spectate/list';
+const URL = 'https://op.gg/spectate/list';
 
 export default async (db: DB) => {
   // 정상적으로 완료되었을시 true 반환

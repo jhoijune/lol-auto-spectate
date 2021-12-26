@@ -87,7 +87,10 @@ export default async (db: DB, startId: number = 1) => {
         if (!imageOrNull) {
           return null;
         }
-        return imageOrNull.getAttribute('data-src');
+        return (
+          imageOrNull.getAttribute('data-src') ||
+          imageOrNull.getAttribute('src')
+        );
       }, IMAGE_SELECTOR);
       if (
         imageHref &&
@@ -187,6 +190,7 @@ export default async (db: DB, startId: number = 1) => {
         isClosed = false;
       }
       const proInstance = proInstances[index];
+
       if (
         exceptionSet.has(proInstance.name.toLowerCase()) ||
         (await navigatePage(proInstance, `${URL}/${proInstance.name}`))

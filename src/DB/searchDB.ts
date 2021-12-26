@@ -7,7 +7,9 @@ import { ProInstance } from '../types';
 type Category = 'Summoner name' | 'Pro name' | 'Team name';
 
 (async () => {
-  const { Summoner, Pro, Team } = await connectDB({ logging: false });
+  const { Summoner, Pro, Team } = await connectDB({
+    logging: false,
+  });
   const createTeamLog = async function (proInstance: ProInstance) {
     const logs: string[] = [];
     const teamInstance = await Team.findOne({
@@ -26,7 +28,7 @@ type Category = 'Summoner name' | 'Pro name' | 'Team name';
     }
     return logs;
   };
-
+  let exCategory = 'Summoner name';
   while (true) {
     const { category, name } = await inquirer.prompt<{
       category: Category;
@@ -37,7 +39,7 @@ type Category = 'Summoner name' | 'Pro name' | 'Team name';
         name: 'category',
         message: 'What do you want to search for?',
         choices: ['Summoner name', 'Pro name', 'Team name'],
-        default: 'permission',
+        default: exCategory,
       },
       {
         type: 'input',
@@ -46,6 +48,7 @@ type Category = 'Summoner name' | 'Pro name' | 'Team name';
       },
     ]);
     const logs: string[] = [];
+    exCategory = category;
     if (category === 'Summoner name') {
       const summonerInstances = await Summoner.findAll({
         where: {

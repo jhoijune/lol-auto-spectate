@@ -10,4 +10,5 @@ export { default as updateProTableEntirely } from './updateProTableEntirely';
 export { default as crawlingOPGG } from './crawlingOPGG';
 export { default as crawlingSCOREGG } from './crawlingSCOREGG';
 export { default as crawlingTTP } from './crawlingTTP';
-export { default as crawlingBC } from './crawlingBC';
+export { default as migrateProInfo } from './migrateProInfo';
+export { default as seizeDuplicateProInfo } from './seizeDuplicateProInfo';

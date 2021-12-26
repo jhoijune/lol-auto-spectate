@@ -79,7 +79,10 @@ export default async (db: DB, ...teams: string[]) => {
         if (!imageOrNull) {
           return null;
         }
-        return imageOrNull.getAttribute('data-src');
+        return (
+          imageOrNull.getAttribute('data-src') ||
+          imageOrNull.getAttribute('src')
+        );
       }, IMAGE_SELECTOR);
       if (
         imageHref &&

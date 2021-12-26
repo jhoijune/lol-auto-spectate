@@ -22,26 +22,26 @@ import test from './test';
       name: 'type',
       message: 'What type would you like to start with?',
       choices: ['permission', 'without permission', 'test'],
-      default: 'permission',
+      default: 'without permission',
     },
     {
       type: 'number',
       name: 'gameWaitLimitMinute',
       message: 'How many minutes would you like to set the game wait time to?',
-      default: 1,
+      default: 3,
     },
     {
       type: 'number',
       name: 'noOnePlayWaitLimitMinute',
       message: 'How many minutes will you wait until no one is playing',
-      default: 10,
+      default: 20,
     },
     {
       type: 'number',
       name: 'spectateWaitLimitMinute',
       message:
         'How many minutes would you like to set the waiting time to spectate high rank?',
-      default: 30,
+      default: 1000,
     },
   ]);
   if (config.type === 'test') {
