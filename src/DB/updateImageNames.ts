@@ -12,7 +12,7 @@ export default async (db: DB) => {
   let imageNames: string[];
   try {
     imageNames = await fs.readdir(imagePath);
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return false;
   }
@@ -75,7 +75,7 @@ export default async (db: DB) => {
         proInstance.save();
       }
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return false;
   }

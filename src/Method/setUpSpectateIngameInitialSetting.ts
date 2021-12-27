@@ -1,21 +1,18 @@
-import robot from 'robotjs';
+import { keyboard, Key } from '@nut-tree/nut-js';
 
 import fixSpectateView from './fixSpectateView';
 import focusGame from './focusGame';
 import zoomOut from './zoomOut';
 
-export default (playerIndex: number) => {
-  focusGame();
+export default async (playerIndex: number) => {
+  await focusGame();
   //  playback menu off
-  robot.keyToggle('u', 'down');
-  robot.keyToggle('u', 'up');
+  await keyboard.type(Key.U);
   // scoreboard on
-  robot.keyToggle('o', 'down');
-  robot.keyToggle('o', 'up');
+  await keyboard.type(Key.O);
   // target timer on
-  robot.keyToggle('n', 'down');
-  robot.keyToggle('n', 'up');
+  await keyboard.type(Key.N);
   //see widely
-  zoomOut(500);
-  fixSpectateView(playerIndex);
+  await zoomOut(750);
+  await fixSpectateView(playerIndex);
 };

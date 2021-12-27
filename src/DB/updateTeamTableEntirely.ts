@@ -16,7 +16,7 @@ export default async () => {
   try {
     console.log(`Starting GET ${URL} ${printDate()}`);
     ({ data: html } = await axios.get<string>(URL));
-  } catch (error) {
+  } catch (error: any) {
     console.error(JSON.stringify(error));
     console.log("OP.GG Doesn't work");
     return false;

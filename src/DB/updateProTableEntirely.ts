@@ -43,7 +43,7 @@ export default async (db: DB, startId: number = 1) => {
       await page.goto(`${DOMAIN}${path}`);
       //await sleep(1 * 1000);
       html = await page.content();
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       return null;
     }

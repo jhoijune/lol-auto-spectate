@@ -10,7 +10,7 @@ export default async (obs: OBSWebSocket) => {
       password: OBS_PASSWORD,
     });
     return Constants.OBS_SUCCESS;
-  } catch (error) {
+  } catch (error: any) {
     if (error.error === 'Connection error.') {
       return Constants.OBS_FAIL;
     } else if (error.error === 'Authentication Failed.') {

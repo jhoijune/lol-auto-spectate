@@ -24,7 +24,7 @@ export default async (db: DB, startId: number = 1) => {
       constants.F_OK || constants.R_OK || constants.W_OK
     );
     isDirectoryExist = true;
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     if (error.code === 'ENOENT') {
       isDirectoryExist = false;
@@ -34,7 +34,7 @@ export default async (db: DB, startId: number = 1) => {
     try {
       console.log('Create images directory');
       await fs.mkdir(imagePath);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       return;
     }
@@ -48,7 +48,7 @@ export default async (db: DB, startId: number = 1) => {
       const rearFileName = fileName.slice(index + 1);
       fileNameMap.set(name, rearFileName);
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return;
   }
@@ -175,7 +175,7 @@ export default async (db: DB, startId: number = 1) => {
         return isNormal;
       }
       return true;
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       isClosed = true;
       return false;
@@ -197,7 +197,7 @@ export default async (db: DB, startId: number = 1) => {
       ) {
         index += 1;
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       isClosed = true;
     }

@@ -1,25 +1,25 @@
-import robot from 'robotjs';
-import { type } from 'os';
-// @ts-ignore
-import ks from 'node-key-sender';
+import { keyboard, Key } from '@nut-tree/nut-js';
 
 import Constants from '../Constants';
 
-const mapping = ['1', '2', '3', '4', '5', 'q', 'w', 'e', 'r', 't'] as const;
+const mapping = [
+  Key.Num1,
+  Key.Num2,
+  Key.Num3,
+  Key.Num4,
+  Key.Num5,
+  Key.Q,
+  Key.W,
+  Key.E,
+  Key.R,
+  Key.T,
+] as const;
 
-export default (playerIndex: number) => {
+export default async (playerIndex: number) => {
   if (playerIndex === Constants.NONE) {
     return;
   }
   const selectedKey = mapping[playerIndex];
-  if (type() === 'Darwin') {
-    robot.keyToggle(selectedKey, 'down');
-    robot.keyToggle(selectedKey, 'up');
-    robot.keyToggle(selectedKey, 'down');
-    robot.keyToggle(selectedKey, 'up');
-  } else {
-    // need jre
-    ks.sendKey(selectedKey);
-    ks.sendKey(selectedKey);
-  }
+  await keyboard.type(selectedKey);
+  await keyboard.type(selectedKey);
 };

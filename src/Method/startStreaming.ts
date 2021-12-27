@@ -8,7 +8,7 @@ export default async (obs: OBSWebSocket) => {
     });
     await obs.send('StartStreaming', {});
     console.log('Start streaming');
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
   }
 };

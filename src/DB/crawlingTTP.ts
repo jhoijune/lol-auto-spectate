@@ -25,7 +25,7 @@ export default async (db: DB) => {
     await sleep(5 * 1000);
     await page.select('select[name=displayTable_length]', '-1');
     html = await page.content();
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return;
   } finally {
@@ -51,7 +51,7 @@ export default async (db: DB) => {
     try {
       console.log(`Starting GET ${url} ${printDate()}`);
       ({ data: html } = await axios.get<string>(url));
-    } catch (error) {
+    } catch (error: any) {
       console.error(JSON.stringify(error));
       console.log("site dooesn't work");
       continue;

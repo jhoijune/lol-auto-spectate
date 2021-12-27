@@ -24,7 +24,7 @@ export default async (db: DB) => {
   try {
     await page.goto(URL);
     await sleep(1000);
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     return;
   }
@@ -32,7 +32,7 @@ export default async (db: DB) => {
     try {
       await page.click('div.more-page');
       await sleep(1000);
-    } catch (error) {
+    } catch (error: any) {
       console.log(count);
       console.error(error);
       return;

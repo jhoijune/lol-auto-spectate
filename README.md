@@ -4,7 +4,7 @@ A program that automatically specates and streams when Faker plays solo queue
 
 ## Prerequisite
 
-JRE must be installed if you are using Window and OBS,obs-websocket must be installed (run as administrator in Windows)
+OBS,obs-websocket must be installed (run as administrator in Windows)
 
 ## .env file description
 

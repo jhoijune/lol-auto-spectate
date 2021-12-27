@@ -10,7 +10,7 @@ export default async () => {
   const imageMap = new Map<string, string>(); // 선수 이름 -> 전체 파일이름
   try {
     imageNames = await readdir(imagePath);
-  } catch (error) {
+  } catch (error: any) {
     console.error(JSON.stringify(error));
     return null;
   }

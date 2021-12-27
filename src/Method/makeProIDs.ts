@@ -20,7 +20,7 @@ export default async (db: DB) => {
             'X-Riot-Token': RIOT_API_KEY,
           },
         }));
-      } catch (error) {
+      } catch (error: any) {
         const errorCode = error.response?.data?.status?.status_code;
         if (errorCode === 403) {
           console.log('Renew RIOT API key');

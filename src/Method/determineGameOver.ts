@@ -14,10 +14,10 @@ export default async (data: Data, auxData: AuxData) => {
       orderStopSpectate(data);
     } else if (gameTime > 10) {
       if (auxData.fixCount === 0) {
-        setUpSpectateIngameInitialSetting(auxData.selectedIndex);
+        await setUpSpectateIngameInitialSetting(auxData.selectedIndex);
         auxData.fixCount += 1;
       } else if (auxData.fixCount > 0 && auxData.fixCount <= 3) {
-        fixSpectateView(auxData.selectedIndex);
+        await fixSpectateView(auxData.selectedIndex);
         auxData.fixCount += 1;
       }
       if (auxData.exGameTime === gameTime) {

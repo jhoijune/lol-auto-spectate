@@ -21,7 +21,7 @@ export default async (data: Data, obs: OBSWebSocket) => {
     await obs.send('SetCurrentScene', {
       'scene-name': 'LOL',
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
   }
 };

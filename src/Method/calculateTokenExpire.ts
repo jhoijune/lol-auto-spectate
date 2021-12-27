@@ -27,7 +27,7 @@ export default async () => {
     console.log(
       `Token validity date is ${day} day ${hour}:${minute}:${expires_in} away. `
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error(JSON.stringify(error));
   } finally {
     console.log(`GET request finished for: ${URL} ${printDate()}`);

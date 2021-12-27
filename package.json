@@ -15,14 +15,13 @@
   "private": true,
   "license": "ISC",
   "dependencies": {
+    "@nut-tree/nut-js": "^2.0.0-RC1",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.5",
     "dotenv": "^8.2.0",
     "inquirer": "^8.0.0",
-    "node-key-sender": "^1.0.11",
     "obs-websocket-js": "^4.0.2",
     "puppeteer": "^9.1.1",
-    "robotjs": "^0.6.0",
     "sequelize": "^6.6.2",
     "sqlite3": "^4.2.0",
     "tmi.js": "^1.8.3"

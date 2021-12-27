@@ -20,7 +20,7 @@ export default async (...ids: string[]) => {
       },
     });
     return data.length !== 0;
-  } catch (error) {
+  } catch (error: any) {
     console.error(JSON.stringify(error));
     return false;
   } finally {

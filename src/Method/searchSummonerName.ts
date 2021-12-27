@@ -20,7 +20,7 @@ export default async (name: string) => {
       }
     );
     return data;
-  } catch (error) {
+  } catch (error: any) {
     const errorCode = error.response?.data?.status?.status_code;
     if (typeof errorCode === 'number') {
       if (errorCode === 403) {

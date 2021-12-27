@@ -43,7 +43,7 @@ export default async (
       constants.F_OK || constants.R_OK || constants.W_OK
     );
     isDirectoryExist = true;
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
     if (error.code === 'ENOENT') {
       isDirectoryExist = false;
@@ -53,7 +53,7 @@ export default async (
     try {
       console.log('Create overlay directory');
       await fs.mkdir(overlayPath);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
     }
   }
@@ -73,7 +73,7 @@ export default async (
   </html>`;
   try {
     await fs.writeFile(filePath, html);
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
   }
 };

@@ -19,7 +19,7 @@ export default async (title: string) => {
         },
       }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
   } finally {
     console.log(`PATCH request finished for: ${url} ${printDate()}`);

@@ -6,7 +6,7 @@ export default async (obs: OBSWebSocket) => {
   try {
     await obs.send('StopStreaming');
     console.log('Stop streaming');
-  } catch (error) {
+  } catch (error: any) {
     console.error(error);
   } finally {
     await turnOffOBS();

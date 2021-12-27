@@ -15,7 +15,7 @@ export default async (db: DB) => {
     ({ data: html } = await axios.get<string>(URL, {
       timeout: 5000,
     }));
-  } catch (error) {
+  } catch (error: any) {
     console.error(JSON.stringify(error));
     console.log("OP.GG Doesn't work");
     return false;

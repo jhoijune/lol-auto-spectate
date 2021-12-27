@@ -74,29 +74,29 @@ export default (data: Data, obs: OBSWebSocket) => {
           data.isPaused = false;
         });
       } else if (message === '!openinterface') {
-        await wrapper(() => {
+        await wrapper(async () => {
           if (data.isSpectating) {
-            setUpSpectateIngameInitialSetting(Constants.NONE);
+            await setUpSpectateIngameInitialSetting(Constants.NONE);
           }
         });
       } else if (/^\!fix\d{1,2}$/.test(message)) {
-        await wrapper(() => {
+        await wrapper(async () => {
           if (data.isSpectating) {
             const charNum = message.slice(4);
             const num = Number(charNum);
             if (num >= 1 && num <= 10) {
-              focusGame();
-              fixSpectateView(num - 1);
+              await focusGame();
+              await fixSpectateView(num - 1);
             }
           }
         });
       } else if (/^\!zoomout\d*$/.test(message)) {
-        await wrapper(() => {
+        await wrapper(async () => {
           if (data.isSpectating) {
             const charNum = message.slice(8);
             const num = Number(charNum);
-            focusGame();
-            zoomOut(num);
+            await focusGame();
+            await zoomOut(num);
           }
         });
       }
